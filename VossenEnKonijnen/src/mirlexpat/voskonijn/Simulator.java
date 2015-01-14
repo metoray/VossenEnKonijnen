@@ -34,6 +34,11 @@ public class Simulator
     // A graphical view of the simulation.
     private SimulatorView view;
     
+    public static void main(String[] args){
+    	Simulator sim = new Simulator();
+    	sim.runLongSimulation();
+    }
+    
     /**
      * Construct a simulation field with default size.
      */
