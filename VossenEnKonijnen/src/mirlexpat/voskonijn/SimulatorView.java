@@ -2,7 +2,9 @@ package mirlexpat.voskonijn;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -30,6 +32,8 @@ public class SimulatorView extends JFrame
     private JLabel stepLabel, population;
     private FieldView fieldView;
     
+    private JTextField stepAmount;
+    
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
     // A statistics object computing and storing simulation information
@@ -40,7 +44,7 @@ public class SimulatorView extends JFrame
      * @param height The simulation's height.
      * @param width  The simulation's width.
      */
-    public SimulatorView(int height, int width)
+    public SimulatorView(int height, int width, Simulator sim)
     {
         stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
@@ -70,8 +74,20 @@ public class SimulatorView extends JFrame
         gl.setVgap(8);
         buttonpanel.setLayout(gl);
         
-        buttonpanel.add(new JButton("Step"));
-        buttonpanel.add(new JTextField("100"));
+        stepAmount = new JTextField("100");
+        
+        JButton step = new JButton("Step");
+        step.addActionListener(new SimulatorActionListener(sim) {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				simulator.simulate(Integer.valueOf(stepAmount.getText()));
+				
+			}
+		});
+        
+        buttonpanel.add(step);
+        buttonpanel.add(stepAmount);
         
         JPanel buttonsidebar = new JPanel();
         buttonsidebar.setLayout(new FlowLayout());
@@ -242,5 +258,15 @@ public class SimulatorView extends JFrame
                 }
             }
         }
+    }
+
+    private abstract class SimulatorActionListener implements ActionListener {
+    	
+    	protected Simulator simulator;
+    	
+    	public SimulatorActionListener(Simulator s){
+    		this.simulator = s;
+    	}
+    	
     }
 }

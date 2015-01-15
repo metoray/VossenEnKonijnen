@@ -36,7 +36,6 @@ public class Simulator
     
     public static void main(String[] args){
     	Simulator sim = new Simulator();
-    	sim.runLongSimulation();
     }
     
     /**
@@ -65,7 +64,7 @@ public class Simulator
         field = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
-        view = new SimulatorView(depth, width);
+        view = new SimulatorView(depth, width, this);
         view.setColor(Rabbit.class, Color.orange);
         view.setColor(Fox.class, Color.blue);
         
