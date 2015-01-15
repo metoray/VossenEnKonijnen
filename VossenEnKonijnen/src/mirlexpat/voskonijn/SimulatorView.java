@@ -54,9 +54,35 @@ public class SimulatorView extends JFrame
         fieldView = new FieldView(height, width);
 
         Container contents = getContentPane();
-        contents.add(stepLabel, BorderLayout.NORTH);
-        contents.add(fieldView, BorderLayout.CENTER);
-        contents.add(population, BorderLayout.SOUTH);
+        
+        JPanel gridpanel = new JPanel();
+        gridpanel.setLayout(new BorderLayout());
+        
+        gridpanel.add(stepLabel, BorderLayout.NORTH);
+        gridpanel.add(fieldView, BorderLayout.CENTER);
+        gridpanel.add(population, BorderLayout.SOUTH);
+        gridpanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8),BorderFactory.createEtchedBorder()));
+        
+        JPanel buttonpanel = new JPanel();
+        
+        GridLayout gl = new GridLayout(0,2);
+        gl.setHgap(8);
+        gl.setVgap(8);
+        buttonpanel.setLayout(gl);
+        
+        buttonpanel.add(new JButton("Step"));
+        buttonpanel.add(new JTextField("100"));
+        
+        JPanel buttonsidebar = new JPanel();
+        buttonsidebar.setLayout(new FlowLayout());
+        buttonsidebar.add(buttonpanel);
+        buttonsidebar.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+        
+        contents.add(gridpanel,BorderLayout.CENTER);
+        contents.add(new JLabel("V0.0.0"),BorderLayout.SOUTH);
+        contents.add(buttonsidebar,BorderLayout.WEST);
+        
+        
         pack();
         setVisible(true);
     }
