@@ -1,11 +1,10 @@
 package mirlexpat.voskonijn;
 
 import java.awt.*;
-import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 
+import mirlexpat.voskonijn.controller.MenuController;
 import mirlexpat.voskonijn.controller.SimulatorController;
 
 import java.util.LinkedHashMap;
@@ -60,6 +59,9 @@ public class SimulatorView extends JFrame
         fieldView = new FieldView(height, width);
 
         Container contents = getContentPane();
+        
+        setJMenuBar(new MenuController());
+        
         
         JPanel gridpanel = new JPanel();
         gridpanel.setLayout(new BorderLayout());
@@ -233,15 +235,5 @@ public class SimulatorView extends JFrame
                 }
             }
         }
-    }
-
-    private abstract class SimulatorActionListener implements ActionListener {
-    	
-    	protected Simulator simulator;
-    	
-    	public SimulatorActionListener(Simulator s){
-    		this.simulator = s;
-    	}
-    	
     }
 }

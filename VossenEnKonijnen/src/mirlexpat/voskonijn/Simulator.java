@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.awt.Color;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 /**
  * A simple predator-prey simulator, based on a rectangular field
  * containing rabbits and foxes.
@@ -36,7 +39,6 @@ public class Simulator
     
     public static void main(String[] args){
     	Simulator sim = new Simulator();
-    	sim.runLongSimulation();
     }
     
     /**
