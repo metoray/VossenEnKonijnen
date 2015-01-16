@@ -6,6 +6,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
+import mirlexpat.voskonijn.controller.SimulatorController;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -67,36 +69,9 @@ public class SimulatorView extends JFrame
         gridpanel.add(population, BorderLayout.SOUTH);
         gridpanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8),BorderFactory.createEtchedBorder()));
         
-        JPanel buttonpanel = new JPanel();
-        
-        GridLayout gl = new GridLayout(0,2);
-        gl.setHgap(8);
-        gl.setVgap(8);
-        buttonpanel.setLayout(gl);
-        
-        stepAmount = new JTextField("100");
-        
-        JButton step = new JButton("Step");
-        step.addActionListener(new SimulatorActionListener(sim) {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				simulator.simulate(Integer.valueOf(stepAmount.getText()));
-				
-			}
-		});
-        
-        buttonpanel.add(step);
-        buttonpanel.add(stepAmount);
-        
-        JPanel buttonsidebar = new JPanel();
-        buttonsidebar.setLayout(new FlowLayout());
-        buttonsidebar.add(buttonpanel);
-        buttonsidebar.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
-        
         contents.add(gridpanel,BorderLayout.CENTER);
         contents.add(new JLabel("V0.0.0"),BorderLayout.SOUTH);
-        contents.add(buttonsidebar,BorderLayout.WEST);
+        contents.add(new SimulatorController(sim),BorderLayout.WEST);
         
         
         pack();
