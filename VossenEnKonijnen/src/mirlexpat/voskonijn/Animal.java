@@ -45,6 +45,11 @@ public abstract class Animal
     {
         return alive;
     }
+    
+    protected void isActive()
+    {
+        isAlive();
+    }
 
     /**
      * Indicate that the animal is no longer alive.
