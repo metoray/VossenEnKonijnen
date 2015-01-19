@@ -13,12 +13,10 @@ public class MenuController extends JMenuBar {
 	    
 	    JMenuItem newMenuItem = new JMenuItem("New Simulation");
 	    JMenuItem saveMenuItem = new JMenuItem("Save Simulation Settings");
-	    JMenuItem openMenuItem = new JMenuItem("Open Simulation Settings");
 	    JMenuItem quitMenuItem = new JMenuItem("Quit");
 	    
 	    fileMenu.add(newMenuItem);
 	    fileMenu.add(saveMenuItem);
-	    fileMenu.add(openMenuItem);
 	    fileMenu.addSeparator();
 	    fileMenu.add(quitMenuItem);
 	    
