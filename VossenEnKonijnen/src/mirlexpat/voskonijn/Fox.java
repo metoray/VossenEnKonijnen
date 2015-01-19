@@ -22,10 +22,10 @@ public class Fox extends Animal
     // The likelihood of a fox breeding.
     private static final double BREEDING_PROBABILITY = 0.08;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 2;
+    private static final int MAX_LITTER_SIZE = 8;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 9;
+    private static final int RABBIT_FOOD_VALUE = 15;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
@@ -64,7 +64,7 @@ public class Fox extends Animal
      * @param newFoxes A list to return newly born foxes.
      */
     @Override
-	public void act(List<Animal> newFoxes)
+	public void act(List<Actor> newFoxes)
     {
         incrementAge();
         incrementHunger();
@@ -140,7 +140,7 @@ public class Fox extends Animal
      * New births will be made into free adjacent locations.
      * @param newFoxes A list to return newly born foxes.
      */
-    private void giveBirth(List<Animal> newFoxes)
+    private void giveBirth(List<Actor> newFoxes)
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.

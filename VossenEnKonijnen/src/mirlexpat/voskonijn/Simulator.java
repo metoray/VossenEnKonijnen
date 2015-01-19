@@ -21,14 +21,14 @@ public class Simulator
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
     // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.02;
+    private static final double FOX_CREATION_PROBABILITY = 0.11;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;  
+    private static final double RABBIT_CREATION_PROBABILITY = 0.3;  
     
-    private static final double HUNTER_CREATION_PROBABILITY = 0.01;
+    private static final double HUNTER_CREATION_PROBABILITY = 0.05;
 
     // List of animals in the field.
-    private List<Animal> animals;
+    private List<Actor> animals;
     // List of hunters in the field.
     private List<Actor> hunters;
     // The current state of the field.
@@ -64,7 +64,7 @@ public class Simulator
             width = DEFAULT_WIDTH;
         }
         
-        animals = new ArrayList<Animal>();
+        animals = new ArrayList<Actor>();
         hunters = new ArrayList<Actor>();
         field = new Field(depth, width);
 
@@ -109,13 +109,13 @@ public class Simulator
         step++;
 
         // Provide space for newborn animals.
-        List<Animal> newAnimals = new ArrayList<Animal>();   
+        List<Actor> newAnimals = new ArrayList<Actor>();   
         List<Actor> newHunters = new ArrayList<Actor>();
         // Let all rabbits act.
-        for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
-            Animal animal = it.next();
-            animal.act(newAnimals);
-            if(! animal.isAlive()) {
+        for(Iterator<Actor> it = animals.iterator(); it.hasNext(); ) {
+            Actor actor = it.next();
+            actor.act(newAnimals);
+            if(! actor.isAlive()) {
                 it.remove();
             }
         }

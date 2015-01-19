@@ -2,7 +2,8 @@ package mirlexpat.voskonijn;
 
 import java.util.List;
 
-public abstract class Human implements Actor {
+public abstract class Human implements Actor 
+{
 	// The age of a Human
 	protected int age;
 	// Whether the animal is alive or not.

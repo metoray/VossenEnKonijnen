@@ -56,14 +56,12 @@ public class Hunter extends Human
     
 	public void act(List<Actor> newHunters)
     {
-    	if(isAlive()) {
-    	//	giveBirth(newHunters);   
+    	if(isAlive()) { 
     		// Move towards a source of prey if found
-    		Location location = getLocation();
     		Location newLocation = findTarget();
     		if(newLocation == null) {
     		// No prey found - try to move to a free location.
-    		newLocation = getField().freeAdjacentLocation(location);
+    		newLocation = getField().freeAdjacentLocation(getLocation());
     		}
     		// See if it was possible to move.
     		if(newLocation != null) {
@@ -73,14 +71,8 @@ public class Hunter extends Human
     		// Overcrowding.
     		setDead();
     		}
-    		// Render Hunter dead if maximum amount of kills has been reached.
-    		if (kills >= MAX_KILLS) {
-    		setDead();
-    		}
-    		}
-    		else {
-    		setDead();
-    		}
+    	}
+    		
     }
 
     
