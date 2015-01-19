@@ -56,7 +56,9 @@ public class Hunter extends Human
     
 	public void act(List<Actor> newHunters)
     {
+		// incrementAge();
     	if(isAlive()) { 
+    		
     		// Move towards a source of prey if found
     		Location newLocation = findTarget();
     		if(newLocation == null) {
@@ -71,9 +73,18 @@ public class Hunter extends Human
     		// Overcrowding.
     		setDead();
     		}
+    		if(kills >= MAX_KILLS) {
+    			setDead();
+    		}else{
+    			newLocation = getField().freeAdjacentLocation(getLocation());
+    			setLocation(newLocation);
+    		}
+    	
+    		}
     	}
     		
-    }
+    
+
 
     
     private Location findTarget()
@@ -95,6 +106,14 @@ public class Hunter extends Human
     	}
     	return null;
 	}
+    
+    private void incrementAge()
+    {
+        age++;
+        if(age > MAX_AGE) {
+            setDead();
+        }
+    }
     
     private static Location getRandomLocation(List<Location> location){
     	int random = (int) (Math.random()*(location.size() -0));
