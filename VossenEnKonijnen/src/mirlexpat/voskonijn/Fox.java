@@ -40,7 +40,7 @@ public class Fox extends Animal
      */
     public Fox(boolean randomAge, Field field, Location location)
     {
-        super(randomAge, field, location);
+        super(MAX_AGE, randomAge, field, location);
         if(randomAge) {
             foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
         }
@@ -135,5 +135,10 @@ public class Fox extends Animal
             newFoxes.add(young);
         }
     }
+
+	@Override
+	public int maxAge() {
+		return MAX_AGE;
+	}
     
 }

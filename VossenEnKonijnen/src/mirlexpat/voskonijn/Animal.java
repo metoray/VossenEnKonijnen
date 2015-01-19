@@ -12,8 +12,6 @@ import java.util.Random;
 public abstract class Animal implements Actor
 {
 	
-	// The age to which an animal live.
-    private static final int MAX_AGE = 0;
     // The age at which an animal can start to breed.
     private static final int BREEDING_AGE = 0;
     // The likelihood of an animal breeding.
@@ -39,14 +37,14 @@ public abstract class Animal implements Actor
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Animal(boolean randomAge, Field field, Location location)
+    public Animal(int maxAge, boolean randomAge, Field field, Location location)
     {
         alive = true;
         this.field = field;
         setLocation(location);
         age = 0;
         if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
+            age = rand.nextInt(maxAge);
         }
     }
     
@@ -77,7 +75,7 @@ public abstract class Animal implements Actor
     protected void incrementAge()
     {
         age++;
-        if(age > MAX_AGE) {
+        if(age > maxAge()) {
             setDead();
         }
     }
@@ -143,11 +141,13 @@ public abstract class Animal implements Actor
 	}
     
     /**
-     * A fox can breed if it has reached the breeding age.
+     * An animal can breed if it has reached the breeding age.
      */
     protected boolean canBreed()
     {
         return age >= BREEDING_AGE;
     }
+    
+    public abstract int maxAge();
     
 }
