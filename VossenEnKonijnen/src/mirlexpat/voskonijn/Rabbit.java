@@ -40,7 +40,7 @@ public class Rabbit extends Animal
      */
     public Rabbit(boolean randomAge, Field field, Location location)
     {
-        super(MAX_AGE,randomAge, field, location);
+        super(randomAge, field, location);
         
     }
     
@@ -85,10 +85,5 @@ public class Rabbit extends Animal
             newRabbits.add(young);
         }
     }
-    
-	@Override
-	public int maxAge() {
-		return MAX_AGE;
-	}
 
 }
