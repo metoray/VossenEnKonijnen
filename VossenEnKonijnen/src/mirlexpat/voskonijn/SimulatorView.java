@@ -69,9 +69,12 @@ public class SimulatorView extends JFrame
         gridpanel.add(stepLabel, BorderLayout.NORTH);
         gridpanel.add(fieldView, BorderLayout.CENTER);
         gridpanel.add(population, BorderLayout.SOUTH);
-        gridpanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8),BorderFactory.createEtchedBorder()));
         
-        contents.add(gridpanel,BorderLayout.CENTER);
+        JPanel gridflow = new JPanel();
+        gridflow.setLayout(new FlowLayout());
+        gridflow.add(gridpanel);
+        
+        contents.add(new JScrollPane(gridflow),BorderLayout.CENTER);
         contents.add(new JLabel("V0.0.0"),BorderLayout.SOUTH);
         contents.add(new SimulatorController(sim),BorderLayout.WEST);
         
