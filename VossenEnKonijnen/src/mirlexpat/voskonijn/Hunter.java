@@ -116,9 +116,8 @@ public class Hunter extends Human
     }
     
     private static Location getRandomLocation(List<Location> location){
-    	int random = (int) (Math.random()*(location.size() -0));
-    	return location.get(random);
-    	}
+    	return location.get(rand.nextInt(location.size()));
+    }
     
 
 		
