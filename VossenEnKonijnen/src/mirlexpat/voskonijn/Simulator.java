@@ -121,7 +121,6 @@ public class Simulator extends JFrame
     public void reset()
     {
     	field.reset();
-    	field.populate();
         
         // Show the starting state in the view.
         view.showStatus(field);
