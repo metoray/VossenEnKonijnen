@@ -73,15 +73,11 @@ public class Hunter extends Human
     		// Overcrowding.
     		setDead();
     		}
-    		if(kills >= MAX_KILLS) {
-    			setDead();
-    		}else{
-    			newLocation = getField().freeAdjacentLocation(getLocation());
-    			setLocation(newLocation);
+    		
     		}
     	
     		}
-    	}
+    	
     		
     
 
@@ -107,13 +103,13 @@ public class Hunter extends Human
     	return null;
 	}
     
-    private void incrementAge()
+   /* private void incrementAge()
     {
         age++;
         if(age > MAX_AGE) {
             setDead();
         }
-    }
+    }*/
     
     private static Location getRandomLocation(List<Location> location){
     	return location.get(rand.nextInt(location.size()));
