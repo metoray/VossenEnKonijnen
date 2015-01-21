@@ -1,5 +1,6 @@
 package mirlexpat.voskonijn;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -15,8 +16,18 @@ import java.util.Random;
  */
 public class Field
 {
+	
+    // The probability that a fox will be created in any given grid position.
+    private static final double FOX_CREATION_PROBABILITY = 0.11;
+    // The probability that a rabbit will be created in any given grid position.
+    private static final double RABBIT_CREATION_PROBABILITY = 0.3;  
+    
+    private static final double HUNTER_CREATION_PROBABILITY = 0.02;
+	
     // A random number generator for providing random locations.
     private static final Random rand = Randomizer.getRandom();
+    // List of animals in the field.
+    private List<Actor> animals;
     
     // The depth and width of the field.
     private int depth, width;
@@ -33,6 +44,7 @@ public class Field
         this.depth = depth;
         this.width = width;
         field = new Object[depth][width];
+        animals = new ArrayList<Actor>();
     }
     
     /**
@@ -205,4 +217,62 @@ public class Field
     {
         return width;
     }
+    
+    /**
+     * Simulate the field for one step
+     */
+    public void step(){
+        // Provide space for newborn animals.
+        List<Actor> newAnimals = new ArrayList<Actor>(); 
+        // Let all rabbits act.
+        for(Iterator<Actor> it = animals.iterator(); it.hasNext(); ) {
+            Actor actor = it.next();
+            actor.act(newAnimals);
+            if(! actor.isAlive()) {
+                it.remove();
+            }
+        }
+        
+        
+ 
+        // Add the newly born foxes and rabbits to the main lists.
+        animals.addAll(newAnimals);
+    }
+
+	public void reset() {
+        
+        animals.clear();
+		
+	}
+	
+	
+	/**
+     * Randomly populate the field with foxes, rabbits and hunters.
+     */
+    void populate()
+    {
+        Random rand = Randomizer.getRandom();
+        this.clear();
+        for(int row = 0; row < this.getDepth(); row++) {
+            for(int col = 0; col < this.getWidth(); col++) {
+                if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Fox fox = new Fox(true, this, location);
+                    animals.add(fox);
+                }
+                else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Rabbit rabbit = new Rabbit(true, this, location);
+                    animals.add(rabbit);
+                }else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Hunter hunter = new Hunter(true, this, location);
+                    animals.add(hunter);
+                }
+                // else leave the location empty.
+            }
+        }
+    }
+    
+    
 }
