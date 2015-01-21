@@ -132,6 +132,7 @@ public class Simulator extends JFrame
     
     public void setupWindow(){
     	setTitle("Fox and Rabbit Simulation");
+    	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     	setLocation(100, 50);
     	Container contents = getContentPane();
         

@@ -59,7 +59,9 @@ public class Field implements Runnable
         field = new Object[depth][width];
         animals = new ArrayList<Actor>();
         this.view = view;
-        new Thread(this).start();
+        Thread thread = new Thread(this);
+        thread.setDaemon(true);
+        thread.start();
     }
     
     /**
