@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class Komodovaraan extends Animal
+public class KomodoDragon extends Animal
 {
     private static final int BREEDING_AGE = 400;
 
@@ -22,7 +22,7 @@ public class Komodovaraan extends Animal
 
     private int foodLevel;
     
-    public Komodovaraan(boolean randomAge, Field field, Location location)
+    public KomodoDragon(boolean randomAge, Field field, Location location)
     {
         super(field, location);
         if(randomAge) {
@@ -34,12 +34,12 @@ public class Komodovaraan extends Animal
             foodLevel = FOOD_VALUE;
         }
     }
-    public void act(List<Actor> newKomodovaraan)
+    public void act(List<Actor> newKomodoDragon)
     {
         incrementAge();
         incrementHunger();
         if(isAlive()) {
-            giveBirth(newKomodovaraan);            
+            giveBirth(newKomodoDragon);            
             Location newLocation = findFood();
             if(newLocation == null) { 
                 newLocation = getField().freeAdjacentLocation(getLocation());
@@ -104,7 +104,7 @@ public class Komodovaraan extends Animal
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Komodovaraan young = new Komodovaraan(false, field, loc);
+            KomodoDragon young = new KomodoDragon(false, field, loc);
             newKomodovaraan.add(young);
         }
     }
