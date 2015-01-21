@@ -30,7 +30,7 @@ public class Simulator
     
     public static void main(String[] args){
     	Simulator sim = new Simulator();
-    	sim.runShortSimulation();
+    	sim.runLongSimulation();
     }
     
     /**
@@ -62,6 +62,7 @@ public class Simulator
         view.setColor(Rabbit.class, Color.orange);
         view.setColor(Fox.class, Color.blue);
         view.setColor(Hunter.class, Color.red);
+        view.setColor(Komodovaraan.class, Color.green);
         
         // Setup a valid starting point.
         reset();
