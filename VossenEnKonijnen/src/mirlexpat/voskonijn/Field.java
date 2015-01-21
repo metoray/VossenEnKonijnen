@@ -53,6 +53,7 @@ public class Field implements Runnable
         field = new Object[depth][width];
         animals = new ArrayList<Actor>();
         this.view = view;
+        new Thread(this).start();
     }
     
     /**
@@ -296,16 +297,25 @@ public class Field implements Runnable
 
 	@Override
 	public void run() {
-		while(stepsToRun  > 0){
-			step();
-			stepsToRun--;
+		while(true){
+			if(getSteps() > 0){
+				step();
+				decrease();
+			}
 		}
 		
 	}
 	
-	public void simulate(int steps){
+	public synchronized void simulate(int steps){
 		stepsToRun = steps;
-		new Thread(this).start();
+	}
+	
+	private synchronized int getSteps(){
+		return stepsToRun;
+	}
+	
+	private synchronized void decrease(){
+		stepsToRun--;
 	}
     
     
