@@ -1,9 +1,12 @@
-package mirlexpat.voskonijn;
+package mirlexpat.voskonijn.view;
 
 import java.awt.*;
 
 import javax.swing.*;
 
+import mirlexpat.voskonijn.Field;
+import mirlexpat.voskonijn.FieldStats;
+import mirlexpat.voskonijn.Simulator;
 import mirlexpat.voskonijn.controller.MenuController;
 import mirlexpat.voskonijn.controller.SimulatorController;
 

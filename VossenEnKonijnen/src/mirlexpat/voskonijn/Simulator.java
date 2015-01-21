@@ -9,6 +9,8 @@ import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import mirlexpat.voskonijn.view.SimulatorView;
+
 /**
  * A simple predator-prey simulator, based on a rectangular field
  * containing rabbits and foxes.
