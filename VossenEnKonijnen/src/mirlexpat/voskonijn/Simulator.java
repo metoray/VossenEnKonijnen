@@ -30,7 +30,7 @@ public class Simulator
     
     public static void main(String[] args){
     	Simulator sim = new Simulator();
-    	sim.runLongSimulation();
+    	sim.runShortSimulation();
     }
     
     /**
@@ -78,7 +78,7 @@ public class Simulator
     
     public void runShortSimulation()
     {
-        simulate(250);
+        simulate(500);
     }
     
     /**
