@@ -18,11 +18,11 @@ public class Field
 {
 	
     // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.13;
+    private static final double FOX_CREATION_PROBABILITY = 0.15;
     // The probability that a rabbit will be created in any given grid position.
     private static final double RABBIT_CREATION_PROBABILITY = 0.2;  
     private static final double KOMODOVARAAN_CREATION_PROBABILITY = 0.001;  
-    private static final double HUNTER_CREATION_PROBABILITY = 0.005;
+    private static final double HUNTER_CREATION_PROBABILITY = 0.010;
 	
     // A random number generator for providing random locations.
     private static final Random rand = Randomizer.getRandom();
