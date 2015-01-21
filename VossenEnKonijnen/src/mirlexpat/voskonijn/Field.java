@@ -285,7 +285,7 @@ public class Field implements Runnable
                     animals.add(hunter);
                 }else if(rand.nextDouble() <= KOMODOVARAAN_CREATION_PROBABILITY){
                 	Location location = new Location(row, col);
-                	KomodoDragon komodovaraan = new KomodoDragon(true, this, location);
+                	Komodovaraan komodovaraan = new Komodovaraan(true, this, location);
                 	animals.add(komodovaraan);
                 }
                 // else leave the location empty.
