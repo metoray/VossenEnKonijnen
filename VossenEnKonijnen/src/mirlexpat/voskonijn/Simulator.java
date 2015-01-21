@@ -132,7 +132,7 @@ public class Simulator extends JFrame
     	setLocation(100, 50);
     	Container contents = getContentPane();
         
-        setJMenuBar(new MenuController());
+        setJMenuBar(new MenuController(field));
         
         contents.add(new JScrollPane(view),BorderLayout.CENTER);
         contents.add(new JLabel("V0.0.0"),BorderLayout.SOUTH);
@@ -140,6 +140,14 @@ public class Simulator extends JFrame
         
         pack();
         setVisible(true);
+    }
+    
+    /**
+     * returns the current field that is being simulated
+     * @return field
+     */
+    public Field getField(){
+    	return field;
     }
     
 }

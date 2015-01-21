@@ -1,7 +1,10 @@
 package mirlexpat.voskonijn.controller;
 
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,22 +18,18 @@ import mirlexpat.voskonijn.Simulator;
 
 public class SimulatorController extends JPanel {
 	
-	private Field field;
-	private JTextField stepAmount;
-	
 	public SimulatorController(final Field field){
-		this.field = field;
 	
 		JPanel buttonpanel = new JPanel();
 	    
-	    GridLayout gl = new GridLayout(0,2);
-	    gl.setHgap(8);
-	    gl.setVgap(8);
+	    GridBagLayout gl = new GridBagLayout();
 	    buttonpanel.setLayout(gl);
 	    
-	    stepAmount = new JTextField("100");
-	    
+	    final JTextField stepAmount = new JTextField("100");
 	    JButton step = new JButton("Step");
+	    JButton start = new JButton("Start");
+	    JButton stop = new JButton("Stop");
+	    
 	    step.addActionListener(new ActionListener() {
 			
 			@Override
@@ -40,8 +39,38 @@ public class SimulatorController extends JPanel {
 			}
 		});
 	    
-	    buttonpanel.add(step);
-	    buttonpanel.add(stepAmount);
+	    start.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				field.startRunning();
+				
+			}
+		});
+	    
+	    stop.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				field.stopRunning();
+				
+			}
+		});
+	    
+	    GridBagConstraints c = new GridBagConstraints();
+	    c.fill = GridBagConstraints.BOTH;
+	    c.weightx = 1;
+	    c.insets = new Insets(2, 2, 2, 2);
+	    c.gridy = 0;
+	    c.gridx = 0;
+	    buttonpanel.add(step,c);
+	    c.gridx = 1;
+	    buttonpanel.add(stepAmount,c);
+	    c.gridy = 1;
+	    c.gridx = 0;
+	    buttonpanel.add(start,c);
+	    c.gridx = 1;
+	    buttonpanel.add(stop,c);
 	    
 	    setLayout(new FlowLayout());
 	    add(buttonpanel);

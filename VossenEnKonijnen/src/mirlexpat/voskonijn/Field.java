@@ -38,6 +38,7 @@ public class Field implements Runnable
     // Storage for the animals.
     private Object[][] field;
 	private int stepsToRun = 0;
+	boolean runInfinite = false;
 	
 	private SimulatorView view;
 
@@ -251,11 +252,12 @@ public class Field implements Runnable
         view.showStatus(this);
     }
 
-	public void reset() {
+	public synchronized void reset() {
+		this.stopRunning();
     	step = 0;
         animals.clear();
         field = new Object[depth][width];
-		
+        this.populate();
 	}
 	
 	
@@ -302,7 +304,7 @@ public class Field implements Runnable
 	@Override
 	public void run() {
 		while(true){
-			if(getSteps() > 0){
+			if(isRunning()){
 				step();
 				decrease();
 			}
@@ -312,14 +314,26 @@ public class Field implements Runnable
 	
 	public synchronized void simulate(int steps){
 		stepsToRun = steps;
-	}
-	
-	private synchronized int getSteps(){
-		return stepsToRun;
+		runInfinite = false;
 	}
 	
 	private synchronized void decrease(){
-		stepsToRun--;
+		if(stepsToRun>0){
+			stepsToRun--;
+		}
+	}
+	
+	public synchronized void startRunning(){
+		runInfinite = true;
+	}
+	
+	public synchronized void stopRunning(){
+		runInfinite = false;
+		stepsToRun = 0;
+	}
+	
+	public synchronized boolean isRunning(){
+		return runInfinite || stepsToRun > 0;
 	}
     
     
