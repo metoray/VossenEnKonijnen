@@ -113,16 +113,15 @@ public class SimulatorView extends JFrame
 
     /**
      * Show the current status of the field.
-     * @param step Which iteration step it is.
      * @param field The field whose status is to be displayed.
      */
-    public void showStatus(int step, Field field)
+    public void showStatus(Field field)
     {
         if(!isVisible()) {
             setVisible(true);
         }
             
-        stepLabel.setText(STEP_PREFIX + step);
+        stepLabel.setText(STEP_PREFIX + field.getStep());
         stats.reset();
         
         fieldView.preparePaint();

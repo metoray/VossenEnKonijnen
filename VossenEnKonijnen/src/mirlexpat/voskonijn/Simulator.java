@@ -25,8 +25,6 @@ public class Simulator
 
     // The current state of the field.
     private Field field;
-    // The current step of the simulation.
-    private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
     
@@ -102,11 +100,10 @@ public class Simulator
      */
     public void simulateOneStep()
     {
-        step++;
 
         field.step();
 
-        view.showStatus(step, field);
+        view.showStatus(field);
     }
         
     /**
@@ -114,12 +111,11 @@ public class Simulator
      */
     public void reset()
     {
-    	step = 0;
     	field.reset();
     	field.populate();
         
         // Show the starting state in the view.
-        view.showStatus(step, field);
+        view.showStatus(field);
     }
     
 }

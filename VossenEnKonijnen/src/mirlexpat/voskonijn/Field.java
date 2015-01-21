@@ -29,6 +29,8 @@ public class Field
     // List of animals in the field.
     private List<Actor> animals;
     
+    // The current step of the simulation.
+    private int step;
     // The depth and width of the field.
     private int depth, width;
     // Storage for the animals.
@@ -222,6 +224,7 @@ public class Field
      * Simulate the field for one step
      */
     public void step(){
+    	step++;
         // Provide space for newborn animals.
         List<Actor> newAnimals = new ArrayList<Actor>(); 
         // Let all rabbits act.
@@ -240,7 +243,7 @@ public class Field
     }
 
 	public void reset() {
-        
+    	step = 0;
         animals.clear();
 		
 	}
@@ -272,6 +275,10 @@ public class Field
                 // else leave the location empty.
             }
         }
+    }
+    
+    public int getStep(){
+    	return step;
     }
     
     
