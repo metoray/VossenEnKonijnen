@@ -12,6 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
+import mirlexpat.voskonijn.actor.Fox;
+import mirlexpat.voskonijn.actor.Hunter;
+import mirlexpat.voskonijn.actor.KomodoDragon;
+import mirlexpat.voskonijn.actor.Rabbit;
 import mirlexpat.voskonijn.controller.MenuController;
 import mirlexpat.voskonijn.controller.SimulatorController;
 import mirlexpat.voskonijn.view.SimulatorView;
@@ -67,7 +71,7 @@ public class Simulator extends JFrame
         view.setColor(Rabbit.class, Color.orange);
         view.setColor(Fox.class, Color.blue);
         view.setColor(Hunter.class, Color.red);
-        view.setColor(KomodoDragon.class, Color.green);
+        view.setColor(KomodoDragon.class, new Color(0,191,0));
         field = new Field(depth, width, view);
         
         setupWindow();

@@ -1,7 +1,11 @@
-package mirlexpat.voskonijn;
+package mirlexpat.voskonijn.actor;
 
 import java.util.List;
 import java.util.Random;
+
+import mirlexpat.voskonijn.Field;
+import mirlexpat.voskonijn.Location;
+import mirlexpat.voskonijn.Randomizer;
 
 /**
  * A simple model of a rabbit.

@@ -1,6 +1,9 @@
-package mirlexpat.voskonijn;
+package mirlexpat.voskonijn.actor;
 
 import java.util.List;
+
+import mirlexpat.voskonijn.Field;
+import mirlexpat.voskonijn.Location;
 
 /**
  * A class representing shared characteristics of animals.
