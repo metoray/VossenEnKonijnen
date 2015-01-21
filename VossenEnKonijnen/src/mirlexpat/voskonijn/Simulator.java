@@ -4,8 +4,16 @@ import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+
+import mirlexpat.voskonijn.controller.MenuController;
+import mirlexpat.voskonijn.controller.SimulatorController;
 import mirlexpat.voskonijn.view.SimulatorView;
 
 /**
@@ -15,7 +23,7 @@ import mirlexpat.voskonijn.view.SimulatorView;
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
-public class Simulator
+public class Simulator extends JFrame
 {
     // Constants representing configuration information for the simulation.
     // The default width for the grid.
@@ -30,7 +38,6 @@ public class Simulator
     
     public static void main(String[] args){
     	Simulator sim = new Simulator();
-    	sim.runShortSimulation();
     }
     
     /**
@@ -54,14 +61,16 @@ public class Simulator
             depth = DEFAULT_DEPTH;
             width = DEFAULT_WIDTH;
         }
-        
-        field = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
-        view = new SimulatorView(depth, width, this);
+        view = new SimulatorView(depth, width);
         view.setColor(Rabbit.class, Color.orange);
         view.setColor(Fox.class, Color.blue);
         view.setColor(Hunter.class, Color.red);
+        
+        field = new Field(depth, width, view);
+        
+        setupWindow();
         
         // Setup a valid starting point.
         reset();
@@ -116,6 +125,21 @@ public class Simulator
         
         // Show the starting state in the view.
         view.showStatus(field);
+    }
+    
+    public void setupWindow(){
+    	setTitle("Fox and Rabbit Simulation");
+    	setLocation(100, 50);
+    	Container contents = getContentPane();
+        
+        setJMenuBar(new MenuController());
+        
+        contents.add(new JScrollPane(view),BorderLayout.CENTER);
+        contents.add(new JLabel("V0.0.0"),BorderLayout.SOUTH);
+        contents.add(new SimulatorController(field),BorderLayout.WEST);
+        
+        pack();
+        setVisible(true);
     }
     
 }

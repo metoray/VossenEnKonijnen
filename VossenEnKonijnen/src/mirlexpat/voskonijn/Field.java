@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import mirlexpat.voskonijn.view.SimulatorView;
+
 /**
  * Represent a rectangular grid of field positions.
  * Each position is able to store a single animal.
@@ -14,7 +16,7 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
-public class Field
+public class Field implements Runnable
 {
 	
     // The probability that a fox will be created in any given grid position.
@@ -35,18 +37,22 @@ public class Field
     private int depth, width;
     // Storage for the animals.
     private Object[][] field;
+	private int stepsToRun = 0;
+	
+	private SimulatorView view;
 
     /**
      * Represent a field of the given dimensions.
      * @param depth The depth of the field.
      * @param width The width of the field.
      */
-    public Field(int depth, int width)
+    public Field(int depth, int width, SimulatorView view)
     {
         this.depth = depth;
         this.width = width;
         field = new Object[depth][width];
         animals = new ArrayList<Actor>();
+        this.view = view;
     }
     
     /**
@@ -240,11 +246,14 @@ public class Field
  
         // Add the newly born foxes and rabbits to the main lists.
         animals.addAll(newAnimals);
+        
+        view.showStatus(this);
     }
 
 	public void reset() {
     	step = 0;
         animals.clear();
+        field = new Object[depth][width];
 		
 	}
 	
@@ -280,6 +289,24 @@ public class Field
     public int getStep(){
     	return step;
     }
+    
+    public void add(Actor actor){
+    	animals.add(actor);
+    }
+
+	@Override
+	public void run() {
+		while(stepsToRun  > 0){
+			step();
+			stepsToRun--;
+		}
+		
+	}
+	
+	public void simulate(int steps){
+		stepsToRun = steps;
+		new Thread(this).start();
+	}
     
     
 }

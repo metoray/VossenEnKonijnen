@@ -10,15 +10,16 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import mirlexpat.voskonijn.Field;
 import mirlexpat.voskonijn.Simulator;
 
 public class SimulatorController extends JPanel {
 	
-	private Simulator simulator;
+	private Field field;
 	private JTextField stepAmount;
 	
-	public SimulatorController(Simulator sim){
-		this.simulator = sim;
+	public SimulatorController(final Field field){
+		this.field = field;
 	
 		JPanel buttonpanel = new JPanel();
 	    
@@ -34,7 +35,7 @@ public class SimulatorController extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				simulator.simulate(Integer.valueOf(stepAmount.getText()));
+				field.simulate(Integer.valueOf(stepAmount.getText()));
 				
 			}
 		});

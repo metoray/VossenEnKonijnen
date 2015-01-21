@@ -23,7 +23,7 @@ import java.util.Map;
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
-public class SimulatorView extends JFrame
+public class SimulatorView extends JPanel
 {
     // Colors used for empty locations.
     private static final Color EMPTY_COLOR = Color.white;
@@ -48,22 +48,18 @@ public class SimulatorView extends JFrame
      * @param height The simulation's height.
      * @param width  The simulation's width.
      */
-    public SimulatorView(int height, int width, Simulator sim)
+    public SimulatorView(int height, int width)
     {
         stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
 
-        setTitle("Fox and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, SwingConstants.CENTER);
         population = new JLabel(POPULATION_PREFIX, SwingConstants.CENTER);
         
-        setLocation(100, 50);
         
         fieldView = new FieldView(height, width);
 
-        Container contents = getContentPane();
         
-        setJMenuBar(new MenuController());
         
         
         JPanel gridpanel = new JPanel();
@@ -73,17 +69,13 @@ public class SimulatorView extends JFrame
         gridpanel.add(fieldView, BorderLayout.CENTER);
         gridpanel.add(population, BorderLayout.SOUTH);
         
-        JPanel gridflow = new JPanel();
-        gridflow.setLayout(new FlowLayout());
-        gridflow.add(gridpanel);
-        
-        contents.add(new JScrollPane(gridflow),BorderLayout.CENTER);
-        contents.add(new JLabel("V0.0.0"),BorderLayout.SOUTH);
-        contents.add(new SimulatorController(sim),BorderLayout.WEST);
+        setLayout(new FlowLayout());
+        add(gridpanel);
         
         
-        pack();
-        setVisible(true);
+        
+        
+        
     }
     
     /**
