@@ -67,7 +67,7 @@ public class Simulator extends JFrame
         view.setColor(Rabbit.class, Color.orange);
         view.setColor(Fox.class, Color.blue);
         view.setColor(Hunter.class, Color.red);
-        
+        view.setColor(KomodoDragon.class, Color.green);
         field = new Field(depth, width, view);
         
         setupWindow();
