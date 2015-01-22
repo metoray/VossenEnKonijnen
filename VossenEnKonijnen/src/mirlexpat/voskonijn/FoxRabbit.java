@@ -18,6 +18,7 @@ import mirlexpat.voskonijn.actor.KomodoDragon;
 import mirlexpat.voskonijn.actor.Rabbit;
 import mirlexpat.voskonijn.controller.MenuController;
 import mirlexpat.voskonijn.controller.SimulationController;
+import mirlexpat.voskonijn.view.LineGraphView;
 import mirlexpat.voskonijn.view.SimulatorView;
 import mirlexpat.voskonijn.view.GraphView;
 
@@ -42,8 +43,8 @@ public class FoxRabbit extends JFrame {
         view.setColor(Hunter.class, Color.red);
         view.setColor(KomodoDragon.class, new Color(0,191,0));
         
-        graph = new GraphView(sim.getField());
-        graph2 = new GraphView(sim.getField()); //please don't name your variables this way
+        graph = new LineGraphView(sim.getField());
+        graph2 = new LineGraphView(sim.getField()); //please don't name your variables this way
         
         setTitle("Fox and Rabbit Simulation");
     	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
