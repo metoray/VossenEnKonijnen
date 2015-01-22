@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,12 +19,15 @@ import mirlexpat.voskonijn.actor.Rabbit;
 import mirlexpat.voskonijn.controller.MenuController;
 import mirlexpat.voskonijn.controller.SimulationController;
 import mirlexpat.voskonijn.view.SimulatorView;
+import mirlexpat.voskonijn.view.GraphView;
 
 public class FoxRabbit extends JFrame {
 	
 	// A graphical view of the simulation.
     private SimulatorView view;
     private Simulator sim;
+    private GraphView graph;
+    private GraphView graph2;
 	
 	public static void main(String[] args){
     	new FoxRabbit();
@@ -37,13 +42,10 @@ public class FoxRabbit extends JFrame {
         view.setColor(Hunter.class, Color.red);
         view.setColor(KomodoDragon.class, new Color(0,191,0));
         
-		setupWindow();
+        graph = new GraphView(sim.getField());
+        graph2 = new GraphView(sim.getField()); //please don't name your variables this way
         
-        sim.addView(view);
-	}
-	
-	public void setupWindow(){
-    	setTitle("Fox and Rabbit Simulation");
+        setTitle("Fox and Rabbit Simulation");
     	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     	setLocation(100, 50);
     	Container contents = getContentPane();
@@ -51,18 +53,26 @@ public class FoxRabbit extends JFrame {
         setJMenuBar(new MenuController(sim));
         
         JPanel graphs = new JPanel();
-        graphs.setLayout(new FlowLayout()); //PUT GRAPH VIEWS IN HERE
-        graphs.add(new JLabel("GRAPHS"));
+        GridLayout gl = new GridLayout(0,1);
+        gl.setVgap(8);
+        graphs.setLayout(gl); //PUT GRAPH VIEWS IN HERE
+        graphs.add(graph);
+        graphs.add(graph2);
+        
+        JPanel rightSideBar = new JPanel();
+        rightSideBar.setLayout(new FlowLayout());
+        rightSideBar.add(graphs);
         
         contents.add(new JScrollPane(view),BorderLayout.CENTER);
         contents.add(new JLabel("V0.0.0"),BorderLayout.SOUTH);
         contents.add(new SimulationController(sim),BorderLayout.WEST);
-        contents.add(graphs,BorderLayout.EAST);
+        contents.add(rightSideBar,BorderLayout.EAST);
         
         pack();
         setVisible(true);
-    }
-	
-	
-
+        
+        sim.addView(view);
+        sim.addView(graph);
+        sim.addView(graph2);
+	}
 }
