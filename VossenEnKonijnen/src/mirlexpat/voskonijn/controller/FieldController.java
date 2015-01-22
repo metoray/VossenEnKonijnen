@@ -27,6 +27,7 @@ public class FieldController extends JPanel {
 	    JButton step = new JButton("Step");
 	    JButton start = new JButton("Start");
 	    JButton stop = new JButton("Stop");
+	    JButton reset = new JButton("Reset");
 	    
 	    step.addActionListener(new ActionListener() {
 			
@@ -55,6 +56,15 @@ public class FieldController extends JPanel {
 			}
 		});
 	    
+	    reset.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sim.reset();
+				
+			}
+		});
+	    
 	    GridBagConstraints c = new GridBagConstraints();
 	    c.fill = GridBagConstraints.BOTH;
 	    c.weightx = 1;
@@ -69,6 +79,10 @@ public class FieldController extends JPanel {
 	    buttonpanel.add(start,c);
 	    c.gridx = 1;
 	    buttonpanel.add(stop,c);
+	    c.gridy = 2;
+	    c.gridx = 0;
+	    c.gridwidth = 2;
+	    buttonpanel.add(reset,c);
 	    
 	    setLayout(new FlowLayout());
 	    add(buttonpanel);

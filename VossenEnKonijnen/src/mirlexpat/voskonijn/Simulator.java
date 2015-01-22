@@ -1,5 +1,8 @@
 package mirlexpat.voskonijn;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * A simple predator-prey simulator, based on a rectangular field
  * containing rabbits and foxes.
@@ -18,8 +21,8 @@ public class Simulator extends AbstractModel implements Runnable
     // The current state of the field.
     private Field field;
     
-	private int stepsToRun = 0;
-	private boolean runInfinite = false;
+	private AtomicInteger stepsToRun;
+	private AtomicBoolean runInfinite;
 	
 	private Thread thread;
     
@@ -40,6 +43,8 @@ public class Simulator extends AbstractModel implements Runnable
      */
     public Simulator(int depth, int width)
     {
+    	stepsToRun = new AtomicInteger(0);
+    	runInfinite = new AtomicBoolean(false);
         if(width <= 0 || depth <= 0) {
             System.out.println("The dimensions must be greater than zero.");
             System.out.println("Using default values.");
@@ -57,7 +62,9 @@ public class Simulator extends AbstractModel implements Runnable
      */
     public void reset()
     {
+    	stopRunning();
     	field.reset();
+    	notifyViews();
     }
     
     /**
@@ -78,30 +85,37 @@ public class Simulator extends AbstractModel implements Runnable
 		
 	}
 	
-	public synchronized void simulate(int steps){
-		stepsToRun = steps;
-		runInfinite = false;
+	public void simulate(int steps){
+		stepsToRun.set(steps);
+		runInfinite.set(false);
 		startThread();
 	}
 	
-	private synchronized void decrease(){
-		if(stepsToRun>0){
-			stepsToRun--;
+	private void decrease(){
+		if(stepsToRun.get()>0){
+			stepsToRun.getAndDecrement();
 		}
 	}
 	
-	public synchronized void startRunning(){
-		runInfinite = true;
+	public void startRunning(){
+		runInfinite.set(true);
 		startThread();
 	}
 	
-	public synchronized void stopRunning(){
-		runInfinite = false;
-		stepsToRun = 0;
+	public void stopRunning(){
+		runInfinite.set(false);
+		stepsToRun.set(0);
+		if(thread!=null){
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
-	public synchronized boolean isRunning(){
-		return runInfinite || stepsToRun > 0;
+	public boolean isRunning(){
+		return runInfinite.get() || stepsToRun.get() > 0;
 	}
 	
 	public void startThread(){
