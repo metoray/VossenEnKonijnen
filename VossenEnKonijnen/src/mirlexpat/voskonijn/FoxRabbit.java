@@ -3,9 +3,11 @@ package mirlexpat.voskonijn;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import mirlexpat.voskonijn.actor.Fox;
@@ -48,9 +50,14 @@ public class FoxRabbit extends JFrame {
         
         setJMenuBar(new MenuController(sim));
         
+        JPanel graphs = new JPanel();
+        graphs.setLayout(new FlowLayout()); //PUT GRAPH VIEWS IN HERE
+        graphs.add(new JLabel("GRAPHS"));
+        
         contents.add(new JScrollPane(view),BorderLayout.CENTER);
         contents.add(new JLabel("V0.0.0"),BorderLayout.SOUTH);
         contents.add(new FieldController(sim),BorderLayout.WEST);
+        contents.add(graphs,BorderLayout.EAST);
         
         pack();
         setVisible(true);
