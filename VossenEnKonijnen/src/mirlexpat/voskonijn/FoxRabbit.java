@@ -15,7 +15,7 @@ import mirlexpat.voskonijn.actor.Hunter;
 import mirlexpat.voskonijn.actor.KomodoDragon;
 import mirlexpat.voskonijn.actor.Rabbit;
 import mirlexpat.voskonijn.controller.MenuController;
-import mirlexpat.voskonijn.controller.FieldController;
+import mirlexpat.voskonijn.controller.SimulationController;
 import mirlexpat.voskonijn.view.SimulatorView;
 
 public class FoxRabbit extends JFrame {
@@ -56,7 +56,7 @@ public class FoxRabbit extends JFrame {
         
         contents.add(new JScrollPane(view),BorderLayout.CENTER);
         contents.add(new JLabel("V0.0.0"),BorderLayout.SOUTH);
-        contents.add(new FieldController(sim),BorderLayout.WEST);
+        contents.add(new SimulationController(sim),BorderLayout.WEST);
         contents.add(graphs,BorderLayout.EAST);
         
         pack();

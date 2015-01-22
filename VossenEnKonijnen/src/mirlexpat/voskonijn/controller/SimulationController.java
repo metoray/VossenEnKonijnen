@@ -14,9 +14,9 @@ import javax.swing.JTextField;
 
 import mirlexpat.voskonijn.Simulator;
 
-public class FieldController extends JPanel {
+public class SimulationController extends JPanel {
 	
-	public FieldController(final Simulator sim){
+	public SimulationController(final Simulator sim){
 	
 		JPanel buttonpanel = new JPanel();
 	    
