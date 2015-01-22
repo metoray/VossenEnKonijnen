@@ -43,9 +43,11 @@ public class Field implements Runnable
     // Storage for the animals.
     private Object[][] field;
 	private int stepsToRun = 0;
-	boolean runInfinite = false;
+	private boolean runInfinite = false;
 	
 	private SimulatorView view;
+	
+	private Thread thread;
 
     /**
      * Represent a field of the given dimensions.
@@ -59,9 +61,6 @@ public class Field implements Runnable
         field = new Object[depth][width];
         animals = new ArrayList<Actor>();
         this.view = view;
-        Thread thread = new Thread(this);
-        thread.setDaemon(true);
-        thread.start();
     }
     
     /**
@@ -310,11 +309,9 @@ public class Field implements Runnable
 
 	@Override
 	public void run() {
-		while(true){
-			if(isRunning()){
-				step();
-				decrease();
-			}
+		while(isRunning()){
+			step();
+			decrease();
 		}
 		
 	}
@@ -322,6 +319,7 @@ public class Field implements Runnable
 	public synchronized void simulate(int steps){
 		stepsToRun = steps;
 		runInfinite = false;
+		startThread();
 	}
 	
 	private synchronized void decrease(){
@@ -332,6 +330,7 @@ public class Field implements Runnable
 	
 	public synchronized void startRunning(){
 		runInfinite = true;
+		startThread();
 	}
 	
 	public synchronized void stopRunning(){
@@ -342,6 +341,13 @@ public class Field implements Runnable
 	public synchronized boolean isRunning(){
 		return runInfinite || stepsToRun > 0;
 	}
-    
+	
+	public void startThread(){
+		if(thread==null||!thread.isAlive()){
+			thread = new Thread(this);
+	        thread.setDaemon(true);
+	        thread.start();
+		}
+	}
     
 }
