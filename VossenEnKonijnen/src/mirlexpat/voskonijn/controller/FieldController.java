@@ -3,7 +3,6 @@ package mirlexpat.voskonijn.controller;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import mirlexpat.voskonijn.Field;
 import mirlexpat.voskonijn.Simulator;
 
 public class FieldController extends JPanel {

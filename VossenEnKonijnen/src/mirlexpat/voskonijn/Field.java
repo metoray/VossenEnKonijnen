@@ -13,7 +13,6 @@ import mirlexpat.voskonijn.actor.Hunter;
 import mirlexpat.voskonijn.actor.KomodoDragon;
 import mirlexpat.voskonijn.actor.Rabbit;
 import mirlexpat.voskonijn.view.IView;
-import mirlexpat.voskonijn.view.SimulatorView;
 
 /**
  * Represent a rectangular grid of field positions.

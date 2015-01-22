@@ -7,8 +7,6 @@ import javax.swing.*;
 import mirlexpat.voskonijn.Field;
 import mirlexpat.voskonijn.FieldStats;
 import mirlexpat.voskonijn.Simulator;
-import mirlexpat.voskonijn.controller.MenuController;
-import mirlexpat.voskonijn.controller.FieldController;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

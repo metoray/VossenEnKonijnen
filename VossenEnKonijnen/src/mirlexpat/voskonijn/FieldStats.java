@@ -1,6 +1,5 @@
 package mirlexpat.voskonijn;
 
-import java.awt.Color;
 import java.util.HashMap;
 
 /**

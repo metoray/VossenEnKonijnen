@@ -1,26 +1,5 @@
 package mirlexpat.voskonijn;
 
-import java.util.Random;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-
-import mirlexpat.voskonijn.actor.Fox;
-import mirlexpat.voskonijn.actor.Hunter;
-import mirlexpat.voskonijn.actor.KomodoDragon;
-import mirlexpat.voskonijn.actor.Rabbit;
-import mirlexpat.voskonijn.controller.MenuController;
-import mirlexpat.voskonijn.controller.FieldController;
-import mirlexpat.voskonijn.view.IView;
-import mirlexpat.voskonijn.view.SimulatorView;
-
 /**
  * A simple predator-prey simulator, based on a rectangular field
  * containing rabbits and foxes.
