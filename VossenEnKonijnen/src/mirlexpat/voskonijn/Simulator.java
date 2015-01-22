@@ -63,6 +63,7 @@ public class Simulator extends AbstractModel implements Runnable
     public void reset()
     {
     	stopRunning();
+    	Randomizer.reset();
     	field.reset();
     	notifyViews();
     }
