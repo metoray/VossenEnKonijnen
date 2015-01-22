@@ -14,7 +14,7 @@ public class KomodoDragon extends Animal
 
     private static final int MAX_AGE = 750;
 
-    private static final double BREEDING_PROBABILITY = 0.09;
+    private static final double BREEDING_PROBABILITY = 0.06;
 
     private static final int MAX_LITTER_SIZE = 2;
 

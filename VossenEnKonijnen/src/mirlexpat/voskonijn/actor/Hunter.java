@@ -28,7 +28,8 @@ public class Hunter extends Human
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
-
+   
+    int number;
     
 
 
@@ -48,9 +49,10 @@ public class Hunter extends Human
         else {
             age = 0;
         }
-        
-        kills = rand.nextInt(MAX_KILLS);
+       
+        kills = rand.nextInt(10);
     }
+    
     
     
     
@@ -87,7 +89,7 @@ public class Hunter extends Human
     {
     	Field currentField = getField();
     	List<Location> adjacent = currentField.adjacentLocations(getLocation());
-    	for (int i=0; i < MAX_KILLS; i++) {
+    	for (int i=0; i < 10; i++) {
     		Location targetLocation = getRandomLocation(adjacent);
     		Object object = currentField.getObjectAt(targetLocation);
     		
@@ -95,7 +97,6 @@ public class Hunter extends Human
     			Animal prey = (Animal) object;
     			if(prey.isAlive()) {
     				prey.setDead();
-    				kills++;
     				return targetLocation;
     			}
     		}
@@ -103,13 +104,9 @@ public class Hunter extends Human
     	return null;
 	}
     
-   /* private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
-    }*/
+    
+    
+    
     
     private static Location getRandomLocation(List<Location> location){
     	return location.get(rand.nextInt(location.size()));
