@@ -12,6 +12,7 @@ import mirlexpat.voskonijn.actor.Fox;
 import mirlexpat.voskonijn.actor.Hunter;
 import mirlexpat.voskonijn.actor.KomodoDragon;
 import mirlexpat.voskonijn.actor.Rabbit;
+import mirlexpat.voskonijn.view.IView;
 import mirlexpat.voskonijn.view.SimulatorView;
 
 /**
@@ -21,7 +22,7 @@ import mirlexpat.voskonijn.view.SimulatorView;
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
-public class Field implements Runnable
+public class Field
 {
 	
     // The probability that a fox will be created in any given grid position.
@@ -42,25 +43,20 @@ public class Field implements Runnable
     private int depth, width;
     // Storage for the animals.
     private Object[][] field;
-	private int stepsToRun = 0;
-	private boolean runInfinite = false;
-	
-	private SimulatorView view;
-	
-	private Thread thread;
+    private ArrayList<IView> views;
 
     /**
      * Represent a field of the given dimensions.
      * @param depth The depth of the field.
      * @param width The width of the field.
      */
-    public Field(int depth, int width, SimulatorView view)
+    public Field(int depth, int width)
     {
         this.depth = depth;
         this.width = width;
         field = new Object[depth][width];
         animals = new ArrayList<Actor>();
-        this.view = view;
+        this.views = new ArrayList<>();
     }
     
     /**
@@ -255,11 +251,21 @@ public class Field implements Runnable
         // Add the newly born foxes and rabbits to the main lists.
         animals.addAll(newAnimals);
         
-        view.showStatus(this);
+        notifyViews();
     }
 
+	private void notifyViews() {
+		for(IView view: views){
+			view.update();
+		}
+		
+	}
+	
+	public void addView(IView view){
+		views.add(view);
+	}
+
 	public synchronized void reset() {
-		this.stopRunning();
     	step = 0;
         animals.clear();
         field = new Object[depth][width];
@@ -306,48 +312,5 @@ public class Field implements Runnable
     public void add(Actor actor){
     	animals.add(actor);
     }
-
-	@Override
-	public void run() {
-		while(isRunning()){
-			step();
-			decrease();
-		}
-		
-	}
-	
-	public synchronized void simulate(int steps){
-		stepsToRun = steps;
-		runInfinite = false;
-		startThread();
-	}
-	
-	private synchronized void decrease(){
-		if(stepsToRun>0){
-			stepsToRun--;
-		}
-	}
-	
-	public synchronized void startRunning(){
-		runInfinite = true;
-		startThread();
-	}
-	
-	public synchronized void stopRunning(){
-		runInfinite = false;
-		stepsToRun = 0;
-	}
-	
-	public synchronized boolean isRunning(){
-		return runInfinite || stepsToRun > 0;
-	}
-	
-	public void startThread(){
-		if(thread==null||!thread.isAlive()){
-			thread = new Thread(this);
-	        thread.setDaemon(true);
-	        thread.start();
-		}
-	}
     
 }

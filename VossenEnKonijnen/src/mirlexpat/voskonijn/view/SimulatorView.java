@@ -8,7 +8,7 @@ import mirlexpat.voskonijn.Field;
 import mirlexpat.voskonijn.FieldStats;
 import mirlexpat.voskonijn.Simulator;
 import mirlexpat.voskonijn.controller.MenuController;
-import mirlexpat.voskonijn.controller.SimulatorController;
+import mirlexpat.voskonijn.controller.FieldController;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ import java.util.Map;
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
-public class SimulatorView extends JPanel
+public class SimulatorView extends JPanel implements IView
 {
     // Colors used for empty locations.
     private static final Color EMPTY_COLOR = Color.white;
@@ -36,19 +36,18 @@ public class SimulatorView extends JPanel
     private JLabel stepLabel, population;
     private FieldView fieldView;
     
-    private JTextField stepAmount;
-    
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
     // A statistics object computing and storing simulation information
     private FieldStats stats;
+    private Simulator sim;
 
     /**
      * Create a view of the given width and height.
      * @param height The simulation's height.
      * @param width  The simulation's width.
      */
-    public SimulatorView(int height, int width)
+    public SimulatorView(Simulator sim)
     {
         stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
@@ -57,7 +56,7 @@ public class SimulatorView extends JPanel
         population = new JLabel(POPULATION_PREFIX, SwingConstants.CENTER);
         
         
-        fieldView = new FieldView(height, width);
+        fieldView = new FieldView(sim.getField().getDepth(), sim.getField().getWidth());
 
         
         
@@ -73,7 +72,7 @@ public class SimulatorView extends JPanel
         add(gridpanel);
         
         
-        
+        this.sim = sim;
         
         
     }
@@ -210,6 +209,7 @@ public class SimulatorView extends JPanel
          */
         public void drawMark(int x, int y, Color color)
         {
+        	if(g==null) return;
             g.setColor(color);
             g.fillRect(x * xScale, y * yScale, xScale-1, yScale-1);
         }
@@ -233,4 +233,10 @@ public class SimulatorView extends JPanel
             }
         }
     }
+
+	@Override
+	public void update() {
+		showStatus(sim.getField());
+		
+	}
 }

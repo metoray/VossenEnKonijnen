@@ -16,9 +16,9 @@ import javax.swing.JTextField;
 import mirlexpat.voskonijn.Field;
 import mirlexpat.voskonijn.Simulator;
 
-public class SimulatorController extends JPanel {
+public class FieldController extends JPanel {
 	
-	public SimulatorController(final Field field){
+	public FieldController(final Simulator sim){
 	
 		JPanel buttonpanel = new JPanel();
 	    
@@ -34,7 +34,7 @@ public class SimulatorController extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				field.simulate(Integer.valueOf(stepAmount.getText()));
+				sim.simulate(Integer.valueOf(stepAmount.getText()));
 				
 			}
 		});
@@ -43,7 +43,7 @@ public class SimulatorController extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				field.startRunning();
+				sim.startRunning();
 				
 			}
 		});
@@ -52,7 +52,7 @@ public class SimulatorController extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				field.stopRunning();
+				sim.stopRunning();
 				
 			}
 		});

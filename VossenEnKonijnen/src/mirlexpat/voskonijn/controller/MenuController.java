@@ -10,10 +10,11 @@ import javax.swing.JSeparator;
 
 import mirlexpat.voskonijn.Field;
 import mirlexpat.voskonijn.Randomizer;
+import mirlexpat.voskonijn.Simulator;
 
 public class MenuController extends JMenuBar {
 	
-	public MenuController(final Field field){
+	public MenuController(final Simulator sim){
 	    JMenu fileMenu = new JMenu("File");
 	    JMenu toolMenu = new JMenu("Tools");
 	    
