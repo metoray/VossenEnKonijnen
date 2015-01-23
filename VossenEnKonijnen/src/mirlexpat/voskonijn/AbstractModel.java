@@ -2,24 +2,24 @@ package mirlexpat.voskonijn;
 
 import java.util.ArrayList;
 
-import mirlexpat.voskonijn.view.IView;
+import mirlexpat.voskonijn.view.AbstractView;
 
 public class AbstractModel {
 	
-    private ArrayList<IView> views;
+    private ArrayList<AbstractView> views;
     
     public AbstractModel(){
     	views = new ArrayList<>();
     }
 	
 	protected void notifyViews() {
-		for(IView view: views){
+		for(AbstractView view: views){
 			view.update();
 		}
 		
 	}
 	
-	public void addView(IView view){
+	public void addView(AbstractView view){
 		views.add(view);
 		view.update();
 	}

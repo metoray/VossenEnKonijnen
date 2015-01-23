@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
+import mirlexpat.voskonijn.Counter;
 import mirlexpat.voskonijn.Field;
 
 public class LineGraphView extends GraphView {
@@ -13,11 +14,14 @@ public class LineGraphView extends GraphView {
 	}
 
 	@Override
-	protected void render(Graphics g) {
+	protected void render(Graphics g, Field field) {
 		g.setColor(Color.red);
 		int w = this.getWidth(), h = this.getHeight();
-		g.drawLine(0, 0, w, h);
-		g.drawLine(0, h, w, 0);
+		int y = 0;
+		for(Counter ctr: field.getStats().getCounters()){
+			g.drawString(ctr.getName()+": "+ctr.getCount(), 8, y);
+			y+=16;
+		}
 	}
 
 }

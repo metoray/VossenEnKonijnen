@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import mirlexpat.voskonijn.Field;
 
-public abstract class GraphView extends JPanel implements IView {
+public abstract class GraphView extends AbstractView {
 
 	private Field field;
 	Dimension size;
@@ -44,8 +44,6 @@ public abstract class GraphView extends JPanel implements IView {
 			size = getSize();
 			fieldImage = this.createImage(size.width, size.height);
 			g = fieldImage.getGraphics();
-			g.setColor(Color.black);
-			g.fillRect(0, 0, getWidth(), getHeight());
 		}
 	}
 
@@ -71,9 +69,11 @@ public abstract class GraphView extends JPanel implements IView {
 	@Override
 	public void update() {
 		preparePaint();
-		render(g);
+		g.setColor(Color.black);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		render(g,field);
 		repaint();
 	}
 
-	protected abstract void render(Graphics g);
+	protected abstract void render(Graphics g, Field field);
 }

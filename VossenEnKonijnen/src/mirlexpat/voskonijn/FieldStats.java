@@ -1,5 +1,6 @@
 package mirlexpat.voskonijn;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -46,6 +47,10 @@ public class FieldStats
             buffer.append(' ');
         }
         return buffer.toString();
+    }
+    
+    public Collection<Counter> getCounters(){
+    	return counters.values();
     }
     
     /**

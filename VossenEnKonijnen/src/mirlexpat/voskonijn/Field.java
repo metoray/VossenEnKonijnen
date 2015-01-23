@@ -12,7 +12,7 @@ import mirlexpat.voskonijn.actor.Fox;
 import mirlexpat.voskonijn.actor.Hunter;
 import mirlexpat.voskonijn.actor.KomodoDragon;
 import mirlexpat.voskonijn.actor.Rabbit;
-import mirlexpat.voskonijn.view.IView;
+import mirlexpat.voskonijn.view.AbstractView;
 
 /**
  * Represent a rectangular grid of field positions.
@@ -42,7 +42,7 @@ public class Field
     private int depth, width;
     // Storage for the animals.
     private Object[][] field;
-    private ArrayList<IView> views;
+    private ArrayList<AbstractView> views;
     // A statistics object computing and storing simulation information
     private FieldStats stats;
 
@@ -278,13 +278,13 @@ public class Field
     }
 
 	private void notifyViews() {
-		for(IView view: views){
+		for(AbstractView view: views){
 			view.update();
 		}
 		
 	}
 	
-	public void addView(IView view){
+	public void addView(AbstractView view){
 		views.add(view);
 	}
 
