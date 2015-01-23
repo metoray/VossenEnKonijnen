@@ -9,6 +9,7 @@ import java.util.Map;
 
 import mirlexpat.voskonijn.logic.Counter;
 import mirlexpat.voskonijn.logic.Field;
+import mirlexpat.voskonijn.logic.Simulator;
 
 public class HistogramView extends GraphView {
 	
@@ -20,8 +21,8 @@ public class HistogramView extends GraphView {
 
 
 
-	public HistogramView(Field field, Map<Class, Color> colors) {
-		super(field,colors);
+	public HistogramView(Simulator sim, Map<Class, Color> colors) {
+		super(sim,colors);
 
 	}
 

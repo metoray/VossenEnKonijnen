@@ -45,7 +45,13 @@ public class Simulator extends AbstractModel implements Runnable
     {
     	stepsToRun = new AtomicInteger(0);
     	runInfinite = new AtomicBoolean(false);
-        if(width <= 0 || depth <= 0) {
+    	newField(depth, width);
+        
+    }
+    
+    public void newField(int depth, int width){
+    	stopRunning();
+    	if(width <= 0 || depth <= 0) {
             System.out.println("The dimensions must be greater than zero.");
             System.out.println("Using default values.");
             depth = DEFAULT_DEPTH;
@@ -53,8 +59,11 @@ public class Simulator extends AbstractModel implements Runnable
         }
 
         field = new Field(depth, width);
-        field.reset();
-        notifyViews();
+        Randomizer.reset();
+        Randomizer.reset();
+    	field.reset();
+    	notifyViews();
+    	
     }
         
     /**

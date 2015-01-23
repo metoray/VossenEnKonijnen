@@ -9,10 +9,11 @@ import java.util.Map;
 import javax.swing.JPanel;
 
 import mirlexpat.voskonijn.logic.Field;
+import mirlexpat.voskonijn.logic.Simulator;
 
 public abstract class GraphView extends AbstractView {
 
-	private Field field;
+	private Simulator sim;
 	Dimension size;
 	private Graphics g;
 	private Image fieldImage;
@@ -20,10 +21,10 @@ public abstract class GraphView extends AbstractView {
 	/**
 	 * Create a new FieldView component.
 	 */
-	public GraphView(Field field, Map<Class, Color> colors)
+	public GraphView(Simulator sim, Map<Class, Color> colors)
 	{
 		super(colors);
-		this.field = field;
+		this.sim = sim;
 		size = new Dimension(0, 0);
 	}
 
@@ -73,7 +74,7 @@ public abstract class GraphView extends AbstractView {
 		preparePaint();
 		g.setColor(Color.black);
 		g.fillRect(0, 0, getWidth(), getHeight());
-		render(g,field);
+		render(g,sim.getField());
 		repaint();
 	}
 

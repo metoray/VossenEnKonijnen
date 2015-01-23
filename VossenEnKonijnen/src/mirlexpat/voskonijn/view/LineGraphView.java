@@ -8,14 +8,15 @@ import java.util.Map;
 
 import mirlexpat.voskonijn.logic.Counter;
 import mirlexpat.voskonijn.logic.Field;
+import mirlexpat.voskonijn.logic.Simulator;
 
 public class LineGraphView extends GraphView {
 	
 	private HashMap<Class,History> histories;
 	private int lastStep;
 
-	public LineGraphView(Field field, Map<Class, Color> colors) {
-		super(field,colors);
+	public LineGraphView(Simulator sim, Map<Class, Color> colors) {
+		super(sim,colors);
 		histories = new HashMap<Class,History>();
 		lastStep = -1;
 	}

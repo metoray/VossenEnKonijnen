@@ -45,7 +45,7 @@ public class SimulatorView extends AbstractView
         population = new JLabel(POPULATION_PREFIX, SwingConstants.CENTER);
         
         
-        fieldView = new FieldView(sim.getField().getDepth(), sim.getField().getWidth());
+        fieldView = new FieldView(sim);
 
         
         
@@ -108,7 +108,6 @@ public class SimulatorView extends AbstractView
     {
         private final int GRID_VIEW_SCALING_FACTOR = 6;
 
-        private int gridWidth, gridHeight;
         private int xScale, yScale;
         Dimension size;
         private Graphics g;
@@ -117,10 +116,8 @@ public class SimulatorView extends AbstractView
         /**
          * Create a new FieldView component.
          */
-        public FieldView(int height, int width)
+        public FieldView(Simulator sim)
         {
-            gridHeight = height;
-            gridWidth = width;
             size = new Dimension(0, 0);
         }
 
@@ -130,8 +127,8 @@ public class SimulatorView extends AbstractView
         @Override
 		public Dimension getPreferredSize()
         {
-            return new Dimension(gridWidth * GRID_VIEW_SCALING_FACTOR,
-                                 gridHeight * GRID_VIEW_SCALING_FACTOR);
+            return new Dimension(sim.getField().getWidth() * GRID_VIEW_SCALING_FACTOR,
+                                 sim.getField().getDepth() * GRID_VIEW_SCALING_FACTOR);
         }
 
         /**
@@ -145,11 +142,11 @@ public class SimulatorView extends AbstractView
                 fieldImage = fieldView.createImage(size.width, size.height);
                 g = fieldImage.getGraphics();
 
-                xScale = size.width / gridWidth;
+                xScale = size.width / sim.getField().getWidth();
                 if(xScale < 1) {
                     xScale = GRID_VIEW_SCALING_FACTOR;
                 }
-                yScale = size.height / gridHeight;
+                yScale = size.height / sim.getField().getDepth();
                 if(yScale < 1) {
                     yScale = GRID_VIEW_SCALING_FACTOR;
                 }
