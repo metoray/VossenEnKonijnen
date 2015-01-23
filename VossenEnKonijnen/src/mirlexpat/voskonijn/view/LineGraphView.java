@@ -40,11 +40,15 @@ public class LineGraphView extends GraphView {
 				int next = values[i+1];
 				g.drawLine(i, h-getScaled(current), i+1, h-getScaled(next));
 			}
+			g.drawString(""+values[values.length-1], 170, h-getScaled(values[values.length-1]));
 		}
 	}
 	
 	private int getScaled(int n){
-		return (int)(Math.log(n)/Math.log(1.1));
+		if(n>0) {
+			return (int)((Math.log(n)/Math.log(2))*8);
+		}
+		return 0;
 	}
 	
 	private class History{
