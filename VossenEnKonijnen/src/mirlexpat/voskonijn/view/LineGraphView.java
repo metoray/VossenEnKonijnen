@@ -12,14 +12,21 @@ import mirlexpat.voskonijn.logic.Field;
 public class LineGraphView extends GraphView {
 	
 	private HashMap<Class,History> histories;
+	private int lastStep;
 
 	public LineGraphView(Field field, Map<Class, Color> colors) {
 		super(field,colors);
 		histories = new HashMap<Class,History>();
+		lastStep = -1;
 	}
 
 	@Override
 	protected void render(Graphics g, Field field) {
+		if(field.getStep()<lastStep){
+			histories.clear();
+			lastStep = -1;
+		}
+		lastStep = field.getStep();
 		int h = getHeight();
 		int amount = 1;
 		g.setColor(Color.DARK_GRAY);
