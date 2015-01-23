@@ -1,4 +1,4 @@
-package mirlexpat.voskonijn;
+package mirlexpat.voskonijn.logic;
 
 /**
  * Represent a location in a rectangular grid.

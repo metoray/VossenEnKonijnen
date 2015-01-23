@@ -1,4 +1,4 @@
-package mirlexpat.voskonijn;
+package mirlexpat.voskonijn.logic;
 
 import java.util.Collection;
 import java.util.HashMap;

@@ -3,9 +3,9 @@ package mirlexpat.voskonijn.actor;
 import java.util.List;
 import java.util.Random;
 
-import mirlexpat.voskonijn.Field;
-import mirlexpat.voskonijn.Location;
-import mirlexpat.voskonijn.Randomizer;
+import mirlexpat.voskonijn.logic.Field;
+import mirlexpat.voskonijn.logic.Location;
+import mirlexpat.voskonijn.logic.Randomizer;
 
 /**
  * A simple model of a hunter.

@@ -1,4 +1,4 @@
-package mirlexpat.voskonijn;
+package mirlexpat.voskonijn.logic;
 
 /**
  * Provide a counter for a participant in the simulation.

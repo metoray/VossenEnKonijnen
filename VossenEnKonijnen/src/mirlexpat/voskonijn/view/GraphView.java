@@ -7,7 +7,7 @@ import java.awt.Image;
 
 import javax.swing.JPanel;
 
-import mirlexpat.voskonijn.Field;
+import mirlexpat.voskonijn.logic.Field;
 
 public abstract class GraphView extends AbstractView {
 

@@ -19,6 +19,7 @@ import mirlexpat.voskonijn.actor.KomodoDragon;
 import mirlexpat.voskonijn.actor.Rabbit;
 import mirlexpat.voskonijn.controller.MenuController;
 import mirlexpat.voskonijn.controller.SimulationController;
+import mirlexpat.voskonijn.logic.Simulator;
 import mirlexpat.voskonijn.view.LineGraphView;
 import mirlexpat.voskonijn.view.SimulatorView;
 import mirlexpat.voskonijn.view.GraphView;

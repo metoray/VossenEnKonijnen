@@ -4,9 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import mirlexpat.voskonijn.Field;
-import mirlexpat.voskonijn.Location;
-import mirlexpat.voskonijn.Randomizer;
+import mirlexpat.voskonijn.logic.Field;
+import mirlexpat.voskonijn.logic.Location;
+import mirlexpat.voskonijn.logic.Randomizer;
 
 public class KomodoDragon extends Animal
 {

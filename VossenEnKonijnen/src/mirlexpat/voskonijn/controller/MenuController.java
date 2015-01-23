@@ -4,7 +4,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import mirlexpat.voskonijn.Simulator;
+import mirlexpat.voskonijn.logic.Simulator;
 
 public class MenuController extends JMenuBar {
 	

@@ -1,4 +1,4 @@
-package mirlexpat.voskonijn;
+package mirlexpat.voskonijn.logic;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;

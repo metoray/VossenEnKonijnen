@@ -2,8 +2,8 @@ package mirlexpat.voskonijn.actor;
 
 import java.util.List;
 
-import mirlexpat.voskonijn.Field;
-import mirlexpat.voskonijn.Location;
+import mirlexpat.voskonijn.logic.Field;
+import mirlexpat.voskonijn.logic.Location;
 
 public abstract class Human implements Actor 
 {

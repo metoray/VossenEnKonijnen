@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import mirlexpat.voskonijn.Simulator;
+import mirlexpat.voskonijn.logic.Simulator;
 
 public class SimulationController extends JPanel {
 	

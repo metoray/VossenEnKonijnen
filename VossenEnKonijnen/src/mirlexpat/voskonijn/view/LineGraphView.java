@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-import mirlexpat.voskonijn.Counter;
-import mirlexpat.voskonijn.Field;
+import mirlexpat.voskonijn.logic.Counter;
+import mirlexpat.voskonijn.logic.Field;
 
 public class LineGraphView extends GraphView {
 

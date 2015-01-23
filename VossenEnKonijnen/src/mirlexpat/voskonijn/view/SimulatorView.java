@@ -4,9 +4,9 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import mirlexpat.voskonijn.Field;
-import mirlexpat.voskonijn.FieldStats;
-import mirlexpat.voskonijn.Simulator;
+import mirlexpat.voskonijn.logic.Field;
+import mirlexpat.voskonijn.logic.FieldStats;
+import mirlexpat.voskonijn.logic.Simulator;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
