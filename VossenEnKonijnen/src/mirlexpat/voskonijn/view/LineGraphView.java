@@ -21,6 +21,13 @@ public class LineGraphView extends GraphView {
 	@Override
 	protected void render(Graphics g, Field field) {
 		int h = getHeight();
+		int amount = 1;
+		g.setColor(Color.DARK_GRAY);
+		for(int i=0; i<h; i+=32){
+			g.drawString(""+amount, 4, h-i-4);
+			g.drawLine(0, h-i, getWidth(), h-i);
+			amount *=16;
+		}
 		for(Counter ctr: field.getStats().getCounters()){
 			Class cls = ctr.getClazz();
 			int count = ctr.getCount();
@@ -37,10 +44,11 @@ public class LineGraphView extends GraphView {
 			int[] values = hist.getHistory();
 			for(int i=0;i<values.length-1;i++){
 				int current = values[i];
+				if(current<0) continue;
 				int next = values[i+1];
 				g.drawLine(i, h-getScaled(current), i+1, h-getScaled(next));
 			}
-			g.drawString(""+values[values.length-1], 170, h-getScaled(values[values.length-1]));
+			g.drawString(""+values[values.length-1], 160, h-getScaled(values[values.length-1]));
 		}
 	}
 	
@@ -56,6 +64,9 @@ public class LineGraphView extends GraphView {
 		
 		public History(int size){
 			history = new int[size];
+			for(int i=0; i<size; i++){
+				history[i] = -1;
+			}
 
 		}
 		
