@@ -11,34 +11,40 @@ import mirlexpat.voskonijn.logic.Field;
 
 public class LineGraphView extends GraphView {
 	
-	private HashMap<String,History> histories;
+	private HashMap<Class,History> histories;
 
 	public LineGraphView(Field field, Map<Class, Color> colors) {
 		super(field,colors);
-		histories = new HashMap<String,History>();
+		histories = new HashMap<Class,History>();
 	}
 
 	@Override
 	protected void render(Graphics g, Field field) {
 		int h = getHeight();
 		for(Counter ctr: field.getStats().getCounters()){
-			String name = ctr.getName();
+			Class cls = ctr.getClazz();
 			int count = ctr.getCount();
 			History hist;
-			if(histories.containsKey(name)){
-				hist = histories.get(name);
+			if(histories.containsKey(cls)){
+				hist = histories.get(cls);
 			}
 			else{
 				hist = new History(getWidth());
-				histories.put(name, hist);
+				histories.put(cls, hist);
 			}
 			hist.add(count);
-			g.setColor(Color.red);
+			g.setColor(getColor(cls));
 			int[] values = hist.getHistory();
 			for(int i=0;i<values.length-1;i++){
-				g.drawLine(i, h-values[i], i+1, h-values[i+1]);
+				int current = values[i];
+				int next = values[i+1];
+				g.drawLine(i, h-getScaled(current), i+1, h-getScaled(next));
 			}
 		}
+	}
+	
+	private int getScaled(int n){
+		return (int)(Math.log(n)/Math.log(1.1));
 	}
 	
 	private class History{

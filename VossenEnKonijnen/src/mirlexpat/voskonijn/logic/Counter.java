@@ -12,7 +12,7 @@ package mirlexpat.voskonijn.logic;
 public class Counter
 {
     // A name for this type of simulation participant
-    private String name;
+    private Class cls;
     // How many of this type exist in the simulation.
     private int count;
 
@@ -20,9 +20,9 @@ public class Counter
      * Provide a name for one of the simulation types.
      * @param name  A name, e.g. "Fox".
      */
-    public Counter(String name)
+    public Counter(Class cls)
     {
-        this.name = name;
+        this.cls = cls;
         count = 0;
     }
     
@@ -31,7 +31,14 @@ public class Counter
      */
     public String getName()
     {
-        return name;
+        return cls.getSimpleName();
+    }
+    
+    /**
+     * @return The original class
+     */
+    public Class getClazz(){
+    	return cls;
     }
 
     /**
