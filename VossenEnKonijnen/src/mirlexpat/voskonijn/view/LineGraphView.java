@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.HashMap;
+import java.util.Map;
 
 import mirlexpat.voskonijn.logic.Counter;
 import mirlexpat.voskonijn.logic.Field;
@@ -12,8 +13,8 @@ public class LineGraphView extends GraphView {
 	
 	private HashMap<String,History> histories;
 
-	public LineGraphView(Field field) {
-		super(field);
+	public LineGraphView(Field field, Map<Class, Color> colors) {
+		super(field,colors);
 		histories = new HashMap<String,History>();
 	}
 

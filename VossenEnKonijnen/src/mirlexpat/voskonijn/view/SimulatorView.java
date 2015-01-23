@@ -26,16 +26,10 @@ public class SimulatorView extends AbstractView
     // Colors used for empty locations.
     private static final Color EMPTY_COLOR = Color.white;
 
-    // Color used for objects that have no defined color.
-    private static final Color UNKNOWN_COLOR = Color.gray;
-
     private final String STEP_PREFIX = "Step: ";
     private final String POPULATION_PREFIX = "Population: ";
     private JLabel stepLabel, population;
     private FieldView fieldView;
-    
-    // A map for storing colors for participants in the simulation
-    private Map<Class, Color> colors;
     private Simulator sim;
 
     /**
@@ -43,9 +37,9 @@ public class SimulatorView extends AbstractView
      * @param height The simulation's height.
      * @param width  The simulation's width.
      */
-    public SimulatorView(Simulator sim)
+    public SimulatorView(Simulator sim, Map<Class, Color> colors)
     {
-        colors = new LinkedHashMap<Class, Color>();
+    	super(colors);
 
         stepLabel = new JLabel(STEP_PREFIX, SwingConstants.CENTER);
         population = new JLabel(POPULATION_PREFIX, SwingConstants.CENTER);
@@ -70,31 +64,6 @@ public class SimulatorView extends AbstractView
         this.sim = sim;
         
         
-    }
-    
-    /**
-     * Define a color to be used for a given class of animal.
-     * @param animalClass The animal's Class object.
-     * @param color The color to be used for the given class.
-     */
-    public void setColor(Class animalClass, Color color)
-    {
-        colors.put(animalClass, color);
-    }
-
-    /**
-     * @return The color to be used for a given class of animal.
-     */
-    private Color getColor(Class animalClass)
-    {
-        Color col = colors.get(animalClass);
-        if(col == null) {
-            // no color defined for this class
-            return UNKNOWN_COLOR;
-        }
-        else {
-            return col;
-        }
     }
 
     /**

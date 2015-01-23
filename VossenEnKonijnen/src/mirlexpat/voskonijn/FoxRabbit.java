@@ -6,6 +6,8 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.WindowEvent;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -29,8 +31,10 @@ public class FoxRabbit extends JFrame {
 	// A graphical view of the simulation.
     private SimulatorView view;
     private Simulator sim;
-    private GraphView graph;
+    private GraphView lineGraph;
     private GraphView graph2;
+    // A map for storing colors for participants in the simulation
+    private Map<Class, Color> colors;
 	
 	public static void main(String[] args){
     	new FoxRabbit();
@@ -39,14 +43,16 @@ public class FoxRabbit extends JFrame {
 	public FoxRabbit(){
 		sim = new Simulator();
 		
-        view = new SimulatorView(sim);
-        view.setColor(Rabbit.class, Color.orange);
-        view.setColor(Fox.class, Color.blue);
-        view.setColor(Hunter.class, Color.red);
-        view.setColor(KomodoDragon.class, new Color(0,191,0));
+        colors = new LinkedHashMap<Class, Color>();
+        setColor(Rabbit.class, Color.orange);
+        setColor(Fox.class, Color.blue);
+        setColor(Hunter.class, Color.red);
+        setColor(KomodoDragon.class, new Color(0,191,0));
         
-        graph = new LineGraphView(sim.getField());
-        graph2 = new LineGraphView(sim.getField()); //please don't name your variables this way
+        view = new SimulatorView(sim,colors);
+        
+        lineGraph = new LineGraphView(sim.getField(),colors);
+        graph2 = new LineGraphView(sim.getField(),colors); //please don't name your variables this way
         
         setTitle("Fox and Rabbit Simulation");
     	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -59,7 +65,7 @@ public class FoxRabbit extends JFrame {
         GridLayout gl = new GridLayout(0,1);
         gl.setVgap(8);
         graphs.setLayout(gl); //PUT GRAPH VIEWS IN HERE
-        graphs.add(graph);
+        graphs.add(lineGraph);
         graphs.add(graph2);
         
         JPanel rightSideBar = new JPanel();
@@ -75,7 +81,7 @@ public class FoxRabbit extends JFrame {
         setVisible(true);
         
         sim.addView(view);
-        sim.addView(graph);
+        sim.addView(lineGraph);
         sim.addView(graph2);
         
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -84,6 +90,16 @@ public class FoxRabbit extends JFrame {
             }
         });
 	}
+	
+    /**
+     * Define a color to be used for a given class of animal.
+     * @param animalClass The animal's Class object.
+     * @param color The color to be used for the given class.
+     */
+    public void setColor(Class animalClass, Color color)
+    {
+        colors.put(animalClass, color);
+    }
 	
 	
 }

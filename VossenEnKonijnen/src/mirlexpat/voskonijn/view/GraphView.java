@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.Map;
 
 import javax.swing.JPanel;
 
@@ -19,8 +20,9 @@ public abstract class GraphView extends AbstractView {
 	/**
 	 * Create a new FieldView component.
 	 */
-	public GraphView(Field field)
+	public GraphView(Field field, Map<Class, Color> colors)
 	{
+		super(colors);
 		this.field = field;
 		size = new Dimension(0, 0);
 	}
