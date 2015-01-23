@@ -9,8 +9,9 @@ import java.util.Map;
 
 import mirlexpat.voskonijn.logic.Counter;
 import mirlexpat.voskonijn.logic.Field;
+import mirlexpat.voskonijn.logic.FieldStats;
 
-public class HistogramView extends GraphView {
+public class PieChartView extends GraphView {
 	
 
 
@@ -20,7 +21,7 @@ public class HistogramView extends GraphView {
 
 
 
-	public HistogramView(Field field, Map<Class, Color> colors) {
+	public PieChartView(Field field, Map<Class, Color> colors) {
 		super(field,colors);
 
 	}
@@ -29,23 +30,24 @@ public class HistogramView extends GraphView {
 	protected void render(Graphics g, Field field) {
 		int w = getWidth();
 		int h = getHeight();
-		int inset = 8;
 		
 		
-		
-		Collection<Counter> counters = field.getStats().getCounters();
-		int i = 0;
-		int barWidth = w/counters.size();
+		FieldStats stats = field.getStats();
+		Collection<Counter> counters = stats.getCounters();
+		int runningTotal = 0;
+		double total = stats.getTotal();
 		for(Counter ctr: counters){
 			Class cls = ctr.getClazz();
 			int count = ctr.getCount();
 			g.setColor(getColor(cls));
 			
-			int scaled = getScaled(count);
-			g.fill3DRect(barWidth*i+inset, h-scaled, barWidth-2*inset, scaled, true);
-			i++;
+			int scaled = (int) (count/total*360);
+			
+			g.fillArc(50,5,100,100,runningTotal,scaled);
+		//	g.fillArc(x, y, width, height, startAngle, arcAngle);
+			runningTotal+=scaled;
 		}
-		scaleLine();
+			
 	}
 	
 	

@@ -24,6 +24,7 @@ import mirlexpat.voskonijn.controller.SimulationController;
 import mirlexpat.voskonijn.logic.Simulator;
 import mirlexpat.voskonijn.view.HistogramView;
 import mirlexpat.voskonijn.view.LineGraphView;
+import mirlexpat.voskonijn.view.PieChartView;
 import mirlexpat.voskonijn.view.SimulatorView;
 import mirlexpat.voskonijn.view.GraphView;
 
@@ -34,6 +35,7 @@ public class FoxRabbit extends JFrame {
     private Simulator sim;
     private GraphView lineGraph;
     private GraphView histoGram;
+    private GraphView pieChart;
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
 	
@@ -53,7 +55,10 @@ public class FoxRabbit extends JFrame {
         view = new SimulatorView(sim,colors);
         
         lineGraph = new LineGraphView(sim.getField(),colors);
-        histoGram = new HistogramView(sim.getField(),colors); //please don't name your variables this way
+        histoGram = new HistogramView(sim.getField(),colors);
+        pieChart = new PieChartView(sim.getField(),colors);
+        
+        		
         
         setTitle("Fox and Rabbit Simulation");
     	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -68,6 +73,8 @@ public class FoxRabbit extends JFrame {
         graphs.setLayout(gl); //PUT GRAPH VIEWS IN HERE
         graphs.add(lineGraph);
         graphs.add(histoGram);
+        graphs.add(pieChart);
+        
         
         JPanel rightSideBar = new JPanel();
         rightSideBar.setLayout(new FlowLayout());
@@ -84,6 +91,7 @@ public class FoxRabbit extends JFrame {
         sim.addView(view);
         sim.addView(lineGraph);
         sim.addView(histoGram);
+        sim.addView(pieChart);
         
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(WindowEvent winEvt) {

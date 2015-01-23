@@ -131,4 +131,14 @@ public class FieldStats
         }
         countsValid = true;
     }
+    
+    public int getTotal(){
+    	int total = 0;
+    	for(Counter ctr: counters.values()){
+    		total += ctr.getCount();
+    	}
+    	return total;
+    }
+    
 }
+

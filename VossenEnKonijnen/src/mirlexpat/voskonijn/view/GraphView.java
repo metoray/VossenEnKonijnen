@@ -71,11 +71,22 @@ public abstract class GraphView extends AbstractView {
 	@Override
 	public void update() {
 		preparePaint();
-		g.setColor(Color.black);
+		g.setColor(Color.white);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		render(g,field);
 		repaint();
 	}
 
 	protected abstract void render(Graphics g, Field field);
+	
+	protected void scaleLine() {
+		int amount = 1;
+		int h = getHeight();
+		g.setColor(Color.DARK_GRAY);
+		for(int j=0; j<h; j+=32){
+			g.drawString(""+amount, 4, h-j-4);
+			g.drawLine(0, h-j, getWidth(), h-j);
+			amount *=16;
+		}
+	}
 }

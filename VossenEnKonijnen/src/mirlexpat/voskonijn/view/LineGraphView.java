@@ -20,14 +20,9 @@ public class LineGraphView extends GraphView {
 
 	@Override
 	protected void render(Graphics g, Field field) {
+		scaleLine();
 		int h = getHeight();
-		int amount = 1;
-		g.setColor(Color.DARK_GRAY);
-		for(int i=0; i<h; i+=32){
-			g.drawString(""+amount, 4, h-i-4);
-			g.drawLine(0, h-i, getWidth(), h-i);
-			amount *=16;
-		}
+		
 		for(Counter ctr: field.getStats().getCounters()){
 			Class cls = ctr.getClazz();
 			int count = ctr.getCount();
