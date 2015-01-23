@@ -53,7 +53,8 @@ public class FoxRabbit extends JFrame {
         view = new SimulatorView(sim,colors);
         
         lineGraph = new LineGraphView(sim,colors);
-        histoGram = new HistogramView(sim,colors); //please don't name your variables this way
+        histoGram = new HistogramView(sim,colors);
+        pieChart = new PieChartView(sim,colors);
         
         setTitle("Fox and Rabbit Simulation");
     	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
