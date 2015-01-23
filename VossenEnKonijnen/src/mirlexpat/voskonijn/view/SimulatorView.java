@@ -36,8 +36,6 @@ public class SimulatorView extends JPanel implements IView
     
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
-    // A statistics object computing and storing simulation information
-    private FieldStats stats;
     private Simulator sim;
 
     /**
@@ -47,7 +45,6 @@ public class SimulatorView extends JPanel implements IView
      */
     public SimulatorView(Simulator sim)
     {
-        stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
 
         stepLabel = new JLabel(STEP_PREFIX, SwingConstants.CENTER);
@@ -111,7 +108,6 @@ public class SimulatorView extends JPanel implements IView
         }
             
         stepLabel.setText(STEP_PREFIX + field.getStep());
-        stats.reset();
         
         fieldView.preparePaint();
 
@@ -119,7 +115,6 @@ public class SimulatorView extends JPanel implements IView
             for(int col = 0; col < field.getWidth(); col++) {
                 Object animal = field.getObjectAt(row, col);
                 if(animal != null) {
-                    stats.incrementCount(animal.getClass());
                     fieldView.drawMark(col, row, getColor(animal.getClass()));
                 }
                 else {
@@ -127,19 +122,9 @@ public class SimulatorView extends JPanel implements IView
                 }
             }
         }
-        stats.countFinished();
 
-        population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
+        population.setText(POPULATION_PREFIX + field.getStats().getPopulationDetails(field));
         fieldView.repaint();
-    }
-
-    /**
-     * Determine whether the simulation should continue to run.
-     * @return true If there is more than one species alive.
-     */
-    public boolean isViable(Field field)
-    {
-        return stats.isViable(field);
     }
     
     /**

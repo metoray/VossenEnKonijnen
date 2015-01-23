@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -75,5 +76,13 @@ public class FoxRabbit extends JFrame {
         sim.addView(view);
         sim.addView(graph);
         sim.addView(graph2);
+        
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(WindowEvent winEvt) {
+                System.exit(0);
+            }
+        });
 	}
+	
+	
 }

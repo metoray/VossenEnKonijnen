@@ -43,6 +43,8 @@ public class Field
     // Storage for the animals.
     private Object[][] field;
     private ArrayList<IView> views;
+    // A statistics object computing and storing simulation information
+    private FieldStats stats;
 
     /**
      * Represent a field of the given dimensions.
@@ -56,6 +58,24 @@ public class Field
         field = new Object[depth][width];
         animals = new ArrayList<Actor>();
         this.views = new ArrayList<>();
+    	stats = new FieldStats();
+    }
+    
+    /**
+     * Determine whether the simulation should continue to run.
+     * @return true If there is more than one species alive.
+     */
+    public boolean isViable(Field field)
+    {
+        return stats.isViable(field);
+    }
+    
+    /**
+     * Return the FieldStats object for this field
+     * @return stats
+     */
+    public FieldStats getStats(){
+    	return stats;
     }
     
     /**
@@ -234,11 +254,13 @@ public class Field
      */
     public void step(){
     	step++;
+    	stats.reset();
         // Provide space for newborn animals.
         List<Actor> newAnimals = new ArrayList<Actor>(); 
         // Let all rabbits act.
         for(Iterator<Actor> it = animals.iterator(); it.hasNext(); ) {
             Actor actor = it.next();
+            stats.incrementCount(actor.getClass());
             actor.act(newAnimals);
             if(! actor.isAlive()) {
                 it.remove();
@@ -249,6 +271,8 @@ public class Field
  
         // Add the newly born foxes and rabbits to the main lists.
         animals.addAll(newAnimals);
+        
+        stats.countFinished();
         
         notifyViews();
     }
@@ -279,29 +303,33 @@ public class Field
     {
         Random rand = Randomizer.getRandom();
         this.clear();
+        stats.reset();
         for(int row = 0; row < this.getDepth(); row++) {
             for(int col = 0; col < this.getWidth(); col++) {
+            	Actor actor = null;
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Fox fox = new Fox(true, this, location);
-                    animals.add(fox);
+                    actor = new Fox(true, this, location);
                 }
                 else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Rabbit rabbit = new Rabbit(true, this, location);
-                    animals.add(rabbit);
+                    actor = new Rabbit(true, this, location);
                 }else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Hunter hunter = new Hunter(true, this, location);
-                    animals.add(hunter);
+                    actor = new Hunter(true, this, location);
                 }else if(rand.nextDouble() <= KOMODOVARAAN_CREATION_PROBABILITY){
                 	Location location = new Location(row, col);
-                	KomodoDragon komodovaraan = new KomodoDragon(true, this, location);
-                	animals.add(komodovaraan);
+                	actor = new KomodoDragon(true, this, location);
                 }
                 // else leave the location empty.
+                
+                if(actor!=null){
+                	animals.add(actor);
+                	stats.incrementCount(actor.getClass());
+                }
             }
         }
+        stats.countFinished();
     }
     
     public int getStep(){
