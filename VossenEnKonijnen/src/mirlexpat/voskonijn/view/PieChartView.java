@@ -32,32 +32,24 @@ public class PieChartView extends GraphView {
 		int w = getWidth();
 		int h = getHeight();
 		
+		int radius = 50;
 		
 		FieldStats stats = field.getStats();
-		Collection<Counter> counters = stats.getCounters();
-		int runningTotal = 0;
-		double total = stats.getTotal();
-		for(Counter ctr: counters){
-			Class cls = ctr.getClazz();
+		int totalDegLeft = 360;
+		int runningDeg = 0;
+		int totalCountLeft = stats.getTotal();
+		for(Counter ctr: stats.getCounters()){
 			int count = ctr.getCount();
-			g.setColor(getColor(cls));
+			int deg = (int)Math.round((count/(double)totalCountLeft)*totalDegLeft);
 			
-			int scaled = (int) (count/total*360);
+			g.setColor(getColor(ctr.getClazz()));
+			g.fillArc(w/2-radius,h/2-radius,radius*2,radius*2,runningDeg,deg);
 			
-			g.fillArc(50,5,100,100,runningTotal,scaled);
-		//	g.fillArc(x, y, width, height, startAngle, arcAngle);
-			runningTotal+=scaled;
+			totalDegLeft -= deg;
+			totalCountLeft -= count;
+			runningDeg += deg;
 		}
 			
 	}
-	
-	
-	private int getScaled(int n){
-		if(n>0) {
-			return (int)((Math.log(n)/Math.log(2))*8);
-		}
-		return 0;
-	}
-	
 
 }
