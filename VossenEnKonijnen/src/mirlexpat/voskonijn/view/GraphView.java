@@ -72,7 +72,7 @@ public abstract class GraphView extends AbstractView {
 	@Override
 	public void update() {
 		preparePaint();
-		g.setColor(Color.white);
+		g.setColor(Color.black);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		render(g,sim.getField());
 		repaint();

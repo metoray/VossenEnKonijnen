@@ -14,14 +14,6 @@ import mirlexpat.voskonijn.logic.Simulator;
 
 public class PieChartView extends GraphView {
 	
-
-
-
-
-
-
-
-
 	public PieChartView(Simulator sim, Map<Class, Color> colors) {
 		super(sim,colors);
 
