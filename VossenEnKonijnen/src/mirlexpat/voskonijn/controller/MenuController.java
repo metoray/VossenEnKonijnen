@@ -28,7 +28,7 @@ public class MenuController extends JMenuBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				sim.newField(100,100);
+				sim.newField(200,200);
 				
 			}
 		});

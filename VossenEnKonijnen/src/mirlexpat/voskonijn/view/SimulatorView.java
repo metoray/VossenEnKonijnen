@@ -172,13 +172,8 @@ public class SimulatorView extends AbstractView
         {
             if(fieldImage != null) {
                 Dimension currentSize = getSize();
-                if(size.equals(currentSize)) {
-                    g.drawImage(fieldImage, 0, 0, null);
-                }
-                else {
-                    // Rescale the previous image.
-                    g.drawImage(fieldImage, 0, 0, currentSize.width, currentSize.height, null);
-                }
+                 g.drawImage(fieldImage, 0, 0, null);
+
             }
         }
     }

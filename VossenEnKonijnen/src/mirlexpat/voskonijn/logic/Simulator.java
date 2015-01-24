@@ -3,6 +3,8 @@ package mirlexpat.voskonijn.logic;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.swing.SwingUtilities;
+
 /**
  * A simple predator-prey simulator, based on a rectangular field
  * containing rabbits and foxes.
@@ -60,10 +62,8 @@ public class Simulator extends AbstractModel implements Runnable
 
         field = new Field(depth, width);
         Randomizer.reset();
-        Randomizer.reset();
     	field.reset();
     	notifyViews();
-    	
     }
         
     /**
