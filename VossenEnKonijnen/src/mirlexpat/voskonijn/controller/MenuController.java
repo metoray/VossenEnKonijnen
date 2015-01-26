@@ -33,6 +33,8 @@ public class MenuController extends JMenuBar {
 			}
 		});
 	    
+	    
+	    
 	    add(fileMenu);
 	    add(toolMenu);
 	}
