@@ -9,6 +9,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JSlider;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.event.*;
+import java.awt.event.*;
 
 import mirlexpat.voskonijn.logic.Simulator;
 
