@@ -137,8 +137,8 @@ public class SimulatorView extends AbstractView
          */
         public void preparePaint()
         {
-            if(! size.equals(getSize())) {  // if the size has changed...
-                size = getSize();
+            if(!size.equals(getPreferredSize())) {  // if the size has changed...
+                size = getPreferredSize();
                 fieldImage = fieldView.createImage(size.width, size.height);
                 g = fieldImage.getGraphics();
 
