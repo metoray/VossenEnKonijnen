@@ -60,7 +60,10 @@ public class Simulator extends AbstractModel implements Runnable
             width = DEFAULT_WIDTH;
         }
 
-        field = new Field(depth, width);
+    	FieldSettings settings = new FieldSettings();
+    	settings.getWidthSetting().setValue(width);
+    	settings.getDepthSetting().setValue(depth);
+        field = settings.generateField();
         Randomizer.reset();
     	field.reset();
     	notifyViews();

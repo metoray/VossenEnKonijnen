@@ -39,7 +39,7 @@ public class Field
     // The current step of the simulation.
     private int step;
     // The depth and width of the field.
-    private int depth, width;
+    private final int depth, width;
     // Storage for the animals.
     private Object[][] field;
     private ArrayList<AbstractView> views;
@@ -51,10 +51,10 @@ public class Field
      * @param depth The depth of the field.
      * @param width The width of the field.
      */
-    public Field(int depth, int width)
+    public Field(FieldSettings settings)
     {
-        this.depth = depth;
-        this.width = width;
+        this.depth = settings.getDepthSetting().getValue();
+        this.width = settings.getWidthSetting().getValue();
         field = new Object[depth][width];
         animals = new ArrayList<Actor>();
         this.views = new ArrayList<>();
