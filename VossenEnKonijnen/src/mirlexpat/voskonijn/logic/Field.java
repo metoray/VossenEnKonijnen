@@ -40,6 +40,8 @@ public class Field
     private int step;
     // The depth and width of the field.
     private final int depth, width;
+    // The field settings
+    private FieldSettings settings;
     // Storage for the animals.
     private Object[][] field;
     private ArrayList<AbstractView> views;
@@ -53,6 +55,7 @@ public class Field
      */
     public Field(FieldSettings settings)
     {
+    	this.settings = settings;
         this.depth = settings.getDepthSetting().getValue();
         this.width = settings.getWidthSetting().getValue();
         field = new Object[depth][width];
@@ -338,6 +341,10 @@ public class Field
     
     public void add(Actor actor){
     	animals.add(actor);
+    }
+    
+    public FieldSettings getSettings(){
+    	return settings;
     }
     
 }
