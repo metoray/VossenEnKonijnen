@@ -310,18 +310,14 @@ public class Field
         for(int row = 0; row < this.getDepth(); row++) {
             for(int col = 0; col < this.getWidth(); col++) {
             	Actor actor = null;
+            	Location location = new Location(row, col);
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
                     actor = new Fox(true, this, location);
-                }
-                else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
+                }else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     actor = new Rabbit(true, this, location);
                 }else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
                     actor = new Hunter(true, this, location);
                 }else if(rand.nextDouble() <= KOMODOVARAAN_CREATION_PROBABILITY){
-                	Location location = new Location(row, col);
                 	actor = new KomodoDragon(true, this, location);
                 }
                 // else leave the location empty.
