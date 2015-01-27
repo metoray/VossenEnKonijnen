@@ -63,6 +63,7 @@ public class Rabbit extends Animal
         if(isAlive()) {
             giveBirth(newRabbits);            
             // Try to move into a free location.
+            Location newLocation2 = findFood();
             Location newLocation = getField().freeAdjacentLocation(getLocation());
             if(newLocation != null) {
                 setLocation(newLocation);
@@ -72,6 +73,29 @@ public class Rabbit extends Animal
                 setDead();
             }
         }
+    }
+    
+    private Location findFood()
+    {
+    	Field currentField = getField();
+    	List<Location> adjacent = currentField.adjacentLocations(getLocation());
+    	for (int i=0; i < 10; i++) {
+    		Location targetLocation = getRandomLocation(adjacent);
+    		Object object = currentField.getObjectAt(targetLocation);
+    		
+    		if(object instanceof Grass) {
+    			Grass grass = (Grass) object;
+    			if(grass.isAlive()) {
+    				grass.setDead();
+    				return targetLocation;
+    			}
+    		}
+    	}
+    	return null;
+	}
+    
+    private static Location getRandomLocation(List<Location> location){
+    	return location.get(rand.nextInt(location.size()));
     }
 
     /**

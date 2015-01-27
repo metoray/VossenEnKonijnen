@@ -12,6 +12,7 @@ import mirlexpat.voskonijn.actor.Fox;
 import mirlexpat.voskonijn.actor.Hunter;
 import mirlexpat.voskonijn.actor.KomodoDragon;
 import mirlexpat.voskonijn.actor.Rabbit;
+import mirlexpat.voskonijn.actor.Grass;
 import mirlexpat.voskonijn.view.AbstractView;
 
 /**
@@ -28,8 +29,9 @@ public class Field
     private static final double FOX_CREATION_PROBABILITY = 0.15;
     // The probability that a rabbit will be created in any given grid position.
     private static final double RABBIT_CREATION_PROBABILITY = 0.2;  
-    private static final double KOMODOVARAAN_CREATION_PROBABILITY = 0.001;  
-    private static final double HUNTER_CREATION_PROBABILITY = 0.010;
+    private static final double KOMODOVARAAN_CREATION_PROBABILITY = 0.00301;  
+    private static final double HUNTER_CREATION_PROBABILITY = 0.020;
+    private static final double GRASS_CREATION_PROBABILITY = 0.050;
 	
     // A random number generator for providing random locations.
     private static final Random rand = Randomizer.getRandom();
@@ -319,6 +321,8 @@ public class Field
                     actor = new Hunter(true, this, location);
                 }else if(rand.nextDouble() <= KOMODOVARAAN_CREATION_PROBABILITY){
                 	actor = new KomodoDragon(true, this, location);
+                }else if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY){
+                	actor = new Grass(true, this, location);
                 }
                 // else leave the location empty.
                 
