@@ -62,11 +62,7 @@ public class MenuController extends JMenuBar {
 	    newMenuItem.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e)
 	    	{
-	    		JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 50,  25);
-	    		//JSlider(0,50);
-	    		f2.add(slider, BorderLayout.CENTER);
-	    		f2.setVisible(true);
-	    		//fieldView.dispose(true);
+	    		
 	    	}
 	    });
 	    
