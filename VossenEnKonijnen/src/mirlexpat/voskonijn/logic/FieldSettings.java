@@ -2,6 +2,8 @@ package mirlexpat.voskonijn.logic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Random;
 
 import mirlexpat.voskonijn.actor.Actor;
@@ -15,41 +17,41 @@ public class FieldSettings implements Serializable {
 	
 	private static final long serialVersionUID = -3696332681664249116L;
 	private int width, depth;
-	private ArrayList<AnimalEntry> spawnList;
+	private LinkedHashMap<Class,AnimalEntry> spawnList;
 	
 	public FieldSettings(){
 		width = 120;
 		depth = 80;
-		spawnList = new ArrayList<AnimalEntry>();
-		spawnList.add(new AnimalEntry(0.2,Fox.class) {
+		spawnList = new LinkedHashMap<Class,AnimalEntry>();
+		addToSpawnList(new AnimalEntry(0.04, 150, Fox.class) {
 			
 			@Override
 			public Actor getActor(Field field, Location location) {
 				return new Fox(true, field, location);
 			}
 		});
-		spawnList.add(new AnimalEntry(0.1,Rabbit.class) {
+		addToSpawnList(new AnimalEntry(0.2, 100, Rabbit.class) {
 			
 			@Override
 			public Actor getActor(Field field, Location location) {
 				return new Rabbit(true, field, location);
 			}
 		});
-		spawnList.add(new AnimalEntry(0.01,KomodoDragon.class) {
+		addToSpawnList(new AnimalEntry(0.01, 750, KomodoDragon.class) {
 			
 			@Override
 			public Actor getActor(Field field, Location location) {
 				return new KomodoDragon(true, field, location);
 			}
 		});
-		spawnList.add(new AnimalEntry(0.030,Hunter.class) {
+		addToSpawnList(new AnimalEntry(0.01, 0, Hunter.class) {
 			
 			@Override
 			public Actor getActor(Field field, Location location) {
 				return new Hunter(true, field, location);
 			}
 		});
-		spawnList.add(new AnimalEntry(0.0,Grass.class) {
+		addToSpawnList(new AnimalEntry(0.0, 0, Grass.class) {
 			
 			@Override
 			public Actor getActor(Field field, Location location) {
@@ -80,7 +82,7 @@ public class FieldSettings implements Serializable {
 		this.depth = depth;
 	}
 
-	public ArrayList<AnimalEntry> getSpawnList(){
+	public HashMap<Class, AnimalEntry> getSpawnList(){
 		return spawnList;
 	}
 	
@@ -95,15 +97,19 @@ public class FieldSettings implements Serializable {
 	}
 	
     public static abstract class AnimalEntry{
+    	
+    	private int maxAge;
+    	
     	private double chance;
     	private Class clazz;
 		/**
 		 * @param chance
 		 * @param clazz
 		 */
-		public AnimalEntry(double chance, Class clazz) {
+		public AnimalEntry(double chance, int maxAge, Class clazz) {
 			super();
 			this.chance = chance;
+			this.setMaxAge(maxAge);
 			this.clazz = clazz;
 		}
 		
@@ -118,8 +124,24 @@ public class FieldSettings implements Serializable {
 			return null;
 		}
 		
+		public Class getClazz(){
+			return clazz;
+		}
+		
 		public abstract Actor getActor(Field field, Location location);
+
+		public int getMaxAge() {
+			return maxAge;
+		}
+
+		public void setMaxAge(int maxAge) {
+			this.maxAge = maxAge;
+		}
     	
+    }
+    
+    public void addToSpawnList(AnimalEntry entry){
+    	spawnList.put(entry.getClazz(), entry);
     }
 
 }

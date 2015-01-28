@@ -31,6 +31,7 @@ public class SimulatorView extends AbstractView
     private JLabel stepLabel, population;
     private FieldView fieldView;
     private Simulator sim;
+    private JCheckBox showAnimals, showGrass;
 
     /**
      * Create a view of the given width and height.
@@ -55,7 +56,30 @@ public class SimulatorView extends AbstractView
         
         gridpanel.add(stepLabel, BorderLayout.NORTH);
         gridpanel.add(fieldView, BorderLayout.CENTER);
-        gridpanel.add(population, BorderLayout.SOUTH);
+        
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new BorderLayout());
+        
+        gridpanel.add(bottomPanel,BorderLayout.SOUTH);
+        
+        bottomPanel.add(population, BorderLayout.CENTER);
+        
+        JPanel checkBoxPanel = new JPanel();
+        checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.X_AXIS));
+        
+        bottomPanel.add(checkBoxPanel,BorderLayout.EAST);
+        
+        showAnimals = new JCheckBox();
+        showAnimals.setSelected(true);
+        
+        checkBoxPanel.add(showAnimals);
+        checkBoxPanel.add(new JLabel("Animals"));
+        
+        showGrass = new JCheckBox();
+        showGrass.setSelected(true);
+        
+        checkBoxPanel.add(showGrass);
+        checkBoxPanel.add(new JLabel("Grass"));
         
         setLayout(new FlowLayout());
         add(gridpanel);
@@ -75,6 +99,9 @@ public class SimulatorView extends AbstractView
         if(!isVisible()) {
             setVisible(true);
         }
+        
+        boolean animalsVisible = showAnimals.isSelected();
+        boolean grassVisible = showGrass.isSelected();
             
         stepLabel.setText(STEP_PREFIX + field.getStep());
         
@@ -83,12 +110,12 @@ public class SimulatorView extends AbstractView
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
                 Object animal = field.getObjectAt(row, col);
-                if(animal != null) {
-                    //fieldView.drawMark(col, row, getColor(animal.getClass()));
+                if(animal != null && animalsVisible) {
+                    fieldView.drawMark(col, row, getColor(animal.getClass()));
                 }
                 else {
-                    fieldView.drawMark(col, row, EMPTY_COLOR);
-                    fieldView.drawBGMark(col, row, field.getGrass(row, col));
+                	fieldView.drawMark(col, row, EMPTY_COLOR);
+                	if(grassVisible) fieldView.drawBGMark(col, row, field.getGrass(row, col));
                 }
             }
         }

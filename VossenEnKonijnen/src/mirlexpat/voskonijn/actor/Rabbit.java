@@ -106,7 +106,7 @@ public class Rabbit extends Animal
 	}
     
     private void eatGrass(){
-    	if(foodLevel<15&&getField().getGrass(getLocation())>0){
+    	if(foodLevel<30&&getField().getGrass(getLocation())>0){
     		getField().eatGrass(getLocation());
     		foodLevel+=10;
     	}

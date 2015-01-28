@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import mirlexpat.voskonijn.actor.Actor;
@@ -25,6 +26,8 @@ import mirlexpat.voskonijn.view.AbstractView;
  */
 public class Field
 {
+	
+	private final static double GRASS_GROW_CHANCE = 0.1;
 	
     // A random number generator for providing random locations.
     private static final Random rand = Randomizer.getRandom();
@@ -312,7 +315,7 @@ public class Field
             for(int col = 0; col < this.getWidth(); col++) {
             	Actor actor = null;
             	Location location = new Location(row, col);
-                for(AnimalEntry entry: settings.getSpawnList()){
+                for(AnimalEntry entry: settings.getSpawnList().values()){
                 	actor = entry.trySpawn(this, location, rand);
                 	if(actor!=null){
                 		break;
@@ -358,8 +361,6 @@ public class Field
 	}
 	
 	public void eatGrass(int col, int row){
-		System.out.println(col+"/"+grass.length);
-		System.out.println(row+"/"+grass[col].length);
 		if(grass[col][row]>0)grass[col][row]--;
 	}
 	
@@ -371,7 +372,7 @@ public class Field
 		for(int col=0; col<grass.length; col++){
     		for(int row=0; row<grass[col].length; row++){
     			int level = grass[col][row];
-    			if((level<3)&&(level>0||grassAdjacent(col, row))&&rand.nextInt(8)==0){
+    			if((level<3)&&(level>0||grassAdjacent(col, row))&&rand.nextDouble()<GRASS_GROW_CHANCE){
     				grass[col][row]++;
     			}
     		}

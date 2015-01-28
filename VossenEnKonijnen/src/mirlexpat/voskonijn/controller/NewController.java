@@ -12,7 +12,7 @@ public class NewController extends JFrame {
 	
 	public NewController(Simulator sim){
 		setLayout(new GridLayout(0,1));
-		for(AnimalEntry entry: sim.getField().getSettings().getSpawnList()){
+		for(AnimalEntry entry: sim.getField().getSettings().getSpawnList().values()){
 			add(new AnimalSettingsController(entry));
 		}
 		pack();
