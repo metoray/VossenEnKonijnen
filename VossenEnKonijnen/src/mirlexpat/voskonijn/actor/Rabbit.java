@@ -19,15 +19,19 @@ public class Rabbit extends Animal
     // Characteristics shared by all rabbits (class variables).
 
     // The age at which a rabbit can start to breed.
-    private static final int BREEDING_AGE = 1;
+    private static final int BREEDING_AGE = 15;
     //The age to which a rabbit can live.
     private static final int MAX_AGE = 100;
     // The likelihood of a rabbit breeding.
-    private static final double BREEDING_PROBABILITY = 0.04;
+    private static final double BREEDING_PROBABILITY = 0.14;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 12;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
+    // A rabbit's food level.
+    private int foodLevel;
+    
+   
     
     // Individual characteristics (instance fields).
     
@@ -47,7 +51,11 @@ public class Rabbit extends Animal
         super(field, location);
         age = 0;
         if(randomAge) {
+        	foodLevel = rand.nextInt(10);
             age = rand.nextInt(MAX_AGE);
+        }
+        else{
+        	foodLevel = 10;
         }
     }
     
@@ -61,10 +69,11 @@ public class Rabbit extends Animal
     {
         incrementAge();
         if(isAlive()) {
-            giveBirth(newRabbits);            
+            giveBirth(newRabbits);
             // Try to move into a free location.
-            Location newLocation2 = findFood();
+            findFood();
             Location newLocation = getField().freeAdjacentLocation(getLocation());
+            
             if(newLocation != null) {
                 setLocation(newLocation);
             }
@@ -72,6 +81,7 @@ public class Rabbit extends Animal
                 // Overcrowding.
                 setDead();
             }
+            dieWhenHungry();
         }
     }
     
@@ -87,6 +97,7 @@ public class Rabbit extends Animal
     			Grass grass = (Grass) object;
     			if(grass.isAlive()) {
     				grass.setDead();
+    				foodLevel+=10;
     				return targetLocation;
     			}
     		}
@@ -128,6 +139,14 @@ public class Rabbit extends Animal
             newRabbits.add(young);
         }
     }
+    
+    private void dieWhenHungry() {
+    	if(foodLevel <= 0) {
+    		setDead();
+    	}
+    	foodLevel--;
+    }
+    
         
     /**
      * Generate a number representing the number of births,
