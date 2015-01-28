@@ -15,6 +15,7 @@ public class FieldSettings implements Serializable {
 	public FieldSettings(){
 		width = 120;
 		depth = 80;
+		spawnList = new ArrayList<AnimalEntry>();
 	}
 	
 	public Field generateField(){
