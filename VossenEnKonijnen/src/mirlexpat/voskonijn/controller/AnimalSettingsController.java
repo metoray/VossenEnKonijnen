@@ -3,6 +3,7 @@ package mirlexpat.voskonijn.controller;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 
 import javax.swing.BoxLayout;
@@ -27,6 +28,24 @@ public class AnimalSettingsController extends JPanel {
 		//age.setPaintLabels(true);
 		//age.setMajorTickSpacing(20);
 		add(age);
+		
+		add(new JLabel("Breeding Age"));
+		JSlider breedage = new JSlider();
+		add(breedage);
+
+		add(new JLabel("Breeding Probability"));
+		JSlider breedprob = new JSlider();
+		add(breedprob);
+		
+		add(new JLabel("Max Litter Size"));
+		JSlider litter = new JSlider();
+		add(litter);
+		
+		add(new JLabel("Food Value"));
+		JSlider food = new JSlider();
+		add(food);
+		
+		
 	}
 
 	
