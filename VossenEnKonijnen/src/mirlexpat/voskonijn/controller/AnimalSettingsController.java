@@ -18,10 +18,15 @@ public class AnimalSettingsController extends JPanel {
 	AnimalEntry entry;
 	public AnimalSettingsController(AnimalEntry entry){
 		this.entry = entry;
-		BoxLayout layout = new BoxLayout(this, BoxLayout.X_AXIS);
+		BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		setLayout(layout);
-		JLabel name = new JLabel(entry.getName());
-		
+		add(new JLabel(entry.getName()));
+		add(new JLabel("Max Age"));
+		JSlider age = new JSlider();
+		//age.setMaximum(100);
+		//age.setPaintLabels(true);
+		//age.setMajorTickSpacing(20);
+		add(age);
 	}
 
 	
