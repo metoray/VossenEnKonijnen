@@ -39,6 +39,7 @@ public class Field
     private FieldSettings settings;
     // Storage for the animals.
     private Object[][] field;
+    private int[][] grass;
     private ArrayList<AbstractView> views;
     // A statistics object computing and storing simulation information
     private FieldStats stats;
@@ -54,6 +55,7 @@ public class Field
         this.depth = settings.getDepth();
         this.width = settings.getWidth();
         field = new Object[depth][width];
+        grass = new int[depth][width];
         animals = new ArrayList<Actor>();
         this.views = new ArrayList<>();
     	stats = new FieldStats();
@@ -272,6 +274,8 @@ public class Field
         
         stats.countFinished();
         
+        updateGrass();
+        
         notifyViews();
     }
 
@@ -290,7 +294,9 @@ public class Field
     	step = 0;
         animals.clear();
         field = new Object[depth][width];
+        grass = new int[depth][width];
         this.populate();
+        this.populateGrass();
 	}
 	
 	
@@ -334,5 +340,49 @@ public class Field
     public FieldSettings getSettings(){
     	return settings;
     }
+    
+    public void populateGrass(){
+    	for(int col=0; col<grass.length; col++){
+    		for(int row=0; row<grass[col].length; row++){
+    			grass[col][row] = rand.nextInt(4);
+    		}
+    	}
+    }
+    
+    public int getGrass(Location loc){
+    	return grass[loc.getRow()][loc.getCol()];
+    }
+
+	public int getGrass(int col, int row) {
+		return grass[col][row];
+	}
+	
+	public void eatGrass(int col, int row){
+		if(grass[col][row]>0)grass[col][row]--;
+	}
+	
+	public void updateGrass(){
+		for(int col=0; col<grass.length; col++){
+    		for(int row=0; row<grass[col].length; row++){
+    			int level = grass[col][row];
+    			if((level<3)&&(level>0||grassAdjacent(col, row))){
+    				grass[col][row]++;
+    			}
+    		}
+    	}
+	}
+	
+	public boolean grassAdjacent(int col, int row){
+		for(int coloffset=-1; coloffset<2; coloffset++){
+			for(int rowoffset=-1; rowoffset<2; rowoffset++){
+				int newCol = col+coloffset;
+				int newRow = row+rowoffset;
+				if(newCol>0&&newRow>0&&newCol<grass.length&&newRow<grass[newCol].length){
+					if(getGrass(newCol,newRow) > 0) return true; 
+				}
+			}
+		}
+		return false;
+	}
     
 }

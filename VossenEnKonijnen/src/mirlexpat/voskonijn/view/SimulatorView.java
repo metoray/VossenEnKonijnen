@@ -88,6 +88,7 @@ public class SimulatorView extends AbstractView
                 }
                 else {
                     fieldView.drawMark(col, row, EMPTY_COLOR);
+                    fieldView.drawBGMark(col, row, field.getGrass(row, col));
                 }
             }
         }
@@ -161,6 +162,13 @@ public class SimulatorView extends AbstractView
         	if(g==null) return;
             g.setColor(color);
             g.fillRect(x * xScale, y * yScale, xScale-1, yScale-1);
+        }
+        
+        public void drawBGMark(int x, int y, int grass){
+        	if(g==null) return;
+        	Color[] colors = new Color[]{new Color(255,191,191),new Color(255,255,191),new Color(223,255,191),new Color(191,255,191)};
+        	g.setColor(colors[grass]);
+        	g.fillRect(x * xScale+2, y * yScale+2, xScale-3, yScale-3);
         }
 
         /**

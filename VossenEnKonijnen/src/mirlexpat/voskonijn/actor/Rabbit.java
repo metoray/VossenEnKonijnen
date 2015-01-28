@@ -105,6 +105,9 @@ public class Rabbit extends Animal
     	return null;
 	}
     
+    private void eatGrass(){
+    }
+    
     private static Location getRandomLocation(List<Location> location){
     	return location.get(rand.nextInt(location.size()));
     }
