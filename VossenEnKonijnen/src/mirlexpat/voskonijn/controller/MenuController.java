@@ -3,15 +3,18 @@ package mirlexpat.voskonijn.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JSlider;
 import java.awt.*;
+
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
 
+import mirlexpat.voskonijn.logic.FieldSettings.AnimalEntry;
 import mirlexpat.voskonijn.logic.Simulator;
 
 public class MenuController extends JMenuBar {
@@ -62,16 +65,8 @@ public class MenuController extends JMenuBar {
 	    newMenuItem.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e)
 	    	{
-	    		
+	    		NewController c = new NewController(sim);
 	    	}
 	    });
 	    
-    newMenuItem.addActionListener(new ActionListener() {
-		
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			sim.newField(200,200);
-			
-		}
-	});
 	}}
