@@ -42,11 +42,11 @@ public class FoxRabbit extends JFrame {
     private Map<Class, Color> colors;
 	
 	public static void main(String[] args){
+		UIManager.put("Slider.paintValue", true);
     	new FoxRabbit();
     }
 	
 	public FoxRabbit(){
-		UIManager.put("Slider.paintValue", true);
 		sim = new Simulator();
 		
         colors = new LinkedHashMap<Class, Color>();
