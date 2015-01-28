@@ -12,6 +12,7 @@ import mirlexpat.voskonijn.actor.Fox;
 import mirlexpat.voskonijn.actor.Hunter;
 import mirlexpat.voskonijn.actor.KomodoDragon;
 import mirlexpat.voskonijn.actor.Rabbit;
+import mirlexpat.voskonijn.logic.FieldSettings.AnimalEntry;
 import mirlexpat.voskonijn.view.AbstractView;
 
 /**
@@ -42,6 +43,8 @@ public class Field
     private final int depth, width;
     // The field settings
     private FieldSettings settings;
+    // The spawnlist
+    private ArrayList<AnimalEntry> spawnList;
     // Storage for the animals.
     private Object[][] field;
     private ArrayList<AbstractView> views;
@@ -56,8 +59,8 @@ public class Field
     public Field(FieldSettings settings)
     {
     	this.settings = settings;
-        this.depth = settings.getDepthSetting().getValue();
-        this.width = settings.getWidthSetting().getValue();
+        this.depth = settings.getDepth();
+        this.width = settings.getWidth();
         field = new Object[depth][width];
         animals = new ArrayList<Actor>();
         this.views = new ArrayList<>();

@@ -61,8 +61,8 @@ public class Simulator extends AbstractModel implements Runnable
         }
 
     	FieldSettings settings = new FieldSettings();
-    	settings.getWidthSetting().setValue(width);
-    	settings.getDepthSetting().setValue(depth);
+    	settings.setWidth(width);
+    	settings.setDepth(depth);
         field = settings.generateField();
         Randomizer.reset();
     	field.reset();

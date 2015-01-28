@@ -1,65 +1,84 @@
 package mirlexpat.voskonijn.logic;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Random;
+
+import mirlexpat.voskonijn.actor.Actor;
 
 public class FieldSettings implements Serializable {
 	
 	private static final long serialVersionUID = -3696332681664249116L;
-	private IntegerSetting width, depth;
+	private int width, depth;
+	private ArrayList<AnimalEntry> spawnList;
 	
 	public FieldSettings(){
-		width = new IntegerSetting(120);
-		depth = new IntegerSetting(80);
+		width = 120;
+		depth = 80;
 	}
 	
 	public Field generateField(){
 		return new Field(this);
 	}
 	
-	public IntegerSetting getWidthSetting() {
+	
+	
+	public int getWidth() {
 		return width;
 	}
 
-	public IntegerSetting getDepthSetting() {
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getDepth() {
 		return depth;
+	}
+
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+
+	public ArrayList<AnimalEntry> getSpawnList(){
+		return spawnList;
 	}
 	
 	public boolean equals(Object o){
 		if(o==this) return true;
 		if(o instanceof FieldSettings){
 			FieldSettings other = (FieldSettings) o;
-			return other.depth.equals(depth)&&
-				   other.width.equals(width);
+			return other.depth==depth&&
+				   other.width==width;
 		}
 		return false;
 	}
-
-	public static class IntegerSetting implements Serializable {
-		
-		private static final long serialVersionUID = -5736047574958108476L;
-		private int value;
-		
-		public IntegerSetting(int value){
-			this.value = value;
-		}
-
-		public int getValue() {
-			return value;
-		}
-
-		public void setValue(int value) {
-			this.value = value;
-		}
-		
-		public boolean equals(Object o){
-			if(o==this) return true;
-			if(o instanceof IntegerSetting){
-				return ((IntegerSetting) o).getValue() == value;
-			}
-			return false;
-		}
-		
-	}
 	
+    public static abstract class AnimalEntry{
+    	private double chance;
+    	private Class clazz;
+		/**
+		 * @param chance
+		 * @param clazz
+		 */
+		public AnimalEntry(double chance, Class clazz) {
+			super();
+			this.chance = chance;
+			this.clazz = clazz;
+		}
+		
+		public String getName(){
+			return clazz.getSimpleName();
+		}
+		
+		public Actor trySpawn(Field field, Location location, Random rand){
+			if(rand.nextDouble() <= chance){
+				return getActor(field, location);
+			}
+			return null;
+		}
+		
+		public abstract Actor getActor(Field field, Location location);
+    	
+    }
 
 }
