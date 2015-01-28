@@ -14,24 +14,18 @@ import mirlexpat.voskonijn.logic.Randomizer;
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
-public class Rabbit extends Animal
+public class Grass extends Animal
 {
     // Characteristics shared by all rabbits (class variables).
 
     // The age at which a rabbit can start to breed.
-    private static final int BREEDING_AGE = 1;
-    //The age to which a rabbit can live.
-    private static final int MAX_AGE = 100;
+    private static final int BREEDING_AGE = 0;
     // The likelihood of a rabbit breeding.
-    private static final double BREEDING_PROBABILITY = 0.04;
+    private static final double BREEDING_PROBABILITY = 0.20;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 12;
+    private static final int MAX_LITTER_SIZE = 1;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
-    
-    // Individual characteristics (instance fields).
-    
-    // The rabbit's age.
     private int age;
 
     /**
@@ -42,80 +36,38 @@ public class Rabbit extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Rabbit(boolean randomAge, Field field, Location location)
-    {
-        super(field, location);
-        age = 0;
-        if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
-        }
-    }
+    public Grass(boolean randomAge, Field field, Location location) {
     
+        super(field, location);
+       
+	}
     /**
      * This is what the rabbit does most of the time - it runs 
      * around. Sometimes it will breed or die of old age.
      * @param newRabbits A list to return newly born rabbits.
      */
     @Override
-	public void act(List<Actor> newRabbits)
+	public void act(List<Actor> newGrass)
     {
-        incrementAge();
+      //  incrementAge();
         if(isAlive()) {
-            giveBirth(newRabbits);            
-            // Try to move into a free location.
-            Location newLocation2 = findFood();
+            giveBirth(newGrass);            
+         // Try to move into a free location.
             Location newLocation = getField().freeAdjacentLocation(getLocation());
             if(newLocation != null) {
                 setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
+          
             }
         }
-    }
-    
-    private Location findFood()
-    {
-    	Field currentField = getField();
-    	List<Location> adjacent = currentField.adjacentLocations(getLocation());
-    	for (int i=0; i < 10; i++) {
-    		Location targetLocation = getRandomLocation(adjacent);
-    		Object object = currentField.getObjectAt(targetLocation);
-    		
-    		if(object instanceof Grass) {
-    			Grass grass = (Grass) object;
-    			if(grass.isAlive()) {
-    				grass.setDead();
-    				return targetLocation;
-    			}
-    		}
-    	}
-    	return null;
-	}
-    
-    private static Location getRandomLocation(List<Location> location){
-    	return location.get(rand.nextInt(location.size()));
     }
 
-    /**
-     * Increase the age.
-     * This could result in the rabbit's death.
-     */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
-    }
     
     /**
      * Check whether or not this rabbit is to give birth at this step.
      * New births will be made into free adjacent locations.
      * @param newRabbits A list to return newly born rabbits.
      */
-    private void giveBirth(List<Actor> newRabbits)
+    private void giveBirth(List<Actor> newGrass)
     {
         // New rabbits are born into adjacent locations.
         // Get a list of adjacent free locations.
@@ -124,8 +76,8 @@ public class Rabbit extends Animal
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Rabbit young = new Rabbit(false, field, loc);
-            newRabbits.add(young);
+            Grass young = new Grass(false, field, loc);
+            newGrass.add(young);
         }
     }
         

@@ -12,6 +12,8 @@ import mirlexpat.voskonijn.actor.Fox;
 import mirlexpat.voskonijn.actor.Hunter;
 import mirlexpat.voskonijn.actor.KomodoDragon;
 import mirlexpat.voskonijn.actor.Rabbit;
+import mirlexpat.voskonijn.logic.FieldSettings.AnimalEntry;
+import mirlexpat.voskonijn.actor.Grass;
 import mirlexpat.voskonijn.view.AbstractView;
 
 /**
@@ -28,8 +30,9 @@ public class Field
     private static final double FOX_CREATION_PROBABILITY = 0.15;
     // The probability that a rabbit will be created in any given grid position.
     private static final double RABBIT_CREATION_PROBABILITY = 0.2;  
-    private static final double KOMODOVARAAN_CREATION_PROBABILITY = 0.001;  
-    private static final double HUNTER_CREATION_PROBABILITY = 0.010;
+    private static final double KOMODOVARAAN_CREATION_PROBABILITY = 0.00301;  
+    private static final double HUNTER_CREATION_PROBABILITY = 0.020;
+    private static final double GRASS_CREATION_PROBABILITY = 0.050;
 	
     // A random number generator for providing random locations.
     private static final Random rand = Randomizer.getRandom();
@@ -39,7 +42,11 @@ public class Field
     // The current step of the simulation.
     private int step;
     // The depth and width of the field.
-    private int depth, width;
+    private final int depth, width;
+    // The field settings
+    private FieldSettings settings;
+    // The spawnlist
+    private ArrayList<AnimalEntry> spawnList;
     // Storage for the animals.
     private Object[][] field;
     private ArrayList<AbstractView> views;
@@ -51,10 +58,11 @@ public class Field
      * @param depth The depth of the field.
      * @param width The width of the field.
      */
-    public Field(int depth, int width)
+    public Field(FieldSettings settings)
     {
-        this.depth = depth;
-        this.width = width;
+    	this.settings = settings;
+        this.depth = settings.getDepth();
+        this.width = settings.getWidth();
         field = new Object[depth][width];
         animals = new ArrayList<Actor>();
         this.views = new ArrayList<>();
@@ -307,19 +315,17 @@ public class Field
         for(int row = 0; row < this.getDepth(); row++) {
             for(int col = 0; col < this.getWidth(); col++) {
             	Actor actor = null;
+            	Location location = new Location(row, col);
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
                     actor = new Fox(true, this, location);
-                }
-                else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
+                }else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     actor = new Rabbit(true, this, location);
                 }else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
                     actor = new Hunter(true, this, location);
                 }else if(rand.nextDouble() <= KOMODOVARAAN_CREATION_PROBABILITY){
-                	Location location = new Location(row, col);
                 	actor = new KomodoDragon(true, this, location);
+                }else if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY){
+                	actor = new Grass(true, this, location);
                 }
                 // else leave the location empty.
                 
@@ -338,6 +344,10 @@ public class Field
     
     public void add(Actor actor){
     	animals.add(actor);
+    }
+    
+    public FieldSettings getSettings(){
+    	return settings;
     }
     
 }

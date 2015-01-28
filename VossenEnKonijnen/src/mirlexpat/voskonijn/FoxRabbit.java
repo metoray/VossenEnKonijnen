@@ -19,6 +19,7 @@ import mirlexpat.voskonijn.actor.Fox;
 import mirlexpat.voskonijn.actor.Hunter;
 import mirlexpat.voskonijn.actor.KomodoDragon;
 import mirlexpat.voskonijn.actor.Rabbit;
+import mirlexpat.voskonijn.actor.Grass;
 import mirlexpat.voskonijn.controller.MenuController;
 import mirlexpat.voskonijn.controller.SimulationController;
 import mirlexpat.voskonijn.logic.Simulator;
@@ -50,7 +51,8 @@ public class FoxRabbit extends JFrame {
         setColor(Rabbit.class, Color.orange);
         setColor(Fox.class, Color.blue);
         setColor(Hunter.class, Color.red);
-        setColor(KomodoDragon.class, new Color(0,191,0));
+        setColor(KomodoDragon.class, Color.gray);
+        setColor(Grass.class, Color.green);
         
         view = new SimulatorView(sim,colors);
         
