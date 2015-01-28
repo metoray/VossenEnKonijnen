@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.UIManager;
 
 import mirlexpat.voskonijn.actor.Fox;
 import mirlexpat.voskonijn.actor.Hunter;
@@ -45,6 +46,7 @@ public class FoxRabbit extends JFrame {
     }
 	
 	public FoxRabbit(){
+		UIManager.put("Slider.paintValue", true);
 		sim = new Simulator();
 		
         colors = new LinkedHashMap<Class, Color>();
