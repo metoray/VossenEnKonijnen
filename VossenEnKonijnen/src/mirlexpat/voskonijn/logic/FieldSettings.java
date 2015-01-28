@@ -49,7 +49,7 @@ public class FieldSettings implements Serializable {
 				return new Hunter(true, field, location);
 			}
 		});
-		spawnList.add(new AnimalEntry(0.30,Grass.class) {
+		spawnList.add(new AnimalEntry(0.0,Grass.class) {
 			
 			@Override
 			public Actor getActor(Field field, Location location) {
