@@ -21,35 +21,35 @@ public class FieldSettings implements Serializable {
 		width = 120;
 		depth = 80;
 		spawnList = new ArrayList<AnimalEntry>();
-		spawnList.add(new AnimalEntry(0.15,Fox.class) {
+		spawnList.add(new AnimalEntry(0.2,Fox.class) {
 			
 			@Override
 			public Actor getActor(Field field, Location location) {
 				return new Fox(true, field, location);
 			}
 		});
-		spawnList.add(new AnimalEntry(0.2,Rabbit.class) {
+		spawnList.add(new AnimalEntry(0.1,Rabbit.class) {
 			
 			@Override
 			public Actor getActor(Field field, Location location) {
 				return new Rabbit(true, field, location);
 			}
 		});
-		spawnList.add(new AnimalEntry(0.00301,KomodoDragon.class) {
+		spawnList.add(new AnimalEntry(0.01,KomodoDragon.class) {
 			
 			@Override
 			public Actor getActor(Field field, Location location) {
 				return new KomodoDragon(true, field, location);
 			}
 		});
-		spawnList.add(new AnimalEntry(0.020,Hunter.class) {
+		spawnList.add(new AnimalEntry(0.030,Hunter.class) {
 			
 			@Override
 			public Actor getActor(Field field, Location location) {
 				return new Hunter(true, field, location);
 			}
 		});
-		spawnList.add(new AnimalEntry(0.05,Grass.class) {
+		spawnList.add(new AnimalEntry(0.30,Grass.class) {
 			
 			@Override
 			public Actor getActor(Field field, Location location) {

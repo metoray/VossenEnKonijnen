@@ -19,11 +19,13 @@ public class Grass extends Animal
     // Characteristics shared by all rabbits (class variables).
 
     // The age at which a rabbit can start to breed.
-    private static final int BREEDING_AGE = 0;
+    private static final int BREEDING_AGE = 5;
     // The likelihood of a rabbit breeding.
-    private static final double BREEDING_PROBABILITY = 0.20;
+    private static final double BREEDING_PROBABILITY = 0.5;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 1;
+    private static final int MAX_LITTER_SIZE = 8;
+    // The maximum amount of steps grass can live.
+    private static final int MAX_AGE = 20;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     private int age;
@@ -49,17 +51,14 @@ public class Grass extends Animal
     @Override
 	public void act(List<Actor> newGrass)
     {
-      //  incrementAge();
+    	incrementAge();
         if(isAlive()) {
-            giveBirth(newGrass);            
-         // Try to move into a free location.
-            Location newLocation = getField().freeAdjacentLocation(getLocation());
-            if(newLocation != null) {
-                setLocation(newLocation);
+            giveBirth(newGrass);
+          
           
             }
         }
-    }
+    
 
     
     /**
@@ -93,6 +92,14 @@ public class Grass extends Animal
             births = rand.nextInt(MAX_LITTER_SIZE) + 1;
         }
         return births;
+    }
+    
+    private void incrementAge()
+    {
+        age++;
+        if(age > MAX_AGE) {
+            setDead();
+        }
     }
 
     /**

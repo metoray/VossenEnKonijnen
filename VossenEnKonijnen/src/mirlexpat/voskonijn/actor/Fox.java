@@ -20,11 +20,11 @@ public class Fox extends Animal
     // Characteristics shared by all foxes (class variables).
     
     // The age at which a fox can start to breed.
-    private static final int BREEDING_AGE = 15;
+    private static final int BREEDING_AGE = 5;
     // The age to which a fox can live.
     private static final int MAX_AGE = 150;
     // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.08;
+    private static final double BREEDING_PROBABILITY = 0.02;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 8;
     // The food value of a single rabbit. In effect, this is the

@@ -93,7 +93,7 @@ public class Hunter extends Human
     		Location targetLocation = getRandomLocation(adjacent);
     		Object object = currentField.getObjectAt(targetLocation);
     		
-    		if(object instanceof Animal) {
+    		if(object instanceof Animal && !(object instanceof Grass)) {
     			Animal prey = (Animal) object;
     			if(prey.isAlive()) {
     				prey.setDead();
