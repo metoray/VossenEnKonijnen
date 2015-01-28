@@ -21,16 +21,18 @@ public class MenuController extends JMenuBar {
 	public MenuController(final Simulator sim){
 	    JMenu fileMenu = new JMenu("File");
 	    JMenu toolMenu = new JMenu("Tools");
+	    JMenu settingsMenu = new JMenu("Settings");
 	    
 	    JMenuItem newMenuItem = new JMenuItem("New Simulation");
 	    JMenuItem saveMenuItem = new JMenuItem("Save Simulation Settings");
 	    JMenuItem quitMenuItem = new JMenuItem("Quit");
-	    
+	    JMenuItem komodoDragonSettings = new JMenuItem("KomodoDragon Settings");
 
 	    fileMenu.add(newMenuItem);
 	    fileMenu.add(saveMenuItem);
 	    fileMenu.addSeparator();
 	    fileMenu.add(quitMenuItem);
+	    settingsMenu.add(komodoDragonSettings);
 	    
 	    newMenuItem.addActionListener(new ActionListener() {
 			
@@ -43,8 +45,19 @@ public class MenuController extends JMenuBar {
 	    
 	    add(fileMenu);
 	    add(toolMenu);
+	    add(settingsMenu);
 	    
 	    f2.setSize(500,500);
+	    
+	    komodoDragonSettings.addActionListener(new ActionListener(){
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 50,  25);
+	    		//JSlider(0,50);
+	    		f2.add(slider, BorderLayout.CENTER);
+	    		f2.setVisible(true);
+	    		//fieldView.dispose(true);
+	    	}});
 	    
 	    newMenuItem.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e)
@@ -56,7 +69,7 @@ public class MenuController extends JMenuBar {
 	    		//fieldView.dispose(true);
 	    	}
 	    });
-	
+	    
     newMenuItem.addActionListener(new ActionListener() {
 		
 		@Override
