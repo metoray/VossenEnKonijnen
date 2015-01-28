@@ -26,6 +26,7 @@ public class MenuController extends JMenuBar {
 	    JMenuItem saveMenuItem = new JMenuItem("Save Simulation Settings");
 	    JMenuItem quitMenuItem = new JMenuItem("Quit");
 	    
+
 	    fileMenu.add(newMenuItem);
 	    fileMenu.add(saveMenuItem);
 	    fileMenu.addSeparator();
@@ -55,6 +56,13 @@ public class MenuController extends JMenuBar {
 	    		//fieldView.dispose(true);
 	    	}
 	    });
-	}
-
-}
+	
+    newMenuItem.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			sim.newField(200,200);
+			
+		}
+	});
+	}}
