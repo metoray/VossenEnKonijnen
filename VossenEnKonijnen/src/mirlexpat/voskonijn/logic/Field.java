@@ -26,14 +26,6 @@ import mirlexpat.voskonijn.view.AbstractView;
 public class Field
 {
 	
-    // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.15;
-    // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.2;  
-    private static final double KOMODOVARAAN_CREATION_PROBABILITY = 0.00301;  
-    private static final double HUNTER_CREATION_PROBABILITY = 0.020;
-    private static final double GRASS_CREATION_PROBABILITY = 0.050;
-	
     // A random number generator for providing random locations.
     private static final Random rand = Randomizer.getRandom();
     // List of animals in the field.
@@ -45,8 +37,6 @@ public class Field
     private final int depth, width;
     // The field settings
     private FieldSettings settings;
-    // The spawnlist
-    private ArrayList<AnimalEntry> spawnList;
     // Storage for the animals.
     private Object[][] field;
     private ArrayList<AbstractView> views;
@@ -316,16 +306,11 @@ public class Field
             for(int col = 0; col < this.getWidth(); col++) {
             	Actor actor = null;
             	Location location = new Location(row, col);
-                if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    actor = new Fox(true, this, location);
-                }else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
-                    actor = new Rabbit(true, this, location);
-                }else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY) {
-                    actor = new Hunter(true, this, location);
-                }else if(rand.nextDouble() <= KOMODOVARAAN_CREATION_PROBABILITY){
-                	actor = new KomodoDragon(true, this, location);
-                }else if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY){
-                	actor = new Grass(true, this, location);
+                for(AnimalEntry entry: settings.getSpawnList()){
+                	actor = entry.trySpawn(this, location, rand);
+                	if(actor!=null){
+                		break;
+                	}
                 }
                 // else leave the location empty.
                 

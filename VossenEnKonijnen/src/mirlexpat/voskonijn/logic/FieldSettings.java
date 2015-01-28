@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import mirlexpat.voskonijn.actor.Actor;
+import mirlexpat.voskonijn.actor.Fox;
+import mirlexpat.voskonijn.actor.Grass;
+import mirlexpat.voskonijn.actor.Hunter;
+import mirlexpat.voskonijn.actor.KomodoDragon;
+import mirlexpat.voskonijn.actor.Rabbit;
 
 public class FieldSettings implements Serializable {
 	
@@ -16,6 +21,41 @@ public class FieldSettings implements Serializable {
 		width = 120;
 		depth = 80;
 		spawnList = new ArrayList<AnimalEntry>();
+		spawnList.add(new AnimalEntry(0.15,Fox.class) {
+			
+			@Override
+			public Actor getActor(Field field, Location location) {
+				return new Fox(true, field, location);
+			}
+		});
+		spawnList.add(new AnimalEntry(0.2,Rabbit.class) {
+			
+			@Override
+			public Actor getActor(Field field, Location location) {
+				return new Rabbit(true, field, location);
+			}
+		});
+		spawnList.add(new AnimalEntry(0.00301,KomodoDragon.class) {
+			
+			@Override
+			public Actor getActor(Field field, Location location) {
+				return new KomodoDragon(true, field, location);
+			}
+		});
+		spawnList.add(new AnimalEntry(0.020,Hunter.class) {
+			
+			@Override
+			public Actor getActor(Field field, Location location) {
+				return new Hunter(true, field, location);
+			}
+		});
+		spawnList.add(new AnimalEntry(0.05,Grass.class) {
+			
+			@Override
+			public Actor getActor(Field field, Location location) {
+				return new Grass(true, field, location);
+			}
+		});
 	}
 	
 	public Field generateField(){
