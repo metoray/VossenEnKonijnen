@@ -255,6 +255,7 @@ public class Field
     public void step(){
     	step++;
     	stats.reset();
+        updateGrass();
         // Provide space for newborn animals.
         List<Actor> newAnimals = new ArrayList<Actor>(); 
         // Let all rabbits act.
@@ -274,7 +275,6 @@ public class Field
         
         stats.countFinished();
         
-        updateGrass();
         
         notifyViews();
     }
@@ -358,14 +358,20 @@ public class Field
 	}
 	
 	public void eatGrass(int col, int row){
+		System.out.println(col+"/"+grass.length);
+		System.out.println(row+"/"+grass[col].length);
 		if(grass[col][row]>0)grass[col][row]--;
+	}
+	
+	public void eatGrass(Location loc){
+		this.eatGrass(loc.getRow(), loc.getCol());
 	}
 	
 	public void updateGrass(){
 		for(int col=0; col<grass.length; col++){
     		for(int row=0; row<grass[col].length; row++){
     			int level = grass[col][row];
-    			if((level<3)&&(level>0||grassAdjacent(col, row))){
+    			if((level<3)&&(level>0||grassAdjacent(col, row))&&rand.nextInt(8)==0){
     				grass[col][row]++;
     			}
     		}

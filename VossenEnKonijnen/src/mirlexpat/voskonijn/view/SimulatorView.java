@@ -84,7 +84,7 @@ public class SimulatorView extends AbstractView
             for(int col = 0; col < field.getWidth(); col++) {
                 Object animal = field.getObjectAt(row, col);
                 if(animal != null) {
-                    fieldView.drawMark(col, row, getColor(animal.getClass()));
+                    //fieldView.drawMark(col, row, getColor(animal.getClass()));
                 }
                 else {
                     fieldView.drawMark(col, row, EMPTY_COLOR);
@@ -166,7 +166,7 @@ public class SimulatorView extends AbstractView
         
         public void drawBGMark(int x, int y, int grass){
         	if(g==null) return;
-        	Color[] colors = new Color[]{new Color(255,191,191),new Color(255,255,191),new Color(223,255,191),new Color(191,255,191)};
+        	Color[] colors = new Color[]{EMPTY_COLOR,new Color(255,191,191),new Color(255,255,127),new Color(127,255,127)};
         	g.setColor(colors[grass]);
         	g.fillRect(x * xScale+2, y * yScale+2, xScale-3, yScale-3);
         }

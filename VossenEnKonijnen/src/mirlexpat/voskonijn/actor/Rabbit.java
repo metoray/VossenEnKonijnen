@@ -71,7 +71,7 @@ public class Rabbit extends Animal
         if(isAlive()) {
             giveBirth(newRabbits);
             // Try to move into a free location.
-            findFood();
+            eatGrass();
             Location newLocation = getField().freeAdjacentLocation(getLocation());
             
             if(newLocation != null) {
@@ -106,6 +106,10 @@ public class Rabbit extends Animal
 	}
     
     private void eatGrass(){
+    	if(foodLevel<15&&getField().getGrass(getLocation())>0){
+    		getField().eatGrass(getLocation());
+    		foodLevel+=10;
+    	}
     }
     
     private static Location getRandomLocation(List<Location> location){
