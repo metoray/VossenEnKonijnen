@@ -16,12 +16,15 @@ import mirlexpat.voskonijn.actor.Rabbit;
 public class FieldSettings implements Serializable {
 	
 	private static final long serialVersionUID = -3696332681664249116L;
-	private int width, depth;
+	private int width, depth, randomSeed;
+	private double grassGrowthChance;
 	private LinkedHashMap<Class,AnimalEntry> spawnList;
 	
 	public FieldSettings(){
 		width = 120;
 		depth = 80;
+		grassGrowthChance = 0.1;
+		randomSeed = 1111;
 		spawnList = new LinkedHashMap<Class,AnimalEntry>();
 		addToSpawnList(new AnimalEntry(0.04, 150, Fox.class) {
 			
@@ -143,5 +146,21 @@ public class FieldSettings implements Serializable {
     public void addToSpawnList(AnimalEntry entry){
     	spawnList.put(entry.getClazz(), entry);
     }
+
+	public double getGrassGrowthChance() {
+		return grassGrowthChance;
+	}
+
+	public void setGrassGrowthChance(double grassGrowthChance) {
+		this.grassGrowthChance = grassGrowthChance;
+	}
+
+	public int getRandomSeed() {
+		return randomSeed;
+	}
+
+	public void setRandomSeed(int randomSeed) {
+		this.randomSeed = randomSeed;
+	}
 
 }

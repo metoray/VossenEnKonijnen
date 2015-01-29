@@ -37,20 +37,13 @@ public class MenuController extends JMenuBar {
 	    fileMenu.add(quitMenuItem);
 	    settingsMenu.add(komodoDragonSettings);
 	    
-	    newMenuItem.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				sim.newField(200,200);
-				
-			}
-		});
-	    
 	    add(fileMenu);
 	    add(toolMenu);
 	    add(settingsMenu);
 	    
 	    f2.setSize(500,500);
+	    
+	    final JMenuBar self = this;
 	    
 	    komodoDragonSettings.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e)
@@ -65,7 +58,9 @@ public class MenuController extends JMenuBar {
 	    newMenuItem.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e)
 	    	{
-	    		NewController c = new NewController(sim);
+	    		JFrame window = (JFrame) SwingUtilities.getWindowAncestor(self);
+	    		new NewController(window,sim);
+	    		
 	    	}
 	    });
 	    

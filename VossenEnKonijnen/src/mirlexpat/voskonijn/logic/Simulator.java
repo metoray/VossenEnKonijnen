@@ -47,11 +47,20 @@ public class Simulator extends AbstractModel implements Runnable
     {
     	stepsToRun = new AtomicInteger(0);
     	runInfinite = new AtomicBoolean(false);
-    	newField(depth, width);
+    	newField(new FieldSettings());
         
     }
     
-    public void newField(int depth, int width){
+	public void newField(FieldSettings settings) {
+		stopRunning();
+		field = new Field(settings);
+		Randomizer.reset();
+		field.reset();
+		notifyViews();
+		
+	}
+    
+    /*public void newField(int depth, int width){
     	stopRunning();
     	if(width <= 0 || depth <= 0) {
             System.out.println("The dimensions must be greater than zero.");
@@ -68,6 +77,7 @@ public class Simulator extends AbstractModel implements Runnable
     	field.reset();
     	notifyViews();
     }
+    */
         
     /**
      * Reset the simulation to a starting position.

@@ -10,12 +10,19 @@ import javax.swing.event.ChangeListener;
 
 public class MComboSlider extends JPanel implements ChangeListener {
 
-	JSlider slider;
-	JLabel text;
+	private JSlider slider;
+	private JLabel text;
 	
-	public MComboSlider(int min, int max, int value){
+	private String suffix;
+	
+	public MComboSlider(int min, int max, int value) {
+		this(min,max,value,"");
+	}
+	
+	public MComboSlider(int min, int max, int value, String suffix){
 		setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
-		text = new JLabel(""+value);
+		this.suffix = suffix;
+		text = new JLabel(value+suffix);
 		add(text);
 		slider = new JSlider(min,max,value);
 		slider.addChangeListener(this);
@@ -25,7 +32,7 @@ public class MComboSlider extends JPanel implements ChangeListener {
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		if(e.getSource()==slider){
-			text.setText(""+slider.getValue());
+			text.setText(slider.getValue()+suffix);
 		}
 		
 	}
