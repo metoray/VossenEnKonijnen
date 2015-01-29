@@ -121,6 +121,8 @@ public class SimulatorView extends AbstractView
         }
 
         population.setText(POPULATION_PREFIX + field.getStats().getPopulationDetails(field));
+        
+
         fieldView.repaint();
     }
     
