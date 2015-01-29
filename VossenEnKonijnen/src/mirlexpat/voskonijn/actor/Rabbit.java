@@ -192,12 +192,11 @@ public class Rabbit extends Animal
 	 * @return true if infected
 	 * @return false if not infected
 	 */
-	public boolean isInfected()
+	public static boolean isInfected()
 	{
 		int random = (rand.nextInt(100) + 1)/100;
 		if (random >= SICK_PROBABILITY)
 		{
-			setInfected(true);
 			return true;
 		}
 		return false;
@@ -221,10 +220,7 @@ public class Rabbit extends Animal
 		return false;
 	}
 	
-	public void setInfected(boolean infected)
-	{
-		this.infected = infected;
-	}
+
 
 	private boolean getInfected()
 	{
@@ -232,11 +228,14 @@ public class Rabbit extends Animal
 	}
 
 	private void dieOfInfection()
-	{
+	{	
+		
 		if(isInfected()) {
 			MAX_AGE = 15;
 			System.out.println("I'm dying of infection.");
+			
 		}
+		
 	}
 	
 
