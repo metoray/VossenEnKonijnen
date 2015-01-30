@@ -22,7 +22,6 @@ public abstract class Human implements Actor
 		alive = true;
 		field = fieldInput;
 		setLocation(locationInput);
-		age = 0;
 	}
 	
 	public abstract void act(List<Actor> newHumans);

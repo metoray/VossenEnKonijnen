@@ -16,18 +16,9 @@ import mirlexpat.voskonijn.logic.Randomizer;
  */
 public class Hunter extends Human
 {
-    // Characteristics shared by all foxes (class variables).
-    
-    // The amount of kills a hunter has.
-	private int kills = 0;
-	// The maximum amount of kills a hunter is allowed to get.
-	private final int MAX_KILLS = 10;
-	
+
     // A shared random number generator to control breeding.
     private Random rand;
-    
-   
-    int number;
     
 
 
@@ -42,14 +33,6 @@ public class Hunter extends Human
     {
         super(field, location);
         this.rand = field.getRandomizer().getRandom();
-        if(randomAge) {
-            age = rand.nextInt(80);            
-        }
-        else {
-            age = 0;
-        }
-       
-        kills = rand.nextInt(10);
     }
     
     

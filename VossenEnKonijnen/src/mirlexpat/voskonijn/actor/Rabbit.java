@@ -37,7 +37,7 @@ public class Rabbit extends Animal
 	// Individual characteristics (instance fields).
 
 	// The rabbit's age.
-	private int age;
+
 	private boolean vulnerable;
 
 	/**

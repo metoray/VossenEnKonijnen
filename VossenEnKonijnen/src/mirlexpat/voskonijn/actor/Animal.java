@@ -144,7 +144,6 @@ public abstract class Animal implements Actor
 		age++;
 		if(age > getMaxAge()) {
 			setDead();
-		//	System.out.println("hi");
 		}
 	}
 
