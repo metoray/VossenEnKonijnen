@@ -26,6 +26,7 @@ import mirlexpat.voskonijn.controller.MenuController;
 import mirlexpat.voskonijn.controller.SimulationController;
 import mirlexpat.voskonijn.logic.Simulator;
 import mirlexpat.voskonijn.view.HistogramView;
+import mirlexpat.voskonijn.view.IconView;
 import mirlexpat.voskonijn.view.LineGraphView;
 import mirlexpat.voskonijn.view.PieChartView;
 import mirlexpat.voskonijn.view.SimulatorView;
@@ -79,13 +80,8 @@ public class FoxRabbit extends JFrame {
 		graphs.add(lineGraph);
 		graphs.add(histoGram);
 		graphs.add(pieChart);
+		graphs.add(new IconView(colors));
 		
-		ImageIcon image = new ImageIcon("image/rabbit.jpg");
-		JLabel label = new JLabel("", image, JLabel.CENTER);
-		JPanel legend = new JPanel();
-		legend.setLayout(new FlowLayout());
-		legend.add(label);
-		graphs.add(legend);
 		
 		
 		JPanel rightSideBar = new JPanel();
