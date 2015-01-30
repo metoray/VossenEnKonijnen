@@ -55,7 +55,7 @@ public class FoxRabbit extends JFrame {
 		setColor(Rabbit.class, Color.orange);
 		setColor(Fox.class, Color.blue);
 		setColor(Hunter.class, Color.red);
-		setColor(KomodoDragon.class, Color.gray);
+		setColor(KomodoDragon.class, new Color(0,127,0));
 		setColor(Grass.class, Color.green);
 
 		view = new SimulatorView(sim,colors);
