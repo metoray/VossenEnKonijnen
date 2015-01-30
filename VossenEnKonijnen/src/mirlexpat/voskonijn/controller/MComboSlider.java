@@ -52,4 +52,8 @@ public class MComboSlider extends JPanel implements ChangeListener {
 		setBorder(BorderFactory.createTitledBorder(title));
 	}
 	
+	public void addChangeListener(ChangeListener listener){
+		slider.addChangeListener(listener);
+	}
+	
 }
