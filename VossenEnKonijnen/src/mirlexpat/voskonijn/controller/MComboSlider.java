@@ -56,4 +56,8 @@ public class MComboSlider extends JPanel implements ChangeListener {
 		slider.addChangeListener(listener);
 	}
 	
+	public boolean isSource(Object object){
+		return object==slider;
+	}
+	
 }
