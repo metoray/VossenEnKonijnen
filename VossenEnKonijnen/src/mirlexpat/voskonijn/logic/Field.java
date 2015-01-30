@@ -27,7 +27,7 @@ import mirlexpat.voskonijn.view.AbstractView;
 public class Field
 {
 	
-	private final static double GRASS_GROW_CHANCE = 0.1;
+	private double grassGrowChance;
 	
     // A random number generator for providing random locations.
     private Random rand;
@@ -60,6 +60,7 @@ public class Field
         this.depth = settings.getDepth();
         this.width = settings.getWidth();
         this.rand = random.getRandom();
+        this.grassGrowChance = settings.getGrassGrowthChance();
         field = new Object[depth][width];
         grass = new int[depth][width];
         animals = new ArrayList<Actor>();
@@ -375,7 +376,7 @@ public class Field
 		for(int col=0; col<grass.length; col++){
     		for(int row=0; row<grass[col].length; row++){
     			int level = grass[col][row];
-    			if((level<3)&&(level>0||grassAdjacent(col, row))&&rand.nextDouble()<GRASS_GROW_CHANCE){
+    			if((level<3)&&(level>0||grassAdjacent(col, row))&&rand.nextDouble()<grassGrowChance){
     				grass[col][row]++;
     			}
     		}
