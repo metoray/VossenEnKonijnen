@@ -12,7 +12,14 @@ import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import mirlexpat.voskonijn.logic.FieldSettings.AnimalEntry;
 import mirlexpat.voskonijn.logic.Simulator;
@@ -43,7 +50,7 @@ public class MenuController extends JMenuBar {
 	    
 	    f2.setSize(500,500);
 	    
-	    final JMenuBar self = this;
+	    final JFrame window = (JFrame) SwingUtilities.getWindowAncestor(this);
 	    
 	    komodoDragonSettings.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e)
@@ -58,10 +65,38 @@ public class MenuController extends JMenuBar {
 	    newMenuItem.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e)
 	    	{
-	    		JFrame window = (JFrame) SwingUtilities.getWindowAncestor(self);
+	    		
 	    		new NewController(window,sim);
 	    		
 	    	}
 	    });
+	    
+	    saveMenuItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser fc = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("FoxRabbitSettings", "frst");
+				fc.setFileFilter(filter);
+				int returnVal = fc.showSaveDialog(window);
+				if(returnVal == JFileChooser.APPROVE_OPTION){
+					File file = fc.getSelectedFile();
+					if(!file.toString().endsWith(".frst")){
+						file = new File(file.toString()+".frst");
+					}
+					ObjectOutputStream oos;
+					try {
+						oos = new ObjectOutputStream(new FileOutputStream(file));
+						oos.writeObject(sim.getField().getSettings());
+						oos.close();
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				
+			}
+		});
 	    
 	}}

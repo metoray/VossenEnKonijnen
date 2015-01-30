@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -38,7 +39,7 @@ public class NewController extends JDialog implements ActionListener {
 		
 		this.sim = sim;
 		
-		settings = new FieldSettings();
+		settings = sim.getField().getSettings();
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());

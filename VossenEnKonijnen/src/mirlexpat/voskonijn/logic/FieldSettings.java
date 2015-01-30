@@ -1,9 +1,12 @@
 package mirlexpat.voskonijn.logic;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import mirlexpat.voskonijn.actor.Actor;
@@ -18,14 +21,14 @@ public class FieldSettings implements Serializable {
 	private static final long serialVersionUID = -3696332681664249116L;
 	private int width, depth, randomSeed;
 	private double grassGrowthChance;
-	private LinkedHashMap<Class,AnimalEntry> spawnList;
+	private LinkedHashMap<Class<Actor>,AnimalEntry> spawnList;
 	
 	public FieldSettings(){
 		width = 120;
 		depth = 80;
 		grassGrowthChance = 0.1;
 		randomSeed = 1111;
-		spawnList = new LinkedHashMap<Class,AnimalEntry>();
+		spawnList = new LinkedHashMap<Class<Actor>,AnimalEntry>();
 		addToSpawnList(new AnimalEntry(0.04, Fox.class, 150, 8, 45, 0.08) {
 			
 			@Override
@@ -85,7 +88,7 @@ public class FieldSettings implements Serializable {
 		this.depth = depth;
 	}
 
-	public HashMap<Class, AnimalEntry> getSpawnList(){
+	public HashMap<Class<Actor>, AnimalEntry> getSpawnList(){
 		return spawnList;
 	}
 	
@@ -99,7 +102,7 @@ public class FieldSettings implements Serializable {
 		return false;
 	}
 	
-    public static abstract class AnimalEntry{
+    public static abstract class AnimalEntry implements Serializable {
     	
     	private int maxAge, maxLitter, foodValue;
     	
@@ -205,5 +208,6 @@ public class FieldSettings implements Serializable {
 	public void setRandomSeed(int randomSeed) {
 		this.randomSeed = randomSeed;
 	}
+
 
 }
