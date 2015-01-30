@@ -4,6 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import mirlexpat.voskonijn.actor.Rabbit;
 import mirlexpat.voskonijn.logic.Field;
 import mirlexpat.voskonijn.logic.FieldStats;
 import mirlexpat.voskonijn.logic.Simulator;
@@ -112,10 +113,16 @@ public class SimulatorView extends AbstractView
                 Object animal = field.getObjectAt(row, col);
                 if(animal != null && animalsVisible) {
                     fieldView.drawMark(col, row, getColor(animal.getClass()));
+                    if(animal instanceof Rabbit && ((Rabbit) animal).isInfected()){
+                    	fieldView.drawSmallMark(col, row, Color.black);
+                    }
                 }
                 else {
                 	fieldView.drawMark(col, row, EMPTY_COLOR);
-                	if(grassVisible) fieldView.drawBGMark(col, row, field.getGrass(row, col));
+                	if(grassVisible){
+                    	Color[] colors = new Color[]{EMPTY_COLOR,new Color(255,191,191),new Color(255,255,127),new Color(127,255,127)};
+                		fieldView.drawSmallMark(col, row, colors[field.getGrass(row, col)]);
+                	}
                 }
             }
         }
@@ -193,10 +200,9 @@ public class SimulatorView extends AbstractView
             g.fillRect(x * xScale, y * yScale, xScale-1, yScale-1);
         }
         
-        public void drawBGMark(int x, int y, int grass){
+        public void drawSmallMark(int x, int y, Color color){
         	if(g==null) return;
-        	Color[] colors = new Color[]{EMPTY_COLOR,new Color(255,191,191),new Color(255,255,127),new Color(127,255,127)};
-        	g.setColor(colors[grass]);
+        	g.setColor(color);
         	g.fillRect(x * xScale+2, y * yScale+2, xScale-3, yScale-3);
         }
 

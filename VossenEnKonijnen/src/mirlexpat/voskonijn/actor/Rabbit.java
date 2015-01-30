@@ -30,11 +30,9 @@ public class Rabbit extends Animal
 	// The maximum number of births.
 	private static final int MAX_LITTER_SIZE = 12;
 
-
-
-	private static final double SICK_PROBABILITY = 0.90;
 	// A rabbit's food level.
 	private int foodLevel;
+	private int sick;
 
 
 
@@ -42,6 +40,7 @@ public class Rabbit extends Animal
 
 	// The rabbit's age.
 	private int age;
+	private boolean vulnerable;
 
 	/**
 	 * Create a new rabbit. A rabbit may be created with age
@@ -62,6 +61,7 @@ public class Rabbit extends Animal
 		else{
 			foodLevel = 10;
 		}
+		vulnerable = rand.nextDouble() < 0.9;
 	}
 
 	/**
@@ -78,7 +78,6 @@ public class Rabbit extends Animal
 			// Try to move into a free location.
 			eatGrass();
 			giveVirus();
-			dieOfInfection();
 			Location newLocation = getField().freeAdjacentLocation(getLocation());
 
 			if(newLocation != null) {
@@ -88,8 +87,17 @@ public class Rabbit extends Animal
 				// Overcrowding.
 				setDead();
 			}
+			maybeGetInfected();
+			dieOfInfection();
 			dieWhenHungry();
 		}
+	}
+
+	private void maybeGetInfected() {
+		if(vulnerable&&rand.nextDouble()<0.01){
+			infect();
+		}
+		
 	}
 
 	private Location findFood()
@@ -190,47 +198,44 @@ public class Rabbit extends Animal
 	 * @return true if infected
 	 * @return false if not infected
 	 */
-	public boolean isInfected()
+	public void infect()
 	{
-		int random = (rand.nextInt(100) + 1)/100;
-		if (random >= SICK_PROBABILITY)
-		{
-			return true;
+		if(sick==0){
+			sick = 1;
 		}
-		return false;
 	}
 
 	private boolean giveVirus()
 	{
+		if(this.isInfected()) {
 		Field currentField = getField();
 		List<Location> adjacent = currentField.adjacentLocations(getLocation());
-		for (int i=0; i < 10; i++) {
-			Location targetLocation = getRandomLocation(adjacent);
-			Object object = currentField.getObjectAt(targetLocation);
-			if(object instanceof Rabbit) {
-				Rabbit rabbit = (Rabbit) object;
-				if(rabbit.getInfected()) {
-				isInfected();
+		Location targetLocation = getRandomLocation(adjacent);
+		Object object = currentField.getObjectAt(targetLocation);
+		if(object instanceof Rabbit) {
+			Rabbit rabbit = (Rabbit) object;
+			rabbit.infect();
+			System.out.println("I'm sick now.");
 					
-				}
 			}
 		}
 		return false;
 	}
 	
-
-
-	private boolean getInfected()
-	{
-		return infected;
+	public boolean isInfected() {
+		return sick > 0;
 	}
 
 	private void dieOfInfection()
 	{	
 		
-		if(isInfected()) {
-			MAX_AGE = 15;
-			System.out.println("I'm dying of infection.");
+			if(sick > 5) {
+				setDead();
+			}
+			if(sick > 0) {
+				sick++;
+				//System.out.println("I'm dying of infection.");
+			}
 			
 		}
 		
@@ -238,4 +243,4 @@ public class Rabbit extends Animal
 	
 
 
-}
+
