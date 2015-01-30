@@ -19,8 +19,6 @@ public class KomodoDragon extends Animal
     private static final int MAX_LITTER_SIZE = 2;
 
     private static final int FOOD_VALUE = 45;
-
-    private static final Random rand = Randomizer.getRandom();
     
     private int age;
 

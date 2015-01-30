@@ -30,7 +30,7 @@ public class Field
 	private final static double GRASS_GROW_CHANCE = 0.1;
 	
     // A random number generator for providing random locations.
-    private static final Random rand = Randomizer.getRandom();
+    private Random rand;
     // List of animals in the field.
     private List<Actor> animals;
     
@@ -46,6 +46,7 @@ public class Field
     private ArrayList<AbstractView> views;
     // A statistics object computing and storing simulation information
     private FieldStats stats;
+    private Randomizer random;
 
     /**
      * Represent a field of the given dimensions.
@@ -54,9 +55,11 @@ public class Field
      */
     public Field(FieldSettings settings)
     {
+    	this.random = new Randomizer(settings.getRandomSeed());
     	this.settings = settings;
         this.depth = settings.getDepth();
         this.width = settings.getWidth();
+        this.rand = random.getRandom();
         field = new Object[depth][width];
         grass = new int[depth][width];
         animals = new ArrayList<Actor>();
@@ -294,6 +297,7 @@ public class Field
 	}
 
 	public synchronized void reset() {
+		random.reset();
     	step = 0;
         animals.clear();
         field = new Object[depth][width];
@@ -308,7 +312,6 @@ public class Field
      */
     void populate()
     {
-        Random rand = Randomizer.getRandom();
         this.clear();
         stats.reset();
         for(int row = 0; row < this.getDepth(); row++) {
@@ -390,6 +393,10 @@ public class Field
 			}
 		}
 		return false;
+	}
+	
+	public Randomizer getRandomizer(){
+		return random;
 	}
     
 }

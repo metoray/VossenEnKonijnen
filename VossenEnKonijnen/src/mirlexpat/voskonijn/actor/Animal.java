@@ -1,6 +1,7 @@
 package mirlexpat.voskonijn.actor;
 
 import java.util.List;
+import java.util.Random;
 
 import mirlexpat.voskonijn.logic.Field;
 import mirlexpat.voskonijn.logic.Location;
@@ -19,6 +20,7 @@ public abstract class Animal implements Actor
 	private Field field;
 	// The animal's position in the field.
 	private Location location;
+	protected Random rand;
 
 	protected boolean infected;
 	/**
@@ -29,6 +31,7 @@ public abstract class Animal implements Actor
 	 */
 	public Animal(Field field, Location location)
 	{
+		this.rand = field.getRandomizer().getRandom();
 		alive = true;
 		this.field = field;
 		setLocation(location);

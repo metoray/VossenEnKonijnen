@@ -26,8 +26,6 @@ public class Grass extends Animal
     private static final int MAX_LITTER_SIZE = 8;
     // The maximum amount of steps grass can live.
     private static final int MAX_AGE = 20;
-    // A shared random number generator to control breeding.
-    private static final Random rand = Randomizer.getRandom();
     private int age;
 
     /**
