@@ -24,8 +24,6 @@ public class Grass extends Animal
     private static final double BREEDING_PROBABILITY = 0.5;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 8;
-    // The maximum amount of steps grass can live.
-    private static final int MAX_AGE = 20;
     private int age;
 
     /**
@@ -38,7 +36,7 @@ public class Grass extends Animal
      */
     public Grass(boolean randomAge, Field field, Location location) {
     
-        super(field, location);
+        super(randomAge,field, location);
        
 	}
     /**
@@ -90,14 +88,6 @@ public class Grass extends Animal
             births = rand.nextInt(MAX_LITTER_SIZE) + 1;
         }
         return births;
-    }
-    
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
     }
 
     /**

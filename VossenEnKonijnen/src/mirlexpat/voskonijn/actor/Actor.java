@@ -11,8 +11,6 @@ public interface Actor {
 	
 	// Whether the animal is alive or not.
 	public boolean alive = true;
-	// The animal's field.
-	public Field field = null;
 	// The animal's position in the field.
 	public Location location = null;
 

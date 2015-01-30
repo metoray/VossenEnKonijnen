@@ -75,7 +75,7 @@ public class AnimalSettingsController extends JPanel implements ChangeListener  
 		entry.setChance(breedAge.getValue());
 		}
 		if(breedprob.isSource(source)){
-		entry.setBreedChance(breedprob.getValue());
+		entry.setBreedChance(breedprob.getValue()/100d);
 		}
 		if(litter.isSource(source)){
 		entry.setMaxLitter(litter.getValue());

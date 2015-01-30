@@ -12,8 +12,6 @@ public class KomodoDragon extends Animal
 {
     private static final int BREEDING_AGE = 400;
 
-    private static final int MAX_AGE = 750;
-
     private static final double BREEDING_PROBABILITY = 0.08;
 
     private static final int MAX_LITTER_SIZE = 2;
@@ -26,13 +24,11 @@ public class KomodoDragon extends Animal
     
     public KomodoDragon(boolean randomAge, Field field, Location location)
     {
-        super(field, location);
+        super(randomAge, field, location);
         if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(FOOD_VALUE);
         }
         else {
-            age = 0;
             foodLevel = FOOD_VALUE;
         }
     }
@@ -52,14 +48,6 @@ public class KomodoDragon extends Animal
             else {
                 setDead();
             }
-        }
-    }
-    
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
         }
     }
     

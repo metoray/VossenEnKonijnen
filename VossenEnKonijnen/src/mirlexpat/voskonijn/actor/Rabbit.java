@@ -23,8 +23,6 @@ public class Rabbit extends Animal
 
 	// The age at which a rabbit can start to breed.
 	private static final int BREEDING_AGE = 15;
-	//The age to which a rabbit can live.
-	private int MAX_AGE = 100;
 	// The likelihood of a rabbit breeding.
 	private static final double BREEDING_PROBABILITY = 0.14;
 	// The maximum number of births.
@@ -52,11 +50,9 @@ public class Rabbit extends Animal
 	 */
 	public Rabbit(boolean randomAge, Field field, Location location)
 	{
-		super(field, location);
-		age = 0;
+		super(randomAge, field, location);
 		if(randomAge) {
 			foodLevel = rand.nextInt(10);
-			age = rand.nextInt(MAX_AGE);
 		}
 		else{
 			foodLevel = 10;
@@ -129,19 +125,6 @@ public class Rabbit extends Animal
 
 	private Location getRandomLocation(List<Location> location){
 		return location.get(rand.nextInt(location.size()));
-	}
-
-	/**
-	 * Increase the age.
-	 * This could result in the rabbit's death.
-	 */
-	private void incrementAge()
-	{
-		age++;
-		if(age > MAX_AGE) {
-			setDead();
-		//	System.out.println("hi");
-		}
 	}
 
 	/**

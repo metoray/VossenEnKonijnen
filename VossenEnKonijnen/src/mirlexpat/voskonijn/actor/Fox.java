@@ -21,8 +21,6 @@ public class Fox extends Animal
     
     // The age at which a fox can start to breed.
     private static final int BREEDING_AGE = 5;
-    // The age to which a fox can live.
-    private static final int MAX_AGE = 150;
     // The likelihood of a fox breeding.
     private static final double BREEDING_PROBABILITY = 0.08;
     // The maximum number of births.
@@ -30,10 +28,7 @@ public class Fox extends Animal
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
     private static final int RABBIT_FOOD_VALUE = 8;
-    
-    // Individual characteristics (instance fields).
-    // The fox's age.
-    private int age;
+
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
 
@@ -47,13 +42,11 @@ public class Fox extends Animal
      */
     public Fox(boolean randomAge, Field field, Location location)
     {
-        super(field, location);
+        super(randomAge, field, location);
         if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
         }
         else {
-            age = 0;
             foodLevel = RABBIT_FOOD_VALUE;
         }
     }
@@ -86,17 +79,6 @@ public class Fox extends Animal
                 // Overcrowding.
                 setDead();
             }
-        }
-    }
-
-    /**
-     * Increase the age. This could result in the fox's death.
-     */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
         }
     }
     

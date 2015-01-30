@@ -22,8 +22,6 @@ public class Hunter extends Human
 	private int kills = 0;
 	// The maximum amount of kills a hunter is allowed to get.
 	private final int MAX_KILLS = 10;
-	// The maximum amount of steps a hunter is allowed to live.
-	private static final int MAX_AGE = 80;
 	
     // A shared random number generator to control breeding.
     private Random rand;
@@ -45,7 +43,7 @@ public class Hunter extends Human
         super(field, location);
         this.rand = field.getRandomizer().getRandom();
         if(randomAge) {
-            age = rand.nextInt(MAX_AGE);            
+            age = rand.nextInt(80);            
         }
         else {
             age = 0;

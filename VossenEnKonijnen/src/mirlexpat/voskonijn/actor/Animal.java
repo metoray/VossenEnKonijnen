@@ -1,10 +1,12 @@
 package mirlexpat.voskonijn.actor;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import mirlexpat.voskonijn.logic.Field;
 import mirlexpat.voskonijn.logic.Location;
+import mirlexpat.voskonijn.logic.FieldSettings.AnimalEntry;
 
 /**
  * A class representing shared characteristics of animals.
@@ -21,6 +23,7 @@ public abstract class Animal implements Actor
 	// The animal's position in the field.
 	private Location location;
 	protected Random rand;
+	protected int age;
 
 	protected boolean infected;
 	/**
@@ -29,11 +32,18 @@ public abstract class Animal implements Actor
 	 * @param field The field currently occupied.
 	 * @param location The location within the field.
 	 */
-	public Animal(Field field, Location location)
+	public Animal(boolean randomAge, Field field, Location location)
 	{
-		this.rand = field.getRandomizer().getRandom();
-		alive = true;
 		this.field = field;
+		this.rand = field.getRandomizer().getRandom();
+		if(randomAge){
+			int maxAge = getMaxAge();
+			this.age = maxAge>0?rand.nextInt(maxAge):0;
+		}
+		else{
+			age = 0;
+		}
+		alive = true;
 		setLocation(location);
 	}
 
@@ -101,6 +111,41 @@ public abstract class Animal implements Actor
 	protected Field getField()
 	{
 		return field;
+	}
+	
+	protected AnimalEntry getEntry(){
+		Map<Class<Actor>,AnimalEntry> map = getField().getSettings().getSpawnList();
+		if(map.containsKey(this.getClass())){
+			return map.get(this.getClass());
+		}
+		else{
+			return new AnimalEntry(0, null, 0, 0, 0, 0, 0){
+
+				@Override
+				public Actor getActor(Field field, Location location) {
+					return null;
+				}
+				
+			};
+		}
+	}
+	
+	protected int getMaxAge(){
+		return getEntry().getMaxAge();
+	}
+	
+	/**
+	 * Increase the age.
+	 * This could result in the rabbit's death.
+	 */
+	protected void incrementAge()
+	{
+		if(!isAlive()) return;
+		age++;
+		if(age > getMaxAge()) {
+			setDead();
+		//	System.out.println("hi");
+		}
 	}
 
 	
