@@ -16,12 +16,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.event.*;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import mirlexpat.voskonijn.logic.FieldSettings.AnimalEntry;
+import mirlexpat.voskonijn.logic.FieldSettings;
 import mirlexpat.voskonijn.logic.Simulator;
 
 public class MenuController extends JMenuBar {
@@ -35,11 +38,13 @@ public class MenuController extends JMenuBar {
 	    
 	    JMenuItem newMenuItem = new JMenuItem("New Simulation");
 	    JMenuItem saveMenuItem = new JMenuItem("Save Simulation Settings");
+	    JMenuItem openMenuItem = new JMenuItem("Open Simulation Settings");
 	    JMenuItem quitMenuItem = new JMenuItem("Quit");
 	    JMenuItem komodoDragonSettings = new JMenuItem("KomodoDragon Settings");
 
 	    fileMenu.add(newMenuItem);
 	    fileMenu.add(saveMenuItem);
+	    fileMenu.add(openMenuItem);
 	    fileMenu.addSeparator();
 	    fileMenu.add(quitMenuItem);
 	    settingsMenu.add(komodoDragonSettings);
@@ -51,16 +56,9 @@ public class MenuController extends JMenuBar {
 	    f2.setSize(500,500);
 	    
 	    final JFrame window = (JFrame) SwingUtilities.getWindowAncestor(this);
-	    
-	    komodoDragonSettings.addActionListener(new ActionListener(){
-	    	public void actionPerformed(ActionEvent e)
-	    	{
-	    		JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 50,  25);
-	    		//JSlider(0,50);
-	    		f2.add(slider, BorderLayout.CENTER);
-	    		f2.setVisible(true);
-	    		//fieldView.dispose(true);
-	    	}});
+	    final JFileChooser fc = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("FoxRabbitSettings", "frst");
+		fc.setFileFilter(filter);
 	    
 	    newMenuItem.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e)
@@ -75,9 +73,6 @@ public class MenuController extends JMenuBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				JFileChooser fc = new JFileChooser();
-				FileNameExtensionFilter filter = new FileNameExtensionFilter("FoxRabbitSettings", "frst");
-				fc.setFileFilter(filter);
 				int returnVal = fc.showSaveDialog(window);
 				if(returnVal == JFileChooser.APPROVE_OPTION){
 					File file = fc.getSelectedFile();
@@ -94,6 +89,29 @@ public class MenuController extends JMenuBar {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+				}
+				
+			}
+		});
+	    
+	    openMenuItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int returnVal = fc.showOpenDialog(window);
+				if(returnVal == JFileChooser.APPROVE_OPTION){
+					File file = fc.getSelectedFile();
+					if(file.exists()){
+						try {
+							ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+							FieldSettings settings = (FieldSettings)ois.readObject();
+							ois.close();
+							sim.newField(settings);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+					
 				}
 				
 			}
