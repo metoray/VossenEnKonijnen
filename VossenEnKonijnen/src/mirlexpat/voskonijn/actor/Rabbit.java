@@ -33,8 +33,6 @@ public class Rabbit extends Animal
 
 
 	private static final double SICK_PROBABILITY = 0.90;
-	// A shared random number generator to control breeding.
-	private static final Random rand = Randomizer.getRandom();
 	// A rabbit's food level.
 	private int foodLevel;
 
@@ -121,7 +119,7 @@ public class Rabbit extends Animal
 		}
 	}
 
-	private static Location getRandomLocation(List<Location> location){
+	private Location getRandomLocation(List<Location> location){
 		return location.get(rand.nextInt(location.size()));
 	}
 
@@ -192,7 +190,7 @@ public class Rabbit extends Animal
 	 * @return true if infected
 	 * @return false if not infected
 	 */
-	public static boolean isInfected()
+	public boolean isInfected()
 	{
 		int random = (rand.nextInt(100) + 1)/100;
 		if (random >= SICK_PROBABILITY)

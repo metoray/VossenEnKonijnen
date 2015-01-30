@@ -26,7 +26,7 @@ public class Hunter extends Human
 	private static final int MAX_AGE = 80;
 	
     // A shared random number generator to control breeding.
-    private static final Random rand = Randomizer.getRandom();
+    private Random rand;
     
    
     int number;
@@ -43,6 +43,7 @@ public class Hunter extends Human
     public Hunter(boolean randomAge, Field field, Location location)
     {
         super(field, location);
+        this.rand = field.getRandomizer().getRandom();
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);            
         }
@@ -108,7 +109,7 @@ public class Hunter extends Human
     
     
     
-    private static Location getRandomLocation(List<Location> location){
+    private Location getRandomLocation(List<Location> location){
     	return location.get(rand.nextInt(location.size()));
     }
     

@@ -70,14 +70,24 @@ public class FoxRabbit extends JFrame {
 
 		setJMenuBar(new MenuController(sim));
 
+		
 		JPanel graphs = new JPanel();
+		
 		GridLayout gl = new GridLayout(0,1);
 		gl.setVgap(8);
 		graphs.setLayout(gl); //PUT GRAPH VIEWS IN HERE
 		graphs.add(lineGraph);
 		graphs.add(histoGram);
 		graphs.add(pieChart);
-
+		
+		ImageIcon image = new ImageIcon("image/rabbit.jpg");
+		JLabel label = new JLabel("", image, JLabel.CENTER);
+		JPanel legend = new JPanel();
+		legend.setLayout(new FlowLayout());
+		legend.add(label);
+		graphs.add(legend);
+		
+		
 		JPanel rightSideBar = new JPanel();
 		rightSideBar.setLayout(new FlowLayout());
 		rightSideBar.add(graphs);

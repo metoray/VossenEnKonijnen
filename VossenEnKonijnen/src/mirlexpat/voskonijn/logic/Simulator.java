@@ -54,7 +54,6 @@ public class Simulator extends AbstractModel implements Runnable
 	public void newField(FieldSettings settings) {
 		stopRunning();
 		field = new Field(settings);
-		Randomizer.reset();
 		field.reset();
 		notifyViews();
 		
@@ -85,7 +84,6 @@ public class Simulator extends AbstractModel implements Runnable
     public void reset()
     {
     	stopRunning();
-    	Randomizer.reset();
     	field.reset();
     	notifyViews();
     }
