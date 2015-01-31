@@ -33,8 +33,6 @@ public class MenuController extends JMenuBar {
 	
 	public MenuController(final Simulator sim){
 	    JMenu fileMenu = new JMenu("File");
-	    JMenu toolMenu = new JMenu("Tools");
-	    JMenu settingsMenu = new JMenu("Settings");
 	    
 	    JMenuItem newMenuItem = new JMenuItem("New Simulation");
 	    JMenuItem saveMenuItem = new JMenuItem("Save Simulation Settings");
@@ -47,11 +45,8 @@ public class MenuController extends JMenuBar {
 	    fileMenu.add(openMenuItem);
 	    fileMenu.addSeparator();
 	    fileMenu.add(quitMenuItem);
-	    settingsMenu.add(komodoDragonSettings);
 	    
 	    add(fileMenu);
-	    add(toolMenu);
-	    add(settingsMenu);
 	    
 	    f2.setSize(500,500);
 	    

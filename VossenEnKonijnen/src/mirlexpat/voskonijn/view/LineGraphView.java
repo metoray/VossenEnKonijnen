@@ -24,12 +24,11 @@ public class LineGraphView extends GraphView {
 	@Override
 	protected void render(Graphics g, Field field) {
 		scaleLine();
+		int h = getHeight();
 		if(field.getStep()<lastStep){
 			histories.clear();
 			lastStep = -1;
 		}
-		lastStep = field.getStep();
-		int h = getHeight();
 		
 		for(Counter ctr: field.getStats().getCounters()){
 			Class cls = ctr.getClazz();
@@ -40,7 +39,9 @@ public class LineGraphView extends GraphView {
 			}
 			else{
 				hist = new History(getWidth());
-				histories.put(cls, hist);
+				if(field.getStep() > lastStep){
+					histories.put(cls, hist);
+				}
 			}
 			hist.add(count);
 			g.setColor(getColor(cls));
@@ -53,6 +54,8 @@ public class LineGraphView extends GraphView {
 			}
 			g.drawString(""+values[values.length-1], 160, h-getScaled(values[values.length-1]));
 		}
+		
+		lastStep = field.getStep();
 	}
 	
 	private int getScaled(int n){
