@@ -10,15 +10,8 @@ import mirlexpat.voskonijn.logic.Randomizer;
 
 public class KomodoDragon extends Animal
 {
-    private static final int BREEDING_AGE = 400;
-
-    private static final double BREEDING_PROBABILITY = 0.08;
-
-    private static final int MAX_LITTER_SIZE = 2;
 
     private static final int FOOD_VALUE = 45;
-    
-    private int age;
 
     private int foodLevel;
     
