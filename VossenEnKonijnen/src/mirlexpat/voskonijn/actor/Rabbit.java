@@ -154,7 +154,7 @@ public class Rabbit extends Animal
 		if(object instanceof Rabbit) {
 			Rabbit rabbit = (Rabbit) object;
 			rabbit.infect();
-			System.out.println("I'm sick now.");
+	
 					
 			}
 		}
@@ -173,7 +173,7 @@ public class Rabbit extends Animal
 			}
 			if(sick > 0) {
 				sick++;
-				//System.out.println("I'm dying of infection.");
+				
 			}
 			
 		}

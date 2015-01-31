@@ -14,7 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import mirlexpat.voskonijn.logic.AbstractModel;
-
+/**
+ * Creates Icons for the simulator.
+ * @param colors Looks up the respective colors of each class and puts them in a map. 
+ */
 public class IconView extends JPanel {
 	
 	Map<Class, Color> colors;
@@ -29,7 +32,10 @@ public class IconView extends JPanel {
     		}
     	}
     }
-    
+    /*
+     * This method loads the icons from the /image folder, changes its color and returns it.
+     * @param Class
+     */
     public ImageIcon loadImage(Class clazz) {
     	File file = new File("image"+File.separator+clazz.getSimpleName()+".png");
     	if(file.exists()){
@@ -42,7 +48,11 @@ public class IconView extends JPanel {
     	}
     	return null;
     }
-    
+    /*
+     * This method changes the color of the icons. The method only changes the color of non-transparent pixels.
+     * @param img The BufferedImage  created by loadImage.
+     * @param newcolor The color desired for the icon.
+     */
     public BufferedImage changeColor(BufferedImage img, Color newcolor) {
         final int newRGB = newcolor.getRGB();
         for (int x = 0; x < img.getWidth(); x++) {
