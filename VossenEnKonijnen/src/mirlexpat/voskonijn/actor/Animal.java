@@ -182,7 +182,8 @@ public abstract class Animal implements Actor
     {
         int births = 0;
         if(canBreed() && rand.nextDouble() <= getBreedChance()) {
-            births = rand.nextInt(getMaxLitterSize()) + 1;
+        	int maxLitterSize = getMaxLitterSize();
+            births = maxLitterSize>0?(rand.nextInt(maxLitterSize) + 1):0;
         }
         return births;
     }
