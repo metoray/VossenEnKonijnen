@@ -119,20 +119,27 @@ public abstract class Animal implements Actor
 			return map.get(this.getClass());
 		}
 		else{
-			return new AnimalEntry(0, null, 0, 0, 0, 0, 0){
-
-				@Override
-				public Actor getActor(Field field, Location location) {
-					return null;
-				}
-				
-			};
+			return new AnimalEntry(0, null);
 		}
 	}
 	
 	protected int getMaxAge(){
-		return getEntry().getMaxAge();
+		return getEntry().getInteger("max age");
 	}
+	
+	protected int getMaxLitterSize(){
+		return getEntry().getInteger("max litter size");
+	}
+	
+	protected double getBreedChance(){
+		return getEntry().getDouble("breeding chance");
+	}
+	
+	protected int getBreedAge(){
+		return getEntry().getInteger("breeding age");
+	}
+	
+	protected abstract Actor getNew(Field field, Location loc);
 	
 	/**
 	 * Increase the age.
@@ -146,6 +153,47 @@ public abstract class Animal implements Actor
 			setDead();
 		}
 	}
+	
+    /**
+     * Check whether or not this animal is to give birth at this step.
+     * New births will be made into free adjacent locations.
+     * @param newFoxes A list to return newly born animals.
+     */
+    protected void giveBirth(List<Actor> newAnimals)
+    {
+        // New foxes are born into adjacent locations.
+        // Get a list of adjacent free locations.
+        Field field = getField();
+        List<Location> free = field.getFreeAdjacentLocations(getLocation());
+        int births = breed();
+        for(int b = 0; b < births && free.size() > 0; b++) {
+            Location loc = free.remove(0);
+            Actor young = getNew(getField(), loc);
+            newAnimals.add(young);
+        }
+    }
+    
+    /**
+     * Generate a number representing the number of births,
+     * if it can breed.
+     * @return The number of births (may be zero).
+     */
+    protected int breed()
+    {
+        int births = 0;
+        if(canBreed() && rand.nextDouble() <= getBreedChance()) {
+            births = rand.nextInt(getMaxLitterSize()) + 1;
+        }
+        return births;
+    }
+    
+    /**
+     * A fox can breed if it has reached the breeding age.
+     */
+    protected boolean canBreed()
+    {
+        return age >= getBreedAge();
+    }
 
 	
 

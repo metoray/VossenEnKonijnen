@@ -40,7 +40,7 @@ public class NewController extends JDialog implements ActionListener {
 		
 		this.sim = sim;
 		
-		settings = sim.getField().getSettings();
+		settings = new FieldSettings(sim.getField().getSettings());
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
@@ -85,7 +85,7 @@ public class NewController extends JDialog implements ActionListener {
 		
 		JPanel animalPanel = new JPanel();
 		animalPanel.setLayout(new GridLayout(0,1));
-		for(AnimalEntry entry: sim.getField().getSettings().getSpawnList().values()){
+		for(AnimalEntry entry: settings.getSpawnList().values()){
 			animalPanel.add(new AnimalSettingsController(entry));
 		}
 		

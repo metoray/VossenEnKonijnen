@@ -87,29 +87,7 @@ public class KomodoDragon extends Animal
         return null;
     }
     
-    private void giveBirth(List<Actor> newKomodovaraan)
-    {
-        Field field = getField();
-        List<Location> free = field.getFreeAdjacentLocations(getLocation());
-        int births = breed();
-        for(int b = 0; b < births && free.size() > 0; b++) {
-            Location loc = free.remove(0);
-            KomodoDragon young = new KomodoDragon(false, field, loc);
-            newKomodovaraan.add(young);
-        }
-    }
-    
-    private int breed()
-    {
-        int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
-    }
-    
-    private boolean canBreed()
-    {
-        return age >= BREEDING_AGE;
+    protected Actor getNew(Field field, Location loc){
+    	return new KomodoDragon(false, field, loc);
     }
 }

@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -23,67 +25,94 @@ import mirlexpat.voskonijn.logic.FieldSettings.AnimalEntry;
 
 public class AnimalSettingsController extends JPanel implements ChangeListener  {
 	private AnimalEntry entry;
-	private MComboSlider age, breedAge, breedprob, litter, food;
+	private HashMap<MComboSlider,String> sliders;
+
+	private static HashMap<String,Range> ranges;
+	
+	static {
+		ranges = new HashMap<String,Range>();
+		ranges.put("max age", new Range(0,800));
+		ranges.put("max litter size", new Range(0,8));
+		ranges.put("food value", new Range(0,80));
+		ranges.put("breeding chance", new Range(0,100));
+		ranges.put("breeding age", new Range(0,800));
+	}
+
 	public AnimalSettingsController(AnimalEntry entry){
 		this.entry = entry;
+		sliders = new HashMap<MComboSlider,String>();
 		BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		setLayout(layout);
-		
-		age = new MComboSlider(0,800,entry.getMaxAge());
-		age.setTicks(25, 100);
-		age.addChangeListener(this);
-		age.addTitleBorder("max age");
-		
-		add(age);
-		
-		breedAge = new MComboSlider(0,400,entry.getBreedAge());
-		breedAge.setTicks(25, 100);
-		breedAge.addChangeListener(this);
-		breedAge.addTitleBorder("breeding age");
-		add(breedAge);
 
-		breedprob = new MComboSlider(0,100,(int)(entry.getBreedChance()*100));
-		breedprob.setTicks(5, 10);
-		breedprob.addChangeListener(this);
-		breedprob.addTitleBorder("Breeding Probability");
-		add(breedprob);
+		for(Entry<String,Number> mapEntry: entry.getSettings().entrySet()){
+			String key = mapEntry.getKey();
+			Number value = mapEntry.getValue();
+			Range range = AnimalSettingsController.getRange(key);
+			
+			MComboSlider slider;
+			if(value instanceof Integer){
+				slider = new MComboSlider(range.getMin(), range.getMax(), value.intValue());
+			}
+			else if(value instanceof Double){
+				slider = new MComboSlider(range.getMin(), range.getMax(), (int)(value.doubleValue()*100),"%");
+			}
+			else {
+				continue;
+			}
+			
+			slider.setTicks(range.getMax()/10, range.getMax());
+			slider.addChangeListener(this);
+			slider.addTitleBorder(key);
+			sliders.put(slider, key);
+			add(slider);
+		}
 
-		litter = new MComboSlider(0,8,entry.getMaxLitter());
-		litter.addChangeListener(this);
-		litter.setTicks(1, 4);
-		litter.addTitleBorder("max litter size");
-		add(litter);
-		
-		food = new MComboSlider(0,100,entry.getFoodValue());
-		food.setTicks(5, 20);
-		food.addChangeListener(this);
-		food.addTitleBorder("food value");
-		add(food);
-		
 		TitledBorder border = BorderFactory.createTitledBorder(entry.getName());
 		border.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.darkGray, Color.black));
 		setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8), border));
-		
+
 	}
+
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		Object source = e.getSource();
-		if(age.isSource(source)){
-		entry.setMaxAge(age.getValue());
+		for(Entry<MComboSlider,String> mapEntry: sliders.entrySet()){
+			if(mapEntry.getKey().isSource(source)){
+				if(entry.isDouble(mapEntry.getValue())){
+					entry.set(mapEntry.getValue(), mapEntry.getKey().getValue()/100d);
+				}
+				else{
+					entry.set(mapEntry.getValue(), mapEntry.getKey().getValue());
+				}
+			}
 		}
-		if(breedAge.isSource(source)){
-		entry.setChance(breedAge.getValue());
-		}
-		if(breedprob.isSource(source)){
-		entry.setBreedChance(breedprob.getValue()/100d);
-		}
-		if(litter.isSource(source)){
-		entry.setMaxLitter(litter.getValue());
-		}
-		if(food.isSource(source)){
-		entry.setFoodValue(food.getValue());
-		}
-	}}
-		
-
+	}
 	
+	public static Range getRange(String key){
+		Range range = ranges.get(key);
+		return range!=null?range:new Range(0,100);
+	}
+	
+	private static class Range {
+		private final int min, max;
+
+		public Range(int min, int max) {
+			super();
+			this.min = min;
+			this.max = max;
+		}
+
+		public int getMin() {
+			return min;
+		}
+
+		public int getMax() {
+			return max;
+		}
+		
+	}
+	
+}
+
+
+
