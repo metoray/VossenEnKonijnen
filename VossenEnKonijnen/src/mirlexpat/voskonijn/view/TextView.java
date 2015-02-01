@@ -10,17 +10,28 @@ import mirlexpat.voskonijn.logic.Simulator;
 
 public class TextView extends AbstractView {
 
-	Simulator sim;
-	HashMap<Class,String> chars;
+	private Simulator sim;
+	private HashMap<Class,String> chars;
+	private HashMap<Class,String> colors;
+	private boolean colorsEnabled;
 	
-	public TextView(Map<Class, Color> colors, Simulator sim) {
-		super(colors);
+	
+	
+	public TextView(Map<Class, Color> col, Simulator sim, boolean color) {
+		super(col);
 		this.sim = sim;
 		this.chars = new HashMap<>();
-		chars.put(Fox.class, "\033[34;1mF");
-		chars.put(Hunter.class, "\033[31;1mH");
-		chars.put(KomodoDragon.class, "\033[32;1mK");
-		chars.put(Rabbit.class,"\033[33;1mR");
+		this.colors = new HashMap<>();
+		this.colorsEnabled = color;
+		chars.put(Fox.class, "F");
+		chars.put(Hunter.class, "H");
+		chars.put(KomodoDragon.class, "K");
+		chars.put(Rabbit.class,"R");
+		
+		colors.put(Fox.class, "\033[34;1m");
+		colors.put(Hunter.class, "\033[31;1m");
+		colors.put(KomodoDragon.class, "\033[32;1m");
+		colors.put(Rabbit.class, "\033[33;1m");
 	}
 
 	@Override
@@ -31,10 +42,17 @@ public class TextView extends AbstractView {
 		for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
             	Object obj = field.getObjectAt(row, col);
-            	if(obj!=null&&chars.containsKey(obj.getClass())){
+            	if(obj!=null&&chars.containsKey(obj.getClass())&&(colors.containsKey(obj.getClass())||!colorsEnabled)){
+            		if(colorsEnabled){
+            			String color = colors.get(obj.getClass());
+            			if(obj instanceof Rabbit && ((Rabbit) obj).isInfected()){
+                			color = "\033[35;1m";
+                		}
+            			sb.append(color);
+            		}
             		String symbol = chars.get(obj.getClass());
             		if(obj instanceof Rabbit && ((Rabbit) obj).isInfected()){
-            			symbol = "\033[35;1mr\033[0m";
+            			symbol = "r";
             		}
             		sb.append(symbol);
             	}

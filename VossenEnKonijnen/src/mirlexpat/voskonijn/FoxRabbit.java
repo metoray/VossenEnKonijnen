@@ -39,7 +39,7 @@ public class FoxRabbit {
 			new FoxRabbit();
 		}
 		else {
-			new FoxRabbit(args);
+			new FoxRabbit(args[0]);
 		}
 	}
 
@@ -99,9 +99,9 @@ public class FoxRabbit {
 		});
 	}
 	
-	public FoxRabbit(String[] args){
+	public FoxRabbit(String firstArg){
 		Simulator sim = new Simulator();
-		TextView view = new TextView(colors, sim);
+		TextView view = new TextView(colors, sim, firstArg.equals("color"));
 		FieldSettings settings = new FieldSettings();
 		settings.setWidth(180);
 		settings.setDepth(60);
