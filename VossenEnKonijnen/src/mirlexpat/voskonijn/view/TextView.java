@@ -36,7 +36,7 @@ public class TextView extends AbstractView {
 
 	@Override
 	public void update() {
-		System.out.print("\033[1;1f");
+		if(colorsEnabled) System.out.print("\033[1;1f");
 		Field field = sim.getField();
 		StringBuilder sb = new StringBuilder();
 		for(int row = 0; row < field.getDepth(); row++) {
@@ -62,7 +62,7 @@ public class TextView extends AbstractView {
             }
             sb.append("\n");
 		}
-		sb.append("\033[0m");
+		if(colorsEnabled) sb.append("\033[0m");
 		System.out.print(sb.toString());
 		
 	}
