@@ -17,85 +17,84 @@ import mirlexpat.voskonijn.logic.Randomizer;
 public class Hunter extends Human
 {
 
-    // A shared random number generator to control breeding.
-    private Random rand;
-    
+	// A shared random number generator.
+	private Random rand;
 
-
-    /**
-     * Create a hunter.
-     * 
-     * @param randomAge 
-     * @param field The field currently occupied.
-     * @param location The location within the field.
-     */
-    public Hunter(boolean randomAge, Field field, Location location)
-    {
-        super(field, location);
-        this.rand = field.getRandomizer().getRandom();
-    }
-    
-    
-    
-    
-	public void act(List<Actor> newHunters)
-    {
-		// incrementAge();
-    	if(isAlive()) { 
-    		
-    		// Move towards a source of prey if found
-    		Location newLocation = findTarget();
-    		if(newLocation == null) {
-    		// No prey found - try to move to a free location.
-    		newLocation = getField().freeAdjacentLocation(getLocation());
-    		}
-    		// See if it was possible to move.
-    		if(newLocation != null) {
-    		setLocation(newLocation);
-    		}
-    		else {
-    		// Overcrowding.
-    		setDead();
-    		}
-    		
-    		}
-    	
-    		}
-    	
-    		
-    
-
-
-    
-    private Location findTarget()
-    {
-    	Field currentField = getField();
-    	List<Location> adjacent = currentField.adjacentLocations(getLocation());
-    	for (int i=0; i < 10; i++) {
-    		Location targetLocation = getRandomLocation(adjacent);
-    		Object object = currentField.getObjectAt(targetLocation);
-    		
-    		if(object instanceof Animal && !(object instanceof Grass)) {
-    			Animal prey = (Animal) object;
-    			if(prey.isAlive()) {
-    				prey.setDead();
-    				return targetLocation;
-    			}
-    		}
-    	}
-    	return null;
+	/**
+	 * Create a hunter.
+	 * 
+	 * @param randomAge 
+	 * @param field The field currently occupied.
+	 * @param location The location within the field.
+	 */
+	public Hunter(boolean randomAge, Field field, Location location)
+	{
+		super(field, location);
+		this.rand = field.getRandomizer().getRandom();
 	}
-    
-    
-    
-    
-    
-    private Location getRandomLocation(List<Location> location){
-    	return location.get(rand.nextInt(location.size()));
-    }
-    
 
-		
-	
+	/**
+	 * Makes the hunter do what it's got to do.
+	 * @param newHunters a list of new actors, unused for hunters
+	 */
+	public void act(List<Actor> newHunters)
+	{
+		// incrementAge();
+		if(isAlive()) { 
+
+			// Move towards a source of prey if found
+			Location newLocation = findTarget();
+			if(newLocation == null) {
+				// No prey found - try to move to a free location.
+				newLocation = getField().freeAdjacentLocation(getLocation());
+			}
+			// See if it was possible to move.
+			if(newLocation != null) {
+				setLocation(newLocation);
+			}
+			else {
+				// Overcrowding.
+				setDead();
+			}
+
+		}
+
+	}
+
+	/**
+	 * Tries to find prey
+	 * @return location of first prey found
+	 */
+	private Location findTarget()
+	{
+		Field currentField = getField();
+		List<Location> adjacent = currentField.adjacentLocations(getLocation());
+		for (int i=0; i < 10; i++) {
+			Location targetLocation = getRandomLocation(adjacent);
+			Object object = currentField.getObjectAt(targetLocation);
+
+			if(object instanceof Animal) {
+				Animal prey = (Animal) object;
+				if(prey.isAlive()) {
+					prey.setDead();
+					return targetLocation;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * returns random entry from location list
+	 * @param locations a list of locations
+	 * @return a random location from the list
+	 */
+	private Location getRandomLocation(List<Location> locations){
+		return locations.get(rand.nextInt(locations.size()));
+	}
+
+
+
+
 }
 

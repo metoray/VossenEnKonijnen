@@ -9,12 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import mirlexpat.voskonijn.actor.Actor;
-import mirlexpat.voskonijn.actor.Fox;
-import mirlexpat.voskonijn.actor.Grass;
-import mirlexpat.voskonijn.actor.Hunter;
-import mirlexpat.voskonijn.actor.KomodoDragon;
-import mirlexpat.voskonijn.actor.Rabbit;
+import mirlexpat.voskonijn.actor.*;
 
 public class FieldSettings implements Serializable {
 	

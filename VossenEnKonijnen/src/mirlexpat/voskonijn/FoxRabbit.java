@@ -17,20 +17,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 
-import mirlexpat.voskonijn.actor.Fox;
-import mirlexpat.voskonijn.actor.Hunter;
-import mirlexpat.voskonijn.actor.KomodoDragon;
-import mirlexpat.voskonijn.actor.Rabbit;
-import mirlexpat.voskonijn.actor.Grass;
+import mirlexpat.voskonijn.actor.*;
+import mirlexpat.voskonijn.view.*;
 import mirlexpat.voskonijn.controller.MenuController;
 import mirlexpat.voskonijn.controller.SimulationController;
 import mirlexpat.voskonijn.logic.Simulator;
-import mirlexpat.voskonijn.view.HistogramView;
-import mirlexpat.voskonijn.view.IconView;
-import mirlexpat.voskonijn.view.LineGraphView;
-import mirlexpat.voskonijn.view.PieChartView;
-import mirlexpat.voskonijn.view.SimulatorView;
-import mirlexpat.voskonijn.view.GraphView;
 
 public class FoxRabbit extends JFrame {
 
@@ -56,7 +47,6 @@ public class FoxRabbit extends JFrame {
 		setColor(Fox.class, Color.blue);
 		setColor(Hunter.class, Color.red);
 		setColor(KomodoDragon.class, new Color(0,127,0));
-		setColor(Grass.class, Color.green);
 
 		view = new SimulatorView(sim,colors);
 

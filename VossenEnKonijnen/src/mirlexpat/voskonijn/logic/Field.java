@@ -5,16 +5,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Random;
 
-import mirlexpat.voskonijn.actor.Actor;
-import mirlexpat.voskonijn.actor.Fox;
-import mirlexpat.voskonijn.actor.Hunter;
-import mirlexpat.voskonijn.actor.KomodoDragon;
-import mirlexpat.voskonijn.actor.Rabbit;
+import mirlexpat.voskonijn.actor.*;
 import mirlexpat.voskonijn.logic.FieldSettings.AnimalEntry;
-import mirlexpat.voskonijn.actor.Grass;
 import mirlexpat.voskonijn.view.AbstractView;
 
 /**

@@ -112,6 +112,10 @@ public class Fox extends Animal
         return null;
     }
     
+    /**
+     * returns a new fox for giveBirth()
+     * @return fox
+     */
     protected Actor getNew(Field field, Location loc){
     	return new Fox(false, field, loc);
     }

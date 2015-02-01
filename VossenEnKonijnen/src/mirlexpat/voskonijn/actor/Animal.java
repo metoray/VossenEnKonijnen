@@ -22,13 +22,15 @@ public abstract class Animal implements Actor
 	private Field field;
 	// The animal's position in the field.
 	private Location location;
+	// The random number generator for this animal
 	protected Random rand;
+	// The age of this animal
 	protected int age;
 
-	protected boolean infected;
 	/**
 	 * Create a new animal at location in field.
 	 * 
+	 * @param randomAge gives the animal a random age if true.
 	 * @param field The field currently occupied.
 	 * @param location The location within the field.
 	 */
@@ -61,11 +63,6 @@ public abstract class Animal implements Actor
 	public boolean isAlive()
 	{
 		return alive;
-	}
-
-	protected void isActive()
-	{
-		isAlive();
 	}
 
 	/**
@@ -113,6 +110,10 @@ public abstract class Animal implements Actor
 		return field;
 	}
 	
+	/**
+	 * return this animal's entry in the settings system.
+	 * @return The animal's entry.
+	 */
 	protected AnimalEntry getEntry(){
 		Map<Class<Actor>,AnimalEntry> map = getField().getSettings().getSpawnList();
 		if(map.containsKey(this.getClass())){
@@ -123,27 +124,47 @@ public abstract class Animal implements Actor
 		}
 	}
 	
+	/**
+	 * return this animal's maximum age according to its entry
+	 * @return maxAge
+	 */
 	protected int getMaxAge(){
 		return getEntry().getInteger("max age");
 	}
 	
+	/**
+	 * return this animal's maximum litter size according to its entry
+	 * @return maxLitterSize
+	 */
 	protected int getMaxLitterSize(){
 		return getEntry().getInteger("max litter size");
 	}
 	
+	/**
+	 * return this animal's breeding chance according to its entry
+	 * @return breedChance
+	 */
 	protected double getBreedChance(){
 		return getEntry().getDouble("breeding chance");
 	}
 	
+	/**
+	 * return this animal's breeding age according to its entry
+	 * @return breedAge
+	 */
 	protected int getBreedAge(){
 		return getEntry().getInteger("breeding age");
 	}
 	
+	/**
+	 * abstract method so animals can instantiate their own kind in giveBirth()
+	 * @return new actor
+	 */
 	protected abstract Actor getNew(Field field, Location loc);
 	
 	/**
 	 * Increase the age.
-	 * This could result in the rabbit's death.
+	 * This could result in the animal's death.
 	 */
 	protected void incrementAge()
 	{
@@ -157,7 +178,7 @@ public abstract class Animal implements Actor
     /**
      * Check whether or not this animal is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newFoxes A list to return newly born animals.
+     * @param newAnimals A list to return newly born animals.
      */
     protected void giveBirth(List<Actor> newAnimals)
     {
@@ -189,7 +210,7 @@ public abstract class Animal implements Actor
     }
     
     /**
-     * A fox can breed if it has reached the breeding age.
+     * An animal can breed if it has reached the breeding age.
      */
     protected boolean canBreed()
     {

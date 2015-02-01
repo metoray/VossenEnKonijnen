@@ -89,26 +89,6 @@ public class Rabbit extends Animal
 		
 	}
 
-	private Location findFood()
-	{
-		Field currentField = getField();
-		List<Location> adjacent = currentField.adjacentLocations(getLocation());
-		for (int i=0; i < 10; i++) {
-			Location targetLocation = getRandomLocation(adjacent);
-			Object object = currentField.getObjectAt(targetLocation);
-
-			if(object instanceof Grass) {
-				Grass grass = (Grass) object;
-				if(grass.isAlive()) {
-					grass.setDead();
-					foodLevel+=10;
-					return targetLocation;
-				}
-			}
-		}
-		return null;
-	}
-
 	private void eatGrass(){
 		if(foodLevel<30&&getField().getGrass(getLocation())>0){
 			getField().eatGrass(getLocation());
