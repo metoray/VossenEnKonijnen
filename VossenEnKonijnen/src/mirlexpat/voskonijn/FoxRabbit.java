@@ -98,7 +98,10 @@ public class FoxRabbit {
 			}
 		});
 	}
-	
+	/**
+	 * Main method for the simulation. Allows for multiple ways to run the simulator.
+	 * @param args Different arguments allow for different simulations.
+	 */
 	public FoxRabbit(String[] args){
 		Simulator sim = new Simulator();
 		TextView view = new TextView(colors, sim);
