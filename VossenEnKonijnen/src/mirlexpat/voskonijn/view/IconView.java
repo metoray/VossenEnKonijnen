@@ -15,8 +15,10 @@ import javax.swing.JPanel;
 
 import mirlexpat.voskonijn.logic.AbstractModel;
 /**
- * Creates Icons for the simulator.
- * @param colors Looks up the respective colors of each class and puts them in a map. 
+ * This class creates icons for the simulator to show which color belongs to which animal.
+ * 
+ * @author Lex Hermans, Mirko Rog
+ * @version 1.0
  */
 public class IconView extends JPanel {
 	

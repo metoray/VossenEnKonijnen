@@ -20,7 +20,12 @@ import mirlexpat.voskonijn.controller.MenuController;
 import mirlexpat.voskonijn.controller.SimulationController;
 import mirlexpat.voskonijn.logic.FieldSettings;
 import mirlexpat.voskonijn.logic.Simulator;
-
+/**
+ * Main class for the simulation.
+ * Contains the main method for the simulation, and other important methods.
+ * 
+ * @author Patrick Breukelman
+ */
 public class FoxRabbit {
 
 	// A map for storing colors for participants in the simulation
@@ -33,7 +38,10 @@ public class FoxRabbit {
 		setColor(Hunter.class, Color.red);
 		setColor(KomodoDragon.class, new Color(0,127,0));
 	}
-
+	/**
+	 * Main method for the simulation. Allows for multiple ways to run the simulator.
+	 * @param args Different arguments allow for different simulations.
+	 */
 	public static void main(String[] args){
 		if(args.length==0){
 			new FoxRabbit();
@@ -99,8 +107,8 @@ public class FoxRabbit {
 		});
 	}
 	/**
-	 * Main method for the simulation. Allows for multiple ways to run the simulator.
-	 * @param args Different arguments allow for different simulations.
+	 * Method which allows for different simulations.
+	 * @param Arguments given in the main method of FoxRabbit.
 	 */
 	public FoxRabbit(String[] args){
 		Simulator sim = new Simulator();

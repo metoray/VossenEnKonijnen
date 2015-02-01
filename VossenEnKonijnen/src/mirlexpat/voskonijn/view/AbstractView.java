@@ -6,7 +6,12 @@ import java.util.Map;
 import javax.swing.JPanel;
 
 import mirlexpat.voskonijn.logic.AbstractModel;
-
+/**
+ * Class with containing methods for all graphs.
+ * 
+ * @author Mirko Rog
+ * @version 1.0
+ */
 public abstract class AbstractView extends JPanel {
 	
 	// A map for storing colors for participants in the simulation

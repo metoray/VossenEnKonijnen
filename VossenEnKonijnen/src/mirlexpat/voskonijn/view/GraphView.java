@@ -1,6 +1,12 @@
 package mirlexpat.voskonijn.view;
 
 import java.awt.Color;
+/**
+ * Class with containing methods for all graphs.
+ * 
+ * @author Mirko Rog
+ * @version 1.0
+ */
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
