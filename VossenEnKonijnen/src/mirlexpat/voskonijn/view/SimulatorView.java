@@ -3,6 +3,8 @@ package mirlexpat.voskonijn.view;
 import java.awt.*;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import mirlexpat.voskonijn.actor.Rabbit;
 import mirlexpat.voskonijn.logic.Field;
@@ -78,6 +80,27 @@ public class SimulatorView extends AbstractView
         
         showGrass = new JCheckBox();
         showGrass.setSelected(true);
+        
+        ChangeListener listener = new ChangeListener() {
+        	
+        	private Simulator sim;
+        	
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				if(!sim.isRunning()){
+					update();
+				}
+				
+			}
+			
+			public ChangeListener setSim(Simulator sim){
+				this.sim = sim;
+				return this;
+			}
+		}.setSim(sim);
+		
+		showAnimals.addChangeListener(listener);
+		showGrass.addChangeListener(listener);
         
         checkBoxPanel.add(showGrass);
         checkBoxPanel.add(new JLabel("Grass"));

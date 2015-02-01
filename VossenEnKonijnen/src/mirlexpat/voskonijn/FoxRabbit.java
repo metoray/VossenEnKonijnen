@@ -112,8 +112,8 @@ public class FoxRabbit {
 		Simulator sim = new Simulator();
 		TextView view = new TextView(colors, sim, firstArg.equals("color"));
 		FieldSettings settings = new FieldSettings();
-		settings.setWidth(180);
-		settings.setDepth(60);
+		settings.setWidth(192);
+		settings.setDepth(64);
 		sim.newField(settings);
 		sim.addView(view);
 		sim.simulate(4000);
