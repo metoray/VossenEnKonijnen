@@ -27,10 +27,17 @@ import mirlexpat.voskonijn.logic.FieldSettings.AnimalEntry;
 import mirlexpat.voskonijn.logic.FieldSettings;
 import mirlexpat.voskonijn.logic.Simulator;
 
+/**
+ * This is the top menu
+ * @author metoray
+ *
+ */
 public class MenuController extends JMenuBar {
 	
-	JFrame f2 = new JFrame("Settings Frame");
-	
+	/**
+	 * Constructor to create menu
+	 * @param sim The simulator
+	 */
 	public MenuController(final Simulator sim){
 	    JMenu fileMenu = new JMenu("File");
 	    
@@ -38,7 +45,6 @@ public class MenuController extends JMenuBar {
 	    JMenuItem saveMenuItem = new JMenuItem("Save Simulation Settings");
 	    JMenuItem openMenuItem = new JMenuItem("Open Simulation Settings");
 	    JMenuItem quitMenuItem = new JMenuItem("Quit");
-	    JMenuItem komodoDragonSettings = new JMenuItem("KomodoDragon Settings");
 
 	    fileMenu.add(newMenuItem);
 	    fileMenu.add(saveMenuItem);
@@ -47,8 +53,6 @@ public class MenuController extends JMenuBar {
 	    fileMenu.add(quitMenuItem);
 	    
 	    add(fileMenu);
-	    
-	    f2.setSize(500,500);
 	    
 	    final JFrame window = (JFrame) SwingUtilities.getWindowAncestor(this);
 	    final JFileChooser fc = new JFileChooser();

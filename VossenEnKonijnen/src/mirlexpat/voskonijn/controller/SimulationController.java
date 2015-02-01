@@ -14,8 +14,17 @@ import javax.swing.JTextField;
 
 import mirlexpat.voskonijn.logic.Simulator;
 
+/**
+ * The controls to start, stop and step the simulation
+ * @author metoray
+ *
+ */
 public class SimulationController extends JPanel {
 	
+	/**
+	 * The constructor creating the buttons and listeners for this controller
+	 * @param sim The simulator
+	 */
 	public SimulationController(final Simulator sim){
 	
 		JPanel buttonpanel = new JPanel();

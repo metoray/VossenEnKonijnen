@@ -27,6 +27,11 @@ import mirlexpat.voskonijn.logic.FieldSettings.AnimalEntry;
 import mirlexpat.voskonijn.logic.FieldSettings;
 import mirlexpat.voskonijn.logic.Simulator;
 
+/**
+ * Controller to manipulate the settings of a new field
+ * @author metoray
+ *
+ */
 public class NewController extends JDialog implements ActionListener {
 	
 	MComboSlider width, height, grassGrowth;
@@ -35,6 +40,11 @@ public class NewController extends JDialog implements ActionListener {
 	Simulator sim;
 	FieldSettings settings;
 	
+	/**
+	 * The constructor for this dialog
+	 * @param owner The top JFrame, required for JDialog
+	 * @param sim The simulator
+	 */
 	public NewController(JFrame owner, Simulator sim){
 		super(owner, "New Simulation", true);
 		
@@ -115,6 +125,10 @@ public class NewController extends JDialog implements ActionListener {
 		this.setVisible(true);
 	}
 
+	/**
+	 * listener to handle the user pressing ok or cancel
+	 * @param e The associated ActionEvent
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==ok){

@@ -23,6 +23,11 @@ import javax.swing.event.ChangeListener;
 
 import mirlexpat.voskonijn.logic.FieldSettings.AnimalEntry;
 
+/**
+ * Controller to manipulate a specific entry for an animal in the settings
+ * @author metoray
+ *
+ */
 public class AnimalSettingsController extends JPanel implements ChangeListener  {
 	private AnimalEntry entry;
 	private HashMap<MComboSlider,String> sliders;
@@ -38,6 +43,11 @@ public class AnimalSettingsController extends JPanel implements ChangeListener  
 		ranges.put("breeding age", new Range(0,800));
 	}
 
+	
+	/**
+	 * Constructor for this controller
+	 * @param entry The AnimalEntry this controller manipulates.
+	 */
 	public AnimalSettingsController(AnimalEntry entry){
 		this.entry = entry;
 		sliders = new HashMap<MComboSlider,String>();
@@ -73,6 +83,10 @@ public class AnimalSettingsController extends JPanel implements ChangeListener  
 
 	}
 
+	/**
+	 * Listener method for when a slider changes state
+	 * @param e The ChangeEvent from the changed slider.
+	 */
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		Object source = e.getSource();
@@ -88,24 +102,47 @@ public class AnimalSettingsController extends JPanel implements ChangeListener  
 		}
 	}
 	
+	/**
+	 * The range a slider should have
+	 * @param key The option associated with the range.
+	 * @return The Range of the option.
+	 */
 	public static Range getRange(String key){
 		Range range = ranges.get(key);
 		return range!=null?range:new Range(0,100);
 	}
 	
+	/**
+	 * Minor class that stores a max and min value
+	 * @author metoray
+	 *
+	 */
 	private static class Range {
 		private final int min, max;
 
+		/**
+		 * The constructor for a range of numbers
+		 * @param min Minimum value.
+		 * @param max Maximum value.
+		 */
 		public Range(int min, int max) {
 			super();
 			this.min = min;
 			this.max = max;
 		}
 
+		/**
+		 * getter for minimum
+		 * @return minimum
+		 */
 		public int getMin() {
 			return min;
 		}
 
+		/**
+		 * getter for maximum
+		 * @return maximum
+		 */
 		public int getMax() {
 			return max;
 		}
