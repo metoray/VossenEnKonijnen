@@ -6,8 +6,8 @@ package mirlexpat.voskonijn.logic;
  * many participants of this type currently exist within 
  * the simulation.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Patrick Breukelman, Lex Hermans, Mirko Rog
+ * @version 1.0
  */
 public class Counter
 {

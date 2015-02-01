@@ -29,7 +29,7 @@ import mirlexpat.voskonijn.logic.Simulator;
 
 /**
  * Controller to manipulate the settings of a new field
- * @author metoray
+ * @author Mirko Rog
  *
  */
 public class NewController extends JDialog implements ActionListener {

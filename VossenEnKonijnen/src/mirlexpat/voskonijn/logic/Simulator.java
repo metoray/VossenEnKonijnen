@@ -9,8 +9,8 @@ import javax.swing.SwingUtilities;
  * A simple predator-prey simulator, based on a rectangular field
  * containing rabbits and foxes.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Patrick Breukelman, Lex Hermans, Mirko Rog
+ * @version 1.0
  */
 public class Simulator extends AbstractModel implements Runnable
 {

@@ -11,8 +11,8 @@ import mirlexpat.voskonijn.logic.FieldSettings.AnimalEntry;
 /**
  * A class representing shared characteristics of animals.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Patrick Breukelman, Lex Hermans, Mirko Rog
+ * @version 1.0
  */
 public abstract class Animal implements Actor
 {
@@ -242,11 +242,16 @@ public abstract class Animal implements Actor
             setDead();
         }
     }
-    
+    /**
+     * Sets the food level.
+     */
     protected void feed(){
     	foodLevel = getFoodValue();
     }
-    
+    /**
+     * Returns the foodlevel.
+     * @return foodLevel
+     */
     public int getFoodLevel(){
     	return foodLevel;
     }

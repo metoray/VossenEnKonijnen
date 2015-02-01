@@ -25,7 +25,8 @@ import mirlexpat.voskonijn.logic.Simulator;
  * Main class for the simulation.
  * Contains the main method for the simulation, and other important methods.
  * 
- * @author Patrick Breukelman
+ * @author Patrick Breukelman, Lex Hermans, Mirko Rog
+ * @version 1.0
  */
 public class FoxRabbit {
 

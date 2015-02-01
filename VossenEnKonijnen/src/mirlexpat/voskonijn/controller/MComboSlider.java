@@ -12,7 +12,7 @@ import javax.swing.event.ChangeListener;
 
 /**
  * A JPanel that combines a slider with a JLabel
- * @author metoray
+ * @author Mirko Rog
  *
  */
 public class MComboSlider extends JPanel implements ChangeListener {

@@ -12,8 +12,8 @@ import mirlexpat.voskonijn.logic.Randomizer;
  * A simple model of a fox.
  * Foxes age, move, eat rabbits, and die.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Patrick Breukelman, Lex Hermans, Mirko Rog
+ * @version 1.0
  */
 public class Fox extends Animal
 {

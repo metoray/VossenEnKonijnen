@@ -9,8 +9,8 @@ import mirlexpat.voskonijn.logic.Location;
 import mirlexpat.voskonijn.logic.Randomizer;
 /**
  * Contains all relevant information for the Komododragons.
- * 
- * @author Patrick Breukelman
+ * @author Patrick Breukelman, Lex Hermans, Mirko Rog
+ * @version 1.0
  */
 public class KomodoDragon extends Animal
 {

@@ -12,10 +12,10 @@ import mirlexpat.voskonijn.FoxRabbit;
 
 /**
  * A simple model of a rabbit.
- * Rabbits age, move, breed, and die.
+ * Rabbits age, move, breed, and die, and get sick.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Lex Hermans, Mirko Rog
+ * @version 1.0
  */
 public class Rabbit extends Animal
 {

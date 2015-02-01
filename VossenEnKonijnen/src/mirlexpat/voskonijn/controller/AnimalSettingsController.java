@@ -25,7 +25,7 @@ import mirlexpat.voskonijn.logic.FieldSettings.AnimalEntry;
 
 /**
  * Controller to manipulate a specific entry for an animal in the settings
- * @author metoray
+ * @author Mirko Rog
  *
  */
 public class AnimalSettingsController extends JPanel implements ChangeListener  {

@@ -16,11 +16,11 @@ import mirlexpat.voskonijn.logic.Simulator;
 
 /**
  * The controls to start, stop and step the simulation
- * @author metoray
+ * @author Mirko Rog
  *
  */
 public class SimulationController extends JPanel {
-	
+
 	/**
 	 * The constructor creating the buttons and listeners for this controller
 	 * @param sim The simulator
@@ -39,7 +39,9 @@ public class SimulationController extends JPanel {
 	    JButton reset = new JButton("Reset");
 	    
 	    step.addActionListener(new ActionListener() {
-			
+			/**
+			 * Listener for simulating based on the amount of steps entered.
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sim.simulate(Integer.valueOf(stepAmount.getText()));
@@ -48,7 +50,9 @@ public class SimulationController extends JPanel {
 		});
 	    
 	    start.addActionListener(new ActionListener() {
-			
+	    	/**
+			 * Listener for starting the simulator when 'start' is clicked.
+			 */
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				sim.startRunning();
@@ -57,7 +61,9 @@ public class SimulationController extends JPanel {
 		});
 	    
 	    stop.addActionListener(new ActionListener() {
-			
+	    	/**
+			 * Listener for stopping the simulator when 'stop' is clicked.
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sim.stopRunning();
@@ -66,7 +72,9 @@ public class SimulationController extends JPanel {
 		});
 	    
 	    reset.addActionListener(new ActionListener() {
-			
+			/**
+			 * Listener for resetting the simulator when 'reset' is clicked.
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sim.reset();

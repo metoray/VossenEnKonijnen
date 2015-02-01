@@ -100,17 +100,26 @@ public class Hunter implements Actor
 	private Location getRandomLocation(List<Location> locations){
 		return locations.get(rand.nextInt(locations.size()));
 	}
-	
+	/**
+	 * Returns the field a hunter is in.
+	 * @return field
+	 */
 	public Field getField()
 	{
 		return field;
 	}
-
+	/**
+	 * Returns whether or not a hunter is alive or not.
+	 * @return true when alive
+	 * @return false when dead
+	 */
 	public boolean isAlive()
 	{
 		return alive;
 	}
-	
+	/**
+	 * Kills a hunter.
+	 */
 	public void setDead()
 	{
 		alive = false;
@@ -120,12 +129,18 @@ public class Hunter implements Actor
 			field = null;
 		}
 	}
-	
+	/**
+	 * Returns the location of a hunter.
+	 * @return location
+	 */
 	public Location getLocation()
 	{
 		return location;
 	}
-	
+	/**
+	 * Sets the location of a hunter.
+	 * @param newLocation
+	 */
 	protected void setLocation(Location newLocation)
 	{
 		if(this.location != null) {

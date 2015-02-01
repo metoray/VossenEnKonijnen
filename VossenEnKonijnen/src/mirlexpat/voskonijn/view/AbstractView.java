@@ -37,7 +37,9 @@ public abstract class AbstractView extends JPanel {
             return col;
         }
     }
-
+    /**
+     * Update method.
+     */
 	public abstract void update();
 
 }

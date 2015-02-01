@@ -10,7 +10,12 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import mirlexpat.voskonijn.actor.*;
-
+/**
+ * This class containts all information needed for the settings of the simulatorfield.
+ * 
+ * @author Patrick Breukelman, Lex Hermans, Mirko Rog
+ * @version 1.0
+ */
 public class FieldSettings implements Serializable {
 
 	private static final long serialVersionUID = -3696332681664249116L;

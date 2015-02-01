@@ -7,7 +7,11 @@ import java.util.Map;
 import mirlexpat.voskonijn.actor.*;
 import mirlexpat.voskonijn.logic.Field;
 import mirlexpat.voskonijn.logic.Simulator;
-
+/**
+ * Textual view of the simulator.
+ * @author Mirko Rog
+ * @version 1.0
+ */
 public class TextView extends AbstractView {
 
 	private Simulator sim;

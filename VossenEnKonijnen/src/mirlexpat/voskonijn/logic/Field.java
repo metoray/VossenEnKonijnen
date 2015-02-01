@@ -15,8 +15,8 @@ import mirlexpat.voskonijn.view.AbstractView;
  * Represent a rectangular grid of field positions.
  * Each position is able to store a single animal.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Patrick Breukelman, Lex Hermans, Mirko Rog
+ * @version 1.0
  */
 public class Field
 {
@@ -329,19 +329,30 @@ public class Field
         }
         stats.countFinished();
     }
-    
+    /**
+     * Returns the current simulator step.
+     * @return step
+     */
     public int getStep(){
     	return step;
     }
-    
+    /**
+     * Adds an actor to the list of 'animals' to be spawned.
+     * @param actor
+     */
     public void add(Actor actor){
     	animals.add(actor);
     }
-    
+    /**
+     * Returns the fieldsettings.
+     * @return settings
+     */
     public FieldSettings getSettings(){
     	return settings;
     }
-    
+    /**
+     * Populaties the field with grass.
+     */
     public void populateGrass(){
     	for(int col=0; col<grass.length; col++){
     		for(int row=0; row<grass[col].length; row++){
@@ -349,23 +360,41 @@ public class Field
     		}
     	}
     }
-    
+    /**
+     * Returns the location where grass is located.
+     * @param loc
+     * @return Location where grass is located
+     */
     public int getGrass(Location loc){
     	return grass[loc.getRow()][loc.getCol()];
     }
-
+    /**
+     * Returns grass.
+     * @param col
+     * @param row
+     * @return Location of grass
+     */
 	public int getGrass(int col, int row) {
 		return grass[col][row];
 	}
-	
+	/**
+	 * Method that allows grass to be eaten and thus to die.
+	 * @param col
+	 * @param row
+	 */
 	public void eatGrass(int col, int row){
 		if(grass[col][row]>0)grass[col][row]--;
 	}
-	
+	/**
+	 * Method that allows grass to be eaten and thus to die.
+	 * @param loc
+	 */
 	public void eatGrass(Location loc){
 		this.eatGrass(loc.getRow(), loc.getCol());
 	}
-	
+	/**
+	 * Updates the location of grass in the simulator.
+	 */
 	public void updateGrass(){
 		for(int col=0; col<grass.length; col++){
     		for(int row=0; row<grass[col].length; row++){
@@ -376,7 +405,13 @@ public class Field
     		}
     	}
 	}
-	
+	/**
+	 * Returns whether or not there is grass in an adjacent location.
+	 * @param col
+	 * @param row
+	 * @return true if grass is found in an adjacent location
+	 * @return false if no grass is found in an adjacent location
+	 */
 	public boolean grassAdjacent(int col, int row){
 		for(int coloffset=-1; coloffset<2; coloffset++){
 			for(int rowoffset=-1; rowoffset<2; rowoffset++){
@@ -389,7 +424,10 @@ public class Field
 		}
 		return false;
 	}
-	
+	/**
+	 * Randomizer used in this class.
+	 * @return random value
+	 */
 	public Randomizer getRandomizer(){
 		return random;
 	}

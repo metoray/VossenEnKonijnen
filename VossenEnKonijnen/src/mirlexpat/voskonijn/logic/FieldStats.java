@@ -48,7 +48,10 @@ public class FieldStats
         }
         return buffer.toString();
     }
-    
+    /**
+     * Returns a collection of counters containing the amounts of each animal in the simulator.
+     * @return counters
+     */
     public Collection<Counter> getCounters(){
     	return counters.values();
     }
@@ -131,7 +134,10 @@ public class FieldStats
         }
         countsValid = true;
     }
-    
+    /**
+     * Returns counters showing the total amount of each animal currently in the simulation.
+     * @return counters
+     */
     public int getTotal(){
     	int total = 0;
     	for(Counter ctr: counters.values()){

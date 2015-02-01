@@ -29,7 +29,7 @@ import mirlexpat.voskonijn.logic.Simulator;
 
 /**
  * This is the top menu
- * @author metoray
+ * @author Mirko Rog
  *
  */
 public class MenuController extends JMenuBar {
@@ -69,7 +69,9 @@ public class MenuController extends JMenuBar {
 	    });
 	    
 	    saveMenuItem.addActionListener(new ActionListener() {
-			
+			/**
+			 * Method that activates when a file is saved, and handles the saving. 
+			 */
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				int returnVal = fc.showSaveDialog(window);
@@ -94,7 +96,9 @@ public class MenuController extends JMenuBar {
 		});
 	    
 	    openMenuItem.addActionListener(new ActionListener() {
-			
+			/**
+			 * Method that activates when a file is loaded, and handles the loading. 
+			 */
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				int returnVal = fc.showOpenDialog(window);
