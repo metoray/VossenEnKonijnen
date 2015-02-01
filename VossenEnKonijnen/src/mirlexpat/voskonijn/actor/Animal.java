@@ -26,6 +26,8 @@ public abstract class Animal implements Actor
 	protected Random rand;
 	// The age of this animal
 	protected int age;
+    // The animal's food level, which is increased by eating rabbits.
+    protected int foodLevel;
 
 	/**
 	 * Create a new animal at location in field.
@@ -40,10 +42,13 @@ public abstract class Animal implements Actor
 		this.rand = field.getRandomizer().getRandom();
 		if(randomAge){
 			int maxAge = getMaxAge();
+			int foodValue = getFoodValue();
 			this.age = maxAge>0?rand.nextInt(maxAge):0;
+			this.foodLevel = foodValue>0?rand.nextInt(foodValue):0;
 		}
 		else{
 			age = 0;
+			foodLevel = getFoodValue();
 		}
 		alive = true;
 		setLocation(location);
@@ -211,12 +216,40 @@ public abstract class Animal implements Actor
     
     /**
      * An animal can breed if it has reached the breeding age.
+     * @return canBreed
      */
     protected boolean canBreed()
     {
         return age >= getBreedAge();
     }
+    
+    /**
+     * return the level of food this animal gains from eating.
+     * Value comes from animal's settings entry.
+     * @return foodValue
+     */
+    protected int getFoodValue(){
+    	return getEntry().getInteger("food value");
+    }
 
+    /**
+     * Make this animal more hungry. This could result in the animal's death.
+     */
+    protected void incrementHunger()
+    {
+        foodLevel--;
+        if(foodLevel <= 0) {
+            setDead();
+        }
+    }
+    
+    protected void feed(){
+    	foodLevel = getFoodValue();
+    }
+    
+    public int getFoodLevel(){
+    	return foodLevel;
+    }
 	
 
 }

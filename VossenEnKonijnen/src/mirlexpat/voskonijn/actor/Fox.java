@@ -17,13 +17,6 @@ import mirlexpat.voskonijn.logic.Randomizer;
  */
 public class Fox extends Animal
 {
-    // Characteristics shared by all foxes (class variables).
-    // The food value of a single rabbit. In effect, this is the
-    // number of steps a fox can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 8;
-
-    // The fox's food level, which is increased by eating rabbits.
-    private int foodLevel;
 
     /**
      * Create a fox. A fox can be created as a new born (age zero
@@ -36,12 +29,6 @@ public class Fox extends Animal
     public Fox(boolean randomAge, Field field, Location location)
     {
         super(randomAge, field, location);
-        if(randomAge) {
-            foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
-        }
-        else {
-            foodLevel = RABBIT_FOOD_VALUE;
-        }
     }
     
     /**
@@ -76,17 +63,6 @@ public class Fox extends Animal
     }
     
     /**
-     * Make this fox more hungry. This could result in the fox's death.
-     */
-    private void incrementHunger()
-    {
-        foodLevel--;
-        if(foodLevel <= 0) {
-            setDead();
-        }
-    }
-    
-    /**
      * Look for rabbits adjacent to the current location.
      * Only the first live rabbit is eaten.
      * @return Where food was found, or null if it wasn't.
@@ -103,7 +79,7 @@ public class Fox extends Animal
                 Rabbit rabbit = (Rabbit) animal;
                 if(rabbit.isAlive()) { 
                     rabbit.setDead();
-                    foodLevel = RABBIT_FOOD_VALUE;
+                    feed();
                     // Remove the dead rabbit from the field.
                     return where;
                 }

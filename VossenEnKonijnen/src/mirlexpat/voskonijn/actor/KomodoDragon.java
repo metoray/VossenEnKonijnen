@@ -11,20 +11,10 @@ import mirlexpat.voskonijn.logic.Randomizer;
 
 public class KomodoDragon extends Animal
 {
-
-    private static final int FOOD_VALUE = 45;
-
-    private int foodLevel;
     
     public KomodoDragon(boolean randomAge, Field field, Location location)
     {
         super(randomAge, field, location);
-        if(randomAge) {
-            foodLevel = rand.nextInt(FOOD_VALUE);
-        }
-        else {
-            foodLevel = FOOD_VALUE;
-        }
     }
     
     /**
@@ -51,17 +41,6 @@ public class KomodoDragon extends Animal
     }
     
     /**
-     * increment hunger, may result in death.
-     */
-    private void incrementHunger()
-    {
-        foodLevel--;
-        if(foodLevel <= 0) {
-            setDead();
-        }
-    }
-    
-    /**
      * Finds food
      * @return first location of food
      */
@@ -77,7 +56,7 @@ public class KomodoDragon extends Animal
             	Animal animal = (Animal) obj;
                 if(animal.isAlive()) { 
                     animal.setDead();
-                    foodLevel = FOOD_VALUE;
+                    feed();
                     return where;
                 }
             }

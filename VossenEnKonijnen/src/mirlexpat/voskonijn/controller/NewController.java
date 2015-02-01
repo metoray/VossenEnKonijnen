@@ -94,7 +94,7 @@ public class NewController extends JDialog implements ActionListener {
 		grassAndRandomPanel.add(grassGrowth);
 		
 		JPanel animalPanel = new JPanel();
-		animalPanel.setLayout(new GridLayout(0,1));
+		animalPanel.setLayout(new BoxLayout(animalPanel, BoxLayout.Y_AXIS));
 		for(AnimalEntry entry: settings.getSpawnList().values()){
 			animalPanel.add(new AnimalSettingsController(entry));
 		}
@@ -121,7 +121,7 @@ public class NewController extends JDialog implements ActionListener {
 		panel.add(buttonPanel,BorderLayout.SOUTH);
 		
 		this.add(panel);
-		this.setSize(640,480);
+		this.setSize(800,600);
 		this.setVisible(true);
 	}
 

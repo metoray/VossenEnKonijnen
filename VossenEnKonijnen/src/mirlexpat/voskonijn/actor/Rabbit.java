@@ -19,10 +19,7 @@ import mirlexpat.voskonijn.FoxRabbit;
  */
 public class Rabbit extends Animal
 {
-	// Characteristics shared by all rabbits (class variables).
 
-	// A rabbit's food level.
-	private int foodLevel;
 	private int sick;
 
 
@@ -44,13 +41,7 @@ public class Rabbit extends Animal
 	public Rabbit(boolean randomAge, Field field, Location location)
 	{
 		super(randomAge, field, location);
-		if(randomAge) {
-			foodLevel = rand.nextInt(10);
-		}
-		else{
-			foodLevel = 10;
-		}
-		vulnerable = rand.nextDouble() < 0.9;
+		vulnerable = rand.nextDouble() < getEntry().getDouble("vulnerable chance");
 	}
 
 	/**
@@ -78,7 +69,7 @@ public class Rabbit extends Animal
 			}
 			maybeGetInfected();
 			dieOfInfection();
-			dieWhenHungry();
+			incrementHunger();
 		}
 	}
 
@@ -86,29 +77,22 @@ public class Rabbit extends Animal
 		if(vulnerable&&rand.nextDouble()<0.01){
 			infect();
 		}
-		
+
 	}
 
 	private void eatGrass(){
-		if(foodLevel<30&&getField().getGrass(getLocation())>0){
+		if(getFoodLevel()<getFoodValue()*3&&getField().getGrass(getLocation())>0){
 			getField().eatGrass(getLocation());
-			foodLevel+=10;
+			feed();
 		}
 	}
 
 	private Location getRandomLocation(List<Location> location){
 		return location.get(rand.nextInt(location.size()));
 	}
-	
-    protected Actor getNew(Field field, Location loc){
-    	return new Rabbit(false, field, loc);
-    }
 
-	private void dieWhenHungry() {
-		if(foodLevel <= 0) {
-			setDead();
-		}
-		foodLevel--;
+	protected Actor getNew(Field field, Location loc){
+		return new Rabbit(false, field, loc);
 	}
 
 
@@ -127,39 +111,43 @@ public class Rabbit extends Animal
 	private boolean giveVirus()
 	{
 		if(this.isInfected()) {
-		Field currentField = getField();
-		List<Location> adjacent = currentField.adjacentLocations(getLocation());
-		Location targetLocation = getRandomLocation(adjacent);
-		Object object = currentField.getObjectAt(targetLocation);
-		if(object instanceof Rabbit) {
-			Rabbit rabbit = (Rabbit) object;
-			rabbit.infect();
-	
-					
+			Field currentField = getField();
+			List<Location> adjacent = currentField.adjacentLocations(getLocation());
+			Location targetLocation = getRandomLocation(adjacent);
+			Object object = currentField.getObjectAt(targetLocation);
+			if(object instanceof Rabbit) {
+				Rabbit rabbit = (Rabbit) object;
+				rabbit.infect();
+
+
 			}
 		}
 		return false;
 	}
-	
+
 	public boolean isInfected() {
 		return sick > 0;
 	}
 
 	private void dieOfInfection()
 	{	
-		
-			if(sick > 5) {
-				setDead();
-			}
-			if(sick > 0) {
-				sick++;
-				
-			}
-			
+
+		if(sick > 5) {
+			setDead();
 		}
-		
+		if(sick > 0) {
+			sick++;
+
+		}
+
 	}
 	
+	protected void feed(){
+		foodLevel+=getFoodValue();
+	}
+
+}
+
 
 
 
