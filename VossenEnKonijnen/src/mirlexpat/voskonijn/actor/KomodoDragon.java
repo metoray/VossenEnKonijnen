@@ -7,8 +7,11 @@ import java.util.Random;
 import mirlexpat.voskonijn.logic.Field;
 import mirlexpat.voskonijn.logic.Location;
 import mirlexpat.voskonijn.logic.Randomizer;
-
-
+/**
+ * Contains all relevant information for the Komododragons.
+ * 
+ * @author Patrick Breukelman
+ */
 public class KomodoDragon extends Animal
 {
     

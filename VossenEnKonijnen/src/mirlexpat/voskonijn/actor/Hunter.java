@@ -9,10 +9,10 @@ import mirlexpat.voskonijn.logic.Randomizer;
 
 /**
  * A simple model of a hunter.
- * Hunters kill, and die.
+ * Hunters kill, they don't breed and they don't die.
  * 
- * @author ...
- * @version 2015.01.18
+ * @author Lex Hermans
+ * @version 1.0
  */
 public class Hunter implements Actor
 {

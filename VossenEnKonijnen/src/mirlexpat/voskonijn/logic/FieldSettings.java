@@ -12,12 +12,12 @@ import java.util.Random;
 import mirlexpat.voskonijn.actor.*;
 
 public class FieldSettings implements Serializable {
-	
+
 	private static final long serialVersionUID = -3696332681664249116L;
 	private int width, depth, randomSeed;
 	private double grassGrowthChance;
 	private LinkedHashMap<Class<Actor>,AnimalEntry> spawnList;
-	
+
 	public FieldSettings(FieldSettings other){
 		this.width = other.width;
 		this.depth = other.depth;
@@ -25,7 +25,7 @@ public class FieldSettings implements Serializable {
 		this.randomSeed = other.randomSeed;
 		this.spawnList = other.copySpawnList();
 	}
-	
+
 	private LinkedHashMap<Class<Actor>,AnimalEntry> copySpawnList(){
 		LinkedHashMap<Class<Actor>,AnimalEntry> newMap = new LinkedHashMap<Class<Actor>,AnimalEntry>();
 		for(Entry<Class<Actor>,AnimalEntry> mapEntry: spawnList.entrySet()){
@@ -33,7 +33,7 @@ public class FieldSettings implements Serializable {
 		}
 		return newMap;
 	}
-	
+
 	public FieldSettings(){
 		width = 120;
 		depth = 80;
@@ -48,48 +48,48 @@ public class FieldSettings implements Serializable {
 		komodoDragon = new AnimalEntry(0.01, KomodoDragon.class);
 		komodoDragon.set("max age", 750).set("max litter size", 2).set("breeding chance", 0.08).set("breeding age", 400).set("food value", 45);
 		hunter = new AnimalEntry(0.01, Hunter.class);
-		
+
 		fox.setSpawner(new Spawner() {
-			
+
 			@Override
 			public Actor getActor(Field field, Location loc) {
 				return new Fox(true, field, loc);
 			}
 		});
-		
+
 		rabbit.setSpawner(new Spawner() {
-			
+
 			@Override
 			public Actor getActor(Field field, Location loc) {
 				return new Rabbit(true, field, loc);
 			}
 		});
-		
+
 		komodoDragon.setSpawner(new Spawner() {
-			
+
 			@Override
 			public Actor getActor(Field field, Location loc) {
 				return new KomodoDragon(true, field, loc);
 			}
 		});
-		
+
 		hunter.setSpawner(new Spawner() {
-			
+
 			@Override
 			public Actor getActor(Field field, Location loc) {
 				return new Hunter(true, field, loc);
 			}
 		});
-		
+
 		addToSpawnList(fox, rabbit, komodoDragon, hunter);
 	}
-	
+
 	public Field generateField(){
 		return new Field(this);
 	}
-	
-	
-	
+
+
+
 	public int getWidth() {
 		return width;
 	}
@@ -109,27 +109,27 @@ public class FieldSettings implements Serializable {
 	public HashMap<Class<Actor>, AnimalEntry> getSpawnList(){
 		return spawnList;
 	}
-	
+
 	public boolean equals(Object o){
 		if(o==this) return true;
 		if(o instanceof FieldSettings){
 			FieldSettings other = (FieldSettings) o;
 			return other.depth==depth&&
-				   other.width==width;
+					other.width==width;
 		}
 		return false;
 	}
-	
+
 	public static abstract class Spawner implements Serializable {
 		public abstract Actor getActor(Field field, Location loc);
 	}
-	
-    public static class AnimalEntry implements Serializable {
-		
-    	private Class clazz;
-    	private Spawner spawner;
-    	private LinkedHashMap<String,Number> settings;
-		
+
+	public static class AnimalEntry implements Serializable {
+
+		private Class clazz;
+		private Spawner spawner;
+		private LinkedHashMap<String,Number> settings;
+
 		public LinkedHashMap<String, Number> getSettings() {
 			return settings;
 		}
@@ -144,13 +144,13 @@ public class FieldSettings implements Serializable {
 			this.settings = new LinkedHashMap<String,Number>();
 			this.set("spawn chance", spawnChance);
 		}
-		
+
 		public AnimalEntry(AnimalEntry other){
 			this.clazz = other.clazz;
 			this.spawner = other.spawner;
 			this.settings = (LinkedHashMap<String, Number>) other.settings.clone();
 		}
-		
+
 		public void setSpawner(Spawner spawner){
 			this.spawner = spawner;
 		}
@@ -166,24 +166,24 @@ public class FieldSettings implements Serializable {
 		public String getName(){
 			return clazz.getSimpleName();
 		}
-		
+
 		public Actor trySpawn(Field field, Location location, Random rand){
 			if(rand.nextDouble() <= getChance()){
 				return spawner.getActor(field, location);
 			}
 			return null;
 		}
-		
+
 		public AnimalEntry set(String key, int value) {
 			settings.put(key, new Integer(value));
 			return this;
 		}
-		
+
 		public AnimalEntry set(String key, double value){
 			settings.put(key, new Double(value));
 			return this;
 		}
-		
+
 		public int getInteger(String key, int defaultVal){
 			if(settings.containsKey(key)){
 				return settings.get(key).intValue();
@@ -192,7 +192,7 @@ public class FieldSettings implements Serializable {
 				return defaultVal;
 			}
 		}
-		
+
 		public double getDouble(String key, double defaultVal){
 			if(settings.containsKey(key)){
 				return settings.get(key).doubleValue();
@@ -201,30 +201,30 @@ public class FieldSettings implements Serializable {
 				return defaultVal;
 			}
 		}
-		
+
 		public int getInteger(String key){
 			return getInteger(key, 0);
 		}
-		
+
 		public double getDouble(String key){
 			return getDouble(key, 0.0d);
 		}
-		
+
 		public boolean isDouble(String key){
 			return settings.containsKey(key)?(settings.get(key) instanceof Double):false;
 		}
-    	
-    }
-    
-    public void addToSpawnList(AnimalEntry entry){
-    	spawnList.put(entry.getClazz(), entry);
-    }
-    
-    public void addToSpawnList(AnimalEntry... entries){
-    	for(AnimalEntry entry: entries){
-    		addToSpawnList(entry);
-    	}
-    }
+
+	}
+
+	public void addToSpawnList(AnimalEntry entry){
+		spawnList.put(entry.getClazz(), entry);
+	}
+
+	public void addToSpawnList(AnimalEntry... entries){
+		for(AnimalEntry entry: entries){
+			addToSpawnList(entry);
+		}
+	}
 
 	public double getGrassGrowthChance() {
 		return grassGrowthChance;

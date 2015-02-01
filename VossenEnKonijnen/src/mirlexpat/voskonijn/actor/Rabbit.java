@@ -19,7 +19,7 @@ import mirlexpat.voskonijn.FoxRabbit;
  */
 public class Rabbit extends Animal
 {
-
+	// Once a rabbit is infected, this number increments from 0 to 1, and then 1 with each step of the simulation.
 	private int sick;
 
 
@@ -79,18 +79,30 @@ public class Rabbit extends Animal
 		}
 
 	}
-
+	
+	/**
+	 * Method that lets a rabbit eat grass.
+	 * Only happens when the foodlevel of the rabbit is lower than desired.
+	 */
 	private void eatGrass(){
 		if(getFoodLevel()<getFoodValue()*3&&getField().getGrass(getLocation())>0){
 			getField().eatGrass(getLocation());
 			feed();
 		}
 	}
-
+	
+	/**
+	 * Method that finds a random location for the rabbit to go to.
+	 * @param current location
+	 * @return new location
+	 */
 	private Location getRandomLocation(List<Location> location){
 		return location.get(rand.nextInt(location.size()));
 	}
-
+	
+	/**
+	 * Method for getting a 'new' rabbit.
+	 */
 	protected Actor getNew(Field field, Location loc){
 		return new Rabbit(false, field, loc);
 	}
@@ -107,7 +119,13 @@ public class Rabbit extends Animal
 			sick = 1;
 		}
 	}
-
+	
+	/**
+	 * This method lets sick rabbits infect a healthy rabbit.
+	 * Every rabbit has an adjustable chance to get infected,
+	 * if vulnerable for infection, the infection takes place.
+	 * @return false if virus hasn't been given
+	 */
 	private boolean giveVirus()
 	{
 		if(this.isInfected()) {
@@ -124,11 +142,18 @@ public class Rabbit extends Animal
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Method to see if a rabbit is infected, which is true when sick is more than 0.
+	 * @return true if sick, false if not sick
+	 */
 	public boolean isInfected() {
 		return sick > 0;
 	}
-
+	
+	/**
+	 * Makes a rabbit die of infection when sick is higher than 5.
+	 */
 	private void dieOfInfection()
 	{	
 
@@ -142,6 +167,9 @@ public class Rabbit extends Animal
 
 	}
 	
+	/**
+	 * Increases a rabbit's foodLevel when grass is consumed.
+	 */
 	protected void feed(){
 		foodLevel+=getFoodValue();
 	}

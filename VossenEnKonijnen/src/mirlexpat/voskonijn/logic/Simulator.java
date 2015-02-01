@@ -77,6 +77,9 @@ public class Simulator extends AbstractModel implements Runnable
     	return field;
     }
     
+    /** 
+     * Runs the simulation and updates all views accordingly.
+     */
 	@Override
 	public void run() {
 		while(isRunning()){
@@ -87,29 +90,45 @@ public class Simulator extends AbstractModel implements Runnable
 		
 	}
 	
+	/**
+	 * Lets the simulator take a number of steps based on what the user determined.
+	 * @param steps the simulator will take
+	 */
 	public void simulate(int steps){
 		stepsToRun.set(steps);
 		runInfinite.set(false);
 		startThread();
 	}
 	
+	/**
+	 * Decrements the steps to run by 1.
+	 */
 	private void decrease(){
 		if(stepsToRun.get()>0){
 			stepsToRun.getAndDecrement();
 		}
 	}
 	
+	/**
+	 * Starts the thread that contains the simulator.
+	 */
 	public void startRunning(){
 		runInfinite.set(true);
 		startThread();
 	}
 	
+	/**
+	 * Stops the thread that runs the simulator.
+	 */
 	public void stopRunning(){
 		runInfinite.set(false);
 		stepsToRun.set(0);
 		waitToEnd();
 	}
 	
+	/**
+	 * Allows the thread to 'die' first when stopped.
+	 */
 	public void waitToEnd(){
 		if(thread!=null){
 			try {
@@ -119,11 +138,17 @@ public class Simulator extends AbstractModel implements Runnable
 			}
 		}
 	}
-	
+	/**
+	 * Checks to see if the thread for the simulation is running at the moment.
+	 * @return true if running, false if not
+	 */
 	public boolean isRunning(){
 		return runInfinite.get() || stepsToRun.get() > 0;
 	}
 	
+	/**
+	 * Starts the simulationthread.
+	 */
 	public void startThread(){
 		if(thread==null||!thread.isAlive()){
 			thread = new Thread(this);

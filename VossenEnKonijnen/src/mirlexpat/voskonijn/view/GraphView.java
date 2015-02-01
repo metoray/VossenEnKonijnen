@@ -1,6 +1,12 @@
 package mirlexpat.voskonijn.view;
 
 import java.awt.Color;
+/**
+ * Class with containing methods for all graphs.
+ * 
+ * @author Mirko Rog
+ * @version 1.0
+ */
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -68,7 +74,9 @@ public abstract class GraphView extends AbstractView {
 			}
 		}
 	}
-
+	/**
+	 * Paints the color used in the backgrounds of the graphs.
+	 */
 	@Override
 	public void update() {
 		preparePaint();
@@ -79,7 +87,9 @@ public abstract class GraphView extends AbstractView {
 	}
 
 	protected abstract void render(Graphics g, Field field);
-	
+	/**
+	 * Draws a line to show the scale used in various graphs.
+	 */
 	protected void scaleLine() {
 		int amount = 1;
 		int h = getHeight();

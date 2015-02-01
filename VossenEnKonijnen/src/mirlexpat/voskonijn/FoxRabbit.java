@@ -21,6 +21,12 @@ import mirlexpat.voskonijn.controller.SimulationController;
 import mirlexpat.voskonijn.logic.FieldSettings;
 import mirlexpat.voskonijn.logic.Simulator;
 
+/**
+ * Main class for the simulation.
+ * Contains the main method for the simulation, and other important methods.
+ * 
+ * @author Patrick Breukelman
+ */
 public class FoxRabbit {
 
 	// A map for storing colors for participants in the simulation
@@ -98,7 +104,10 @@ public class FoxRabbit {
 			}
 		});
 	}
-	
+	/**
+	 * Method which allows for different simulations.
+	 * @param First argument given in the main method of FoxRabbit.
+	 */
 	public FoxRabbit(String firstArg){
 		Simulator sim = new Simulator();
 		TextView view = new TextView(colors, sim, firstArg.equals("color"));

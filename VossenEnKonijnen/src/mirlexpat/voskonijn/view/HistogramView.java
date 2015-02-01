@@ -10,22 +10,22 @@ import java.util.Map;
 import mirlexpat.voskonijn.logic.Counter;
 import mirlexpat.voskonijn.logic.Field;
 import mirlexpat.voskonijn.logic.Simulator;
-
+/**
+ * Renders a histogram on screen, which changes according to the simulator.
+ * 
+ * @author Lex Hermans, Mirko Rog
+ * @version 1.0
+ */
 public class HistogramView extends GraphView {
 	
-
-
-
-
-
-
-
-
 	public HistogramView(Simulator sim, Map<Class, Color> colors) {
 		super(sim,colors);
 
 	}
-
+	/**
+	 * Renders the histogram on screen.
+	 * Scales according to the screen the histogram is placed in.
+	 */
 	@Override
 	protected void render(Graphics g, Field field) {
 		int w = getWidth();
@@ -49,7 +49,11 @@ public class HistogramView extends GraphView {
 		scaleLine();
 	}
 	
-	
+	/**
+	 * Scales the view to the size of the application window.
+	 * @param n
+	 * @return 0
+	 */
 	private int getScaled(int n){
 		if(n>0) {
 			return (int)((Math.log(n)/Math.log(2))*8);
