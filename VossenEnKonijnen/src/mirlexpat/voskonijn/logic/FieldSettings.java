@@ -42,7 +42,7 @@ public class FieldSettings implements Serializable {
 		spawnList = new LinkedHashMap<Class<Actor>,AnimalEntry>();
 		AnimalEntry fox, rabbit, komodoDragon, hunter;
 		fox = new AnimalEntry(0.04, Fox.class);
-		fox.set("max age", 150).set("max litter size", 2).set("food value", 12).set("breeding chance", 0.08).set("breeding age", 15);
+		fox.set("max age", 150).set("max litter size", 2).set("food value", 14).set("breeding chance", 0.08).set("breeding age", 15);
 		rabbit = new AnimalEntry(0.2, Rabbit.class);
 		rabbit.set("max age", 100).set("max litter size", 8).set("breeding chance", 0.14).set("breeding age", 15).set("food value",10).set("vulnerable chance", 0.9);
 		komodoDragon = new AnimalEntry(0.01, KomodoDragon.class);

@@ -14,9 +14,15 @@ import mirlexpat.voskonijn.logic.Randomizer;
  * @author ...
  * @version 2015.01.18
  */
-public class Hunter extends Human
+public class Hunter implements Actor
 {
 
+	// The animal's field.
+	private Field field;
+	// The animal's position in the field.
+	private Location location;
+	// Whether the animal is alive or not.
+	protected boolean alive;
 	// A shared random number generator.
 	private Random rand;
 
@@ -29,7 +35,9 @@ public class Hunter extends Human
 	 */
 	public Hunter(boolean randomAge, Field field, Location location)
 	{
-		super(field, location);
+		alive = true;
+		this.field = field;
+		setLocation(location);
 		this.rand = field.getRandomizer().getRandom();
 	}
 
@@ -92,8 +100,40 @@ public class Hunter extends Human
 	private Location getRandomLocation(List<Location> locations){
 		return locations.get(rand.nextInt(locations.size()));
 	}
+	
+	public Field getField()
+	{
+		return field;
+	}
 
-
+	public boolean isAlive()
+	{
+		return alive;
+	}
+	
+	public void setDead()
+	{
+		alive = false;
+		if(location != null) {
+			field.clear(location);
+			location = null;
+			field = null;
+		}
+	}
+	
+	public Location getLocation()
+	{
+		return location;
+	}
+	
+	protected void setLocation(Location newLocation)
+	{
+		if(this.location != null) {
+			field.clear(location);
+		}
+		location = newLocation;
+		field.place(this, newLocation);
+	}
 
 
 }

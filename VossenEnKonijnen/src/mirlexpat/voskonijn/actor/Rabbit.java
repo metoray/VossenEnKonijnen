@@ -74,7 +74,7 @@ public class Rabbit extends Animal
 	}
 
 	private void maybeGetInfected() {
-		if(vulnerable&&rand.nextDouble()<0.01){
+		if(vulnerable&&rand.nextDouble()<0.001){
 			infect();
 		}
 
