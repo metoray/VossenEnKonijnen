@@ -13,16 +13,14 @@ public class TextView extends AbstractView {
 	private Simulator sim;
 	private HashMap<Class,String> chars;
 	private HashMap<Class,String> colors;
-	private boolean colorsEnabled;
 	
 	
 	
-	public TextView(Map<Class, Color> col, Simulator sim, boolean color) {
+	public TextView(Map<Class, Color> col, Simulator sim) {
 		super(col);
 		this.sim = sim;
 		this.chars = new HashMap<>();
 		this.colors = new HashMap<>();
-		this.colorsEnabled = color;
 		chars.put(Fox.class, "F");
 		chars.put(Hunter.class, "H");
 		chars.put(KomodoDragon.class, "K");
@@ -36,20 +34,18 @@ public class TextView extends AbstractView {
 
 	@Override
 	public void update() {
-		if(colorsEnabled) System.out.print("\033[1;1f");
+		System.out.print("\033[1;1f");
 		Field field = sim.getField();
 		StringBuilder sb = new StringBuilder();
 		for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
             	Object obj = field.getObjectAt(row, col);
-            	if(obj!=null&&chars.containsKey(obj.getClass())&&(colors.containsKey(obj.getClass())||!colorsEnabled)){
-            		if(colorsEnabled){
-            			String color = colors.get(obj.getClass());
-            			if(obj instanceof Rabbit && ((Rabbit) obj).isInfected()){
-                			color = "\033[35;1m";
-                		}
-            			sb.append(color);
-            		}
+            	if(obj!=null&&chars.containsKey(obj.getClass())&&colors.containsKey(obj.getClass())){
+            		String color = colors.get(obj.getClass());
+            		if(obj instanceof Rabbit && ((Rabbit) obj).isInfected()){
+                		color = "\033[35;1m";
+                	}
+            		sb.append(color);
             		String symbol = chars.get(obj.getClass());
             		if(obj instanceof Rabbit && ((Rabbit) obj).isInfected()){
             			symbol = "r";
@@ -62,7 +58,7 @@ public class TextView extends AbstractView {
             }
             sb.append("\n");
 		}
-		if(colorsEnabled) sb.append("\033[0m");
+		sb.append("\033[0m");
 		System.out.print(sb.toString());
 		
 	}
