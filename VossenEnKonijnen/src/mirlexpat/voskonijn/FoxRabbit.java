@@ -9,57 +9,58 @@ import java.awt.event.WindowEvent;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.UIManager;
 
 import mirlexpat.voskonijn.actor.*;
 import mirlexpat.voskonijn.view.*;
 import mirlexpat.voskonijn.controller.MenuController;
 import mirlexpat.voskonijn.controller.SimulationController;
+import mirlexpat.voskonijn.logic.FieldSettings;
 import mirlexpat.voskonijn.logic.Simulator;
 
-public class FoxRabbit extends JFrame {
+public class FoxRabbit {
 
-	// A graphical view of the simulation.
-	private SimulatorView view;
-	private Simulator sim;
-	private GraphView lineGraph;
-	private GraphView histoGram;
-	private GraphView pieChart;
 	// A map for storing colors for participants in the simulation
-	private Map<Class, Color> colors;
-
-	public static void main(String[] args){
-		UIManager.put("Slider.paintValue", true);
-		new FoxRabbit();
-	}
-
-	public FoxRabbit(){
-		sim = new Simulator();
-
+	private static Map<Class, Color> colors;
+	
+	static {
 		colors = new LinkedHashMap<Class, Color>();
 		setColor(Rabbit.class, Color.orange);
 		setColor(Fox.class, Color.blue);
 		setColor(Hunter.class, Color.red);
 		setColor(KomodoDragon.class, new Color(0,127,0));
+	}
 
-		view = new SimulatorView(sim,colors);
+	public static void main(String[] args){
+		if(args.length==0){
+			new FoxRabbit();
+		}
+		else {
+			new FoxRabbit(args);
+		}
+	}
 
-		lineGraph = new LineGraphView(sim,colors);
-		histoGram = new HistogramView(sim,colors);
-		pieChart = new PieChartView(sim,colors);
+	public FoxRabbit(){
+		Simulator sim = new Simulator();
 
-		setTitle("Fox and Rabbit Simulation");
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setLocation(100, 50);
-		Container contents = getContentPane();
+		SimulatorView view = new SimulatorView(sim,colors);
 
-		setJMenuBar(new MenuController(sim));
+		GraphView lineGraph = new LineGraphView(sim,colors);
+		GraphView histoGram = new HistogramView(sim,colors);
+		GraphView pieChart = new PieChartView(sim,colors);
+		
+		JFrame frame = new JFrame();
+		
+
+		frame.setTitle("Fox and Rabbit Simulation");
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setLocation(100, 50);
+		Container contents = frame.getContentPane();
+
+		frame.setJMenuBar(new MenuController(sim));
 
 		
 		JPanel graphs = new JPanel();
@@ -83,19 +84,31 @@ public class FoxRabbit extends JFrame {
 		contents.add(new SimulationController(sim),BorderLayout.WEST);
 		contents.add(rightSideBar,BorderLayout.EAST);
 
-		pack();
-		setVisible(true);
+		frame.pack();
+		frame.setVisible(true);
 
 		sim.addView(view);
 		sim.addView(lineGraph);
 		sim.addView(histoGram);
 		sim.addView(pieChart);
 
-		addWindowListener(new java.awt.event.WindowAdapter() {
+		frame.addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowClosing(WindowEvent winEvt) {
 				System.exit(0);
 			}
 		});
+	}
+	
+	public FoxRabbit(String[] args){
+		Simulator sim = new Simulator();
+		TextView view = new TextView(colors, sim);
+		FieldSettings settings = new FieldSettings();
+		settings.setWidth(180);
+		settings.setDepth(60);
+		sim.newField(settings);
+		sim.addView(view);
+		sim.simulate(4000);
+		sim.waitToEnd();
 	}
 
 	/**
@@ -103,7 +116,7 @@ public class FoxRabbit extends JFrame {
 	 * @param animalClass The animal's Class object.
 	 * @param color The color to be used for the given class.
 	 */
-	public void setColor(Class animalClass, Color color)
+	public static void setColor(Class animalClass, Color color)
 	{
 		colors.put(animalClass, color);
 	}

@@ -58,25 +58,6 @@ public class Simulator extends AbstractModel implements Runnable
 		notifyViews();
 		
 	}
-    
-    /*public void newField(int depth, int width){
-    	stopRunning();
-    	if(width <= 0 || depth <= 0) {
-            System.out.println("The dimensions must be greater than zero.");
-            System.out.println("Using default values.");
-            depth = DEFAULT_DEPTH;
-            width = DEFAULT_WIDTH;
-        }
-
-    	FieldSettings settings = new FieldSettings();
-    	settings.setWidth(width);
-    	settings.setDepth(depth);
-        field = settings.generateField();
-        Randomizer.reset();
-    	field.reset();
-    	notifyViews();
-    }
-    */
         
     /**
      * Reset the simulation to a starting position.
@@ -126,6 +107,10 @@ public class Simulator extends AbstractModel implements Runnable
 	public void stopRunning(){
 		runInfinite.set(false);
 		stepsToRun.set(0);
+		waitToEnd();
+	}
+	
+	public void waitToEnd(){
 		if(thread!=null){
 			try {
 				thread.join();
