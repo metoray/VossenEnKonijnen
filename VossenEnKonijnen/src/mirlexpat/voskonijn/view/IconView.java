@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -37,10 +38,10 @@ public class IconView extends JPanel {
      * @param Class
      */
     public ImageIcon loadImage(Class clazz) {
-    	File file = new File("image"+File.separator+clazz.getSimpleName()+".png");
-    	if(file.exists()){
+    	InputStream in = this.getClass().getResourceAsStream("/image/"+clazz.getSimpleName()+".png");
+    	if(in!=null){
     		try {
-				BufferedImage img = ImageIO.read(file);
+				BufferedImage img = ImageIO.read(in);
 				return new ImageIcon(changeColor(img, colors.get(clazz)));
 			} catch (IOException e) {
 				e.printStackTrace();
