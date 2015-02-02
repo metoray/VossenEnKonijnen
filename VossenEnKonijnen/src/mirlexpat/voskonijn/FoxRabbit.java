@@ -107,7 +107,7 @@ public class FoxRabbit {
 	}
 	/**
 	 * Method which allows for different simulations.
-	 * @param First argument given in the main method of FoxRabbit.
+	 * @param firstArg First argument given in the main method of FoxRabbit.
 	 */
 	public FoxRabbit(String firstArg){
 		Simulator sim = new Simulator();
