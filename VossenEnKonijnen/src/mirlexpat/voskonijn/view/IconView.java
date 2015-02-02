@@ -37,7 +37,7 @@ public class IconView extends JPanel {
     }
     /**
      * This method loads the icons from the /image folder, changes its color and returns it.
-     * @param Class
+     * @param clazz The class to load the image for.
      */
     public ImageIcon loadImage(Class clazz) {
     	InputStream in = this.getClass().getResourceAsStream("/image/"+clazz.getSimpleName()+".png");

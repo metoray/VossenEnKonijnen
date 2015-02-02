@@ -111,7 +111,6 @@ public class Rabbit extends Animal
 
 	/**
 	 * @return true if infected
-	 * @return false if not infected
 	 */
 	public void infect()
 	{

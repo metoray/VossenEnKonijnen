@@ -44,8 +44,7 @@ public class Field
 
     /**
      * Represent a field of the given dimensions.
-     * @param depth The depth of the field.
-     * @param width The width of the field.
+     * @param settings The settings for the field
      */
     public Field(FieldSettings settings)
     {

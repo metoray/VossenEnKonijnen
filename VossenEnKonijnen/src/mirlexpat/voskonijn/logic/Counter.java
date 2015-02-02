@@ -18,7 +18,7 @@ public class Counter
 
     /**
      * Provide a name for one of the simulation types.
-     * @param name  A name, e.g. "Fox".
+     * @param cls The class for the animal counted
      */
     public Counter(Class cls)
     {

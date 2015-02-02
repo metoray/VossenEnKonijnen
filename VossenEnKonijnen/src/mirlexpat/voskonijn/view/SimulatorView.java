@@ -38,8 +38,8 @@ public class SimulatorView extends AbstractView
 
     /**
      * Create a view of the given width and height.
-     * @param height The simulation's height.
-     * @param width  The simulation's width.
+     * @param sim The simulator.
+     * @param colors A map of colors for all animal classes
      */
     public SimulatorView(Simulator sim, Map<Class, Color> colors)
     {
